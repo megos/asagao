@@ -1,0 +1,28 @@
+{
+  "name": "asagao",
+  "version": "1.0.0",
+  "description": "electron twitter client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/megos/asagao.git"
+  },
+  "keywords": [],
+  "author": "megos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/megos/asagao/issues"
+  },
+  "homepage": "https://github.com/megos/asagao#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "onsenui": "^2.0.0-beta",
+    "passport": "^0.3.2",
+    "passport-twitter": "^1.0.4",
+    "twitter": "^1.2.5"
+  }
+}
