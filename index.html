@@ -2,12 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
 
-<title>asagao</title>
+  <script src="node_modules/onsenui/js/onsenui.js"></script>
+
+  <link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.css" type="text/css" media="all" />
+  <title>asagao</title>
 </head>
 <body>
-        <a href="/auth/twitter">Twitter でサインイン</a>
-
+  <ons-page modifier="material">
+    <ons-toolbar>
+      <div class="center">Timeline</div>
+    </ons-toolbar>
+    <ons-button onClick="location.href='/auth/twitter'">Twitter でサインイン</ons-button>
+  </ons-page>
 </body>
 </html>

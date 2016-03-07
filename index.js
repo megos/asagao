@@ -62,6 +62,8 @@ backApp.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
 })
 
+backApp.use('/node_modules', express.static(__dirname + '/node_modules'));
+
 backApp.listen(3000);
 
 var mainWindow = null;
