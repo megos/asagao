@@ -2,6 +2,9 @@
 
 var settings = require('./settings');
 
+var accessTokenKey = '';
+var accessTokenSecret = '';
+
 var frontApp = require('app');
 var browserWindow = require('browser-window');
 var express = require('express');
@@ -9,6 +12,8 @@ var backApp = express();
 var passport = require('passport');
 var passportTwitter = require('passport-twitter');
 var twitterStrategy = passportTwitter.Strategy;
+
+var Twitter = require('twitter');
 
 require('crash-reporter').start();
 
@@ -35,9 +40,25 @@ passport.use(new twitterStrategy({
     callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, done) {
-  	console.log(token);
-  	console.log(tokenSecret);
-  	console.log(profile);
+  	accessTokenKey = token;
+  	accessTokenSecret = tokenSecret;
+
+  	var client = new Twitter({
+	  consumer_key: settings.TWITTER_CONSUMER_KEY,
+	  consumer_secret: settings.TWITTER_CONSUMER_SECRET,
+	  access_token_key: accessTokenKey,
+	  access_token_secret: accessTokenSecret
+	});
+	client.stream('user', function(stream) {
+	  stream.on('data', function(tweet) {
+	    console.log(tweet);
+	  });
+	 
+	  stream.on('error', function(error) {
+	    throw error;
+	  });
+	});
+
     process.nextTick(function() {
     	return done(null, profile);
     });
