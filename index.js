@@ -1,7 +1,6 @@
 'use strict';
 
-var TWITTER_CONSUMER_KEY = '';
-var TWITTER_CONSUMER_SECRET = '';
+var settings = require('./settings');
 
 var frontApp = require('app');
 var browserWindow = require('browser-window');
@@ -31,8 +30,8 @@ backApp.use(require('express-session')({
 }));
 
 passport.use(new twitterStrategy({
-    consumerKey: TWITTER_CONSUMER_KEY,
-    consumerSecret: TWITTER_CONSUMER_SECRET,
+    consumerKey: settings.TWITTER_CONSUMER_KEY,
+    consumerSecret: settings.TWITTER_CONSUMER_SECRET,
     callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, done) {
@@ -76,7 +75,7 @@ frontApp.on('window-all-closed', function() {
 
 frontApp.on('ready', function() {
 	mainWindow = new browserWindow({width: 300, height: 500});
-	mainWindow.loadUrl('http://127.0.0.1:3000');
+	mainWindow.loadUrl('http://127.0.0.1:3000/auth/twitter');
 
 	mainWindow.on('closed', function() {
 		mainWindow = null;
