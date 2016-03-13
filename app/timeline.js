@@ -14,9 +14,16 @@ Timeline.prototype = {
 			created: function() {
 				var cls = this;
 				self.client.get('statuses/home_timeline', function(error, tweets, response){
-
 				  if (!error) {
-				  	cls.tweets = tweets;
+				  	tweets.forEach(function(tweet) {
+				  		// 相対時間に変更
+				  		moment.locale('ja');
+				  		tweet.created_at = moment(tweet.created_at).fromNow();
+				  		cls.tweets.push(tweet);
+				  	});
+				  	// for (var i = 0; i < tweets.length; i++) {
+				  	// 	cls.tweets.push(tweets[i]);
+				  	// }
 				  } else {
 				  	console.log(error);
 				  }
@@ -40,7 +47,7 @@ Timeline.prototype = {
 						  if (!error) {
 							  cls.tweets.unshift(tweet);  // Tweet body. 
 							  console.log(response);  // Raw response object. 
-							  this.tweettext = '';
+							  cls.tweettext = '';
 
 						} else {
 							console.log(error);

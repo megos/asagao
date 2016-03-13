@@ -2,10 +2,15 @@ var remote = require('remote');
 var BrowserWindow = remote.require('browser-window');
 var storage = require('electron-json-storage');
 var Twitter = require('twitter');
+var Vue = require('vue');
+var moment = require('moment');
 var settings = require('./app/settings');
 var accessTokenKey = '';
 var accessTokenSecret = '';
 var client = '';
+
+// 初期設定
+moment.locale('ja');
 
 storage.get('auth', function(error, data) {
 	if (error) throw error;

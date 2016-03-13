@@ -7,7 +7,6 @@
   <meta name="mobile-web-app-capable" content="yes" />
 
   <script src="node_modules/onsenui/js/onsenui.js"></script>
-  <script src="node_modules/vue/dist/vue.js"></script>
 
   <link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css" type="text/css" media="all" />
   <link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.css" type="text/css" media="all" />
@@ -48,11 +47,9 @@
           </div>
         </ons-toolbar>
 
-                
-          <div id="a">
-            <textarea class="textarea" id="my-textarea" v-model="tweettext"></textarea>
-            <ons-button modifier="cta" v-on:click="tweet">Tweet</ons-button>
-          </div>
+          
+          <textarea class="textarea" row="2" width="80%" v-model="tweettext"></textarea>
+          <ons-button modifier="cta" v-on:click="tweet">Tweet</ons-button>
 
           <ons-list class="timeline" modifier="inset" v-for="tweet in tweets" v-show="$index > 0">
             <ons-list-item class="timeline-li" modifier="tappable">
