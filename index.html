@@ -19,6 +19,9 @@
       <ons-toolbar>
         <div class="center">Timeline</div>
       </ons-toolbar>
+      <ons-list id="timeline">
+        <ons-list-item v-for="tweet in tweets">{{tweet.text}}</ons-list-item>
+      </ons-list>
     </ons-page>
   </div>
 

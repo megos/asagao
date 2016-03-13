@@ -24,7 +24,7 @@ TwitterAuth.prototype.getTwitterAuth = function() {
       if(matched = url.match(/\?oauth_token=([^&]*)&oauth_verifier=([^&]*)/)) {
         twitter.getAccessToken(requestToken, requestTokenSecret, matched[2], function(error, accessToken, accessTokenSecret){
           var auth = {
-            accessToken: accessToken,
+            accessTokenKey: accessToken,
             accessTokenSecret: accessTokenSecret
           };
           storage.set('auth', auth, function(error) {

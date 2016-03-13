@@ -27,7 +27,7 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-	mainWindow = new browserWindow({width: 300, height: 500});
+	mainWindow = new browserWindow({width: 600, height: 500});
 	mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
 	mainWindow.on('closed', function() {
