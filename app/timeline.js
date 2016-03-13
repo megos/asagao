@@ -16,11 +16,17 @@ Timeline.prototype = {
 				self.client.get('statuses/home_timeline', function(error, tweets, response){
 				  if (!error) {
 				  	tweets.forEach(function(tweet) {
-				  		// 相対時間に変更
-				  		moment.locale('ja');
-				  		tweet.created_at = moment(tweet.created_at).fromNow();
-				  		cls.tweets.push(tweet);
+				  		if (typeof tweet.created_at !== undefined || tweet.created_at !== null || typeof tweet.text !== undefined || tweet.text !== null) {
+					  		// 相対時間に変更
+					  		tweet.created_at = moment(tweet.created_at).fromNow();
+
+					  		// 改行コード
+					  		tweet.text = tweet.text.replace(/[\n\r]/g, '<br>');
+					  		cls.tweets.push(tweet);
+
+				  		}
 				  	});
+				  	console.log(cls.tweets);
 				  	// for (var i = 0; i < tweets.length; i++) {
 				  	// 	cls.tweets.push(tweets[i]);
 				  	// }
@@ -31,8 +37,12 @@ Timeline.prototype = {
 
 				self.client.stream('user', function(stream) {
 					stream.on('data', function(tweet) {
-						console.log(tweet);
-						cls.tweets.unshift(tweet);
+				  		if (typeof tweet.created_at !== undefined || tweet.created_at !== null) {
+					  		// 相対時間に変更
+					  		tweet.created_at = moment(tweet.created_at).fromNow();
+					  		cls.tweets.unshift(tweet);
+
+				  		}
 					});
 
 					stream.on('error', function(error) {
@@ -53,6 +63,9 @@ Timeline.prototype = {
 							console.log(error);
 						}
 					});
+				},
+				a: function(event) {
+					console.log('a');
 				}
 			}
 		});

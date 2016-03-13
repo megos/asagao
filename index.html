@@ -17,7 +17,7 @@
     <ons-page id="main">
 
     <ons-tabbar>
-      <ons-tab page="timeline.html" label="Home" icon="ion-home" active="true"></ons-tab>
+      <ons-tab page="timeline.html" label="Home" icon="ion-home" active="true" v-on:click="a"></ons-tab>
       <ons-tab page="timeline.html" label="Mentions" icon="ion-at">
         <div class="notification reply-notification" ons-tab-inactive></div>
         <ons-icon icon="ion-at" class="tab-icon"></ons-icon>
@@ -47,7 +47,7 @@
           </div>
         </ons-toolbar>
 
-        <ons-row>
+        <ons-row class="tweetarea">
           <ons-col width="80%">
             <textarea class="textarea" row="2" width="100%" v-model="tweettext"></textarea>
           </ons-col>
@@ -71,7 +71,7 @@
                   </div>
 
                   <div class="timeline-message">
-                    {{tweet.text}}
+                    {{{tweet.text | br2nl}}}
                   </div>
                 </ons-col>
               </ons-row>
