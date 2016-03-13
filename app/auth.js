@@ -1,5 +1,9 @@
 var browserWindow = require('browser-window');
 var storage = require('electron-json-storage');
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  var localStorage = new LocalStorage('./');
+}
 
 var TwitterAuth = function(consumerKey, consumerSecret) {
   this.consumerKey = consumerKey;
@@ -27,9 +31,10 @@ TwitterAuth.prototype.getTwitterAuth = function() {
             accessTokenKey: accessToken,
             accessTokenSecret: accessTokenSecret
           };
-          storage.set('auth', auth, function(error) {
-            if (error) throw error;
-          });
+          localStorage.setItem('auth', auth);
+          // storage.set('auth', auth, function(error) {
+          //   if (error) throw error;
+          // });
         });
       }
       event.preventDefault();

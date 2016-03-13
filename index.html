@@ -20,11 +20,14 @@
         <div class="center">Timeline</div>
       </ons-toolbar>
       <ons-list id="timeline">
+
         <ons-list-item v-for="tweet in tweets">{{tweet.text}}</ons-list-item>
       </ons-list>
     </ons-page>
   </div>
 
-  <script src="app/app.js"></script>
+  <script src="app/main.js"></script>
+  <script src="app/client.js"></script>
+  <script src="app/timeline.js"></script>
 </body>
 </html>
