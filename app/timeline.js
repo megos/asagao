@@ -5,10 +5,11 @@ var Timeline = function(client) {
 Timeline.prototype = {
 	getTimeline: function() {
 		var self = this;
-		var vue = new Vue({
-			el: '.timeline',
+		var timelineVue = new Vue({
+			el: '#main',
 			data: {
 				tweets: [],
+				tweettext: ''
 			},
 			created: function() {
 				var cls = this;
@@ -23,7 +24,7 @@ Timeline.prototype = {
 
 				self.client.stream('user', function(stream) {
 					stream.on('data', function(tweet) {
-						console.log(tweet.text);
+						console.log(tweet);
 						cls.tweets.unshift(tweet);
 					});
 
@@ -31,6 +32,21 @@ Timeline.prototype = {
 						throw error;
 					});
 				});
+			},
+			methods: {
+				tweet: function(event) {
+					var cls = this;
+					self.client.post('statuses/update', {status: this.tweettext},  function(error, tweet, response){
+						  if (!error) {
+							  cls.tweets.unshift(tweet);  // Tweet body. 
+							  console.log(response);  // Raw response object. 
+							  this.tweettext = '';
+
+						} else {
+							console.log(error);
+						}
+					});
+				}
 			}
 		});
 	}
