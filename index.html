@@ -11,21 +11,73 @@
 
   <link rel="stylesheet" href="node_modules/onsenui/css/onsenui.css" type="text/css" media="all" />
   <link rel="stylesheet" href="node_modules/onsenui/css/onsen-css-components.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="css/main.css" type="text/css" />
   <title>asagao</title>
 </head>
 <body>
-  <div id="main">
     <ons-page modifier="material">
-      <ons-toolbar>
-        <div class="center">Timeline</div>
-      </ons-toolbar>
-      <ons-list id="timeline">
 
-        <ons-list-item v-for="tweet in tweets">{{tweet.text}}</ons-list-item>
-      </ons-list>
+    <ons-tabbar>
+      <ons-tab page="timeline.html" active="true">
+        <ons-icon icon="ion-home" class="tab-icon"></ons-icon>
+      </ons-tab>
+      <ons-tab page="timeline.html">
+        <div class="notification reply-notification" ons-tab-inactive>4</div>
+        <ons-icon icon="ion-at" class="tab-icon"></ons-icon>
+      </ons-tab>
+      <ons-tab page="timeline.html">
+        <ons-icon icon="ion-heart" class="tab-icon"></ons-icon>
+      </ons-tab>
+      <ons-tab page="timeline.html">
+        <ons-icon icon="ion-person" class="tab-icon"></ons-icon>
+      </ons-tab>
+    </ons-tabbar>
+      <ons-template id="timeline.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button>
+              <ons-icon icon="ion-compose" fixed-width="false" style="font-size: 26px; vertical-align: -4px"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+          <div class="center">
+            Timeline
+          </div>
+          <div class="right">
+            <ons-toolbar-button>
+              <ons-icon icon="ion-ios-search-strong" fixed-width="false" style="font-size: 26px; vertical-align: -4px;"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+        <div v-if="tweets">
+          <ons-list class="timeline" modifier="inset" v-for="tweet in tweets">
+            <ons-list-item class="timeline-li" modifier="tappable">
+              <ons-row>
+                <ons-col width="50px">
+                  <img src="{{tweet.user.profile_image_url}}" class="timeline-image">
+                </ons-col>
+
+                <ons-col>
+                  <div class="timeline-date">3m</div>
+                  <div class="timline-from">
+                    <span class="timeline-name">{{tweet.user.name}}</span>
+                    <span class="timeline-id">@{{tweet.user.screen_name}}</span>
+                  </div>
+
+                  <div class="timeline-message">
+                    {{tweet.text}}
+                  </div>
+                </ons-col>
+              </ons-row>
+            </ons-list-item>
+          </ons-list>
+        </div>
+
+
+      </ons-page>
+    </ons-template>
+
     </ons-page>
-  </div>
-
   <script src="app/main.js"></script>
   <script src="app/client.js"></script>
   <script src="app/timeline.js"></script>

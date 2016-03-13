@@ -20,7 +20,6 @@ storage.get('auth', function(error, data) {
 							settings.TWITTER_CONSUMER_SECRET,
 							accessTokenKey,
 							accessTokenSecret);
-		console.log(client.getClient());
 		
 		getTimeline(client.getClient());
 	}
