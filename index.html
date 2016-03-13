@@ -14,7 +14,7 @@
   <title>asagao</title>
 </head>
 <body>
-    <ons-page modifier="material" id="main">
+    <ons-page id="main">
 
     <ons-tabbar>
       <ons-tab page="timeline.html" label="Home" icon="ion-home" active="true"></ons-tab>
@@ -47,9 +47,14 @@
           </div>
         </ons-toolbar>
 
-          
-          <textarea class="textarea" row="2" width="80%" v-model="tweettext"></textarea>
-          <ons-button modifier="cta" v-on:click="tweet">Tweet</ons-button>
+        <ons-row>
+          <ons-col width="80%">
+            <textarea class="textarea" row="2" width="100%" v-model="tweettext"></textarea>
+          </ons-col>
+          <ons-col width="20%">
+            <ons-button modifier="cta" v-on:click="tweet">Tweet</ons-button>
+          </ons-col>
+        </ons-row>
 
           <ons-list class="timeline" modifier="inset" v-for="tweet in tweets" v-show="$index > 0">
             <ons-list-item class="timeline-li" modifier="tappable">

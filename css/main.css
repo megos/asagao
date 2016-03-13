@@ -15,11 +15,6 @@
   vertical-align: -4px;
 }
 
-.timeline {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 .timeline-li {
   line-height: 1;
   padding: 10px;
@@ -42,18 +37,22 @@
 }
 
 .timeline-name {
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 500;
 }
 
 .timeline-id {
-  font-size: 14px;
+  font-size: 11px;
   opacity: 0.4;
 }
 
 .timeline-message {
   margin-top: 4px;
-  font-size: 14px;
+  font-size: 12px;
   opacity: 0.8;
   line-height: 1.15;
+}
+
+.textarea {
+  width: 100%;
 }
