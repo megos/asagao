@@ -24,7 +24,7 @@ Timeline.prototype = {
 				self.client.stream('user', function(stream) {
 					stream.on('data', function(tweet) {
 						console.log(tweet.text);
-						cls.tweets.push(tweet);
+						cls.tweets.unshift(tweet);
 					});
 
 					stream.on('error', function(error) {
