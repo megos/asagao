@@ -20,7 +20,10 @@ storage.get('auth', function(error, data) {
 							settings.TWITTER_CONSUMER_SECRET,
 							accessTokenKey,
 							accessTokenSecret);
+		twitterClient = client.getClient();
+
+		timeline = new Timeline(twitterClient);
 		
-		getTimeline(client.getClient());
+		timeline.getTimeline();
 	}
 });
