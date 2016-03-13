@@ -20,6 +20,17 @@ Timeline.prototype = {
 				  	console.log(error);
 				  }
 				});
+
+				self.client.stream('user', function(stream) {
+					stream.on('data', function(tweet) {
+						console.log(tweet.text);
+						cls.tweets.push(tweet);
+					});
+
+					stream.on('error', function(error) {
+						throw error;
+					});
+				});
 			}
 		});
 	}

@@ -54,11 +54,11 @@
             <ons-list-item class="timeline-li" modifier="tappable">
               <ons-row>
                 <ons-col width="50px">
-                  <img src="{{tweet.user.profile_image_url}}" class="timeline-image">
+                  <img v-bind:src="tweet.user.profile_image_url" class="timeline-image">
                 </ons-col>
 
                 <ons-col>
-                  <div class="timeline-date">3m</div>
+                  <div class="timeline-date">{{tweet.created_at}}</div>
                   <div class="timline-from">
                     <span class="timeline-name">{{tweet.user.name}}</span>
                     <span class="timeline-id">@{{tweet.user.screen_name}}</span>
