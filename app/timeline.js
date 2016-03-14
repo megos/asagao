@@ -102,8 +102,9 @@ Timeline.prototype = {
 				},
 
 				openImageWindow: function(url, height, width, event) {
-					console.log(height);
-					var imageWindow = new BrowserWindow({height: height, width: width});
+					// TODO: マジックナンバーをどうにかする
+					var titleBarHeight = 22;
+					var imageWindow = new BrowserWindow({height: height + titleBarHeight, width: width});
 					imageWindow.loadUrl(url);
 
 					imageWindow.on('closed', function() {

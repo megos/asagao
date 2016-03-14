@@ -74,7 +74,7 @@
                     {{{tweet.text | br2nl}}}
                   </div>
 
-                  <div v-for="m in tweet.media">
+                  <div id="imagethumb" v-for="m in tweet.media" style="float:left; margin: 2px;">
                       <img v-on:click="openImageWindow(m.url, m.h, m.w, $event)" src="{{m.url}}:thumb" width="100px">
                   </div>
                 </ons-col>
