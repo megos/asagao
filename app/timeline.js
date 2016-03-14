@@ -36,12 +36,22 @@ Timeline.prototype = {
 				});
 
 				self.client.stream('user', function(stream) {
-					stream.on('data', function(tweet) {
-				  		if (tweet.created_at != null && tweet.text != null) {
-					  		// 相対時間に変更
-					  		tweet.created_at = moment(tweet.created_at).fromNow();
-					  		cls.tweets.unshift(tweet);
+					stream.on('data', function(data) {
 
+						// 新規tweet
+				  		if (data.created_at != null && data.text != null) {
+					  		// 相対時間に変更
+					  		tweet.created_at = moment(data.created_at).fromNow();
+					  		cls.tweets.unshift(data);
+
+					  	// tweet削除
+				  		} else if (data.delete != null) {
+				  			for (var i = 0; i < cls.tweets.length; i++) {
+				  				// 削除tweet id確認
+				  				if (cls.tweets[i].id == data.delete.status.id) {
+				  					cls.tweets.splice(i, 1);
+				  				}
+				  			}
 				  		}
 					});
 
