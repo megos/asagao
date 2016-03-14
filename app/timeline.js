@@ -98,6 +98,15 @@ Timeline.prototype = {
 				},
 				a: function(event) {
 					console.log('a');
+				},
+
+				openImageWindow: function(url, event) {
+					var imageWindow = new BrowserWindow({useContentSize: true, webPreferences: { images: true }});
+					imageWindow.loadUrl(url);
+
+					imageWindow.on('closed', function() {
+						imageWindow = null;
+					});
 				}
 			}
 		});

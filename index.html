@@ -73,9 +73,12 @@
                   <div class="timeline-message">
                     {{{tweet.text | br2nl}}}
                   </div>
-                </ons-col>
-                <ons-col width="50px" v-for="m in tweet.media">
-                  <img v-bind:src="m" class="timeline-image">
+
+                  <div v-for="m in tweet.media">
+                    <ons-col>
+                      <img v-on:click="openImageWindow(m, $event)" v-bind:src="m" width="100px">
+                    </ons-col>
+                  </div>
                 </ons-col>
               </ons-row>
             </ons-list-item>
