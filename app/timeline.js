@@ -28,10 +28,10 @@ Timeline.prototype = {
 					  			tweet.media = [];
 					  			var media = tweet.extended_entities.media;
 					  			for (var i = 0; i < media.length; i++) {
-						  			var type = tweet.extended_entities.media[i].type;
+						  			var type = media[i].type;
 						  			if (type == 'photo') {
 						  				// tweet.text += ' <a href src=\"tweet.extended_entities.media[i].media_url\">image' + (i + 1) + '</a>';
-						  				tweet.media.push(tweet.extended_entities.media[i].media_url);
+						  				tweet.media.push({url: media[i].media_url, h: media[i].sizes.medium.h, w: media[i].sizes.medium.w});
 						  			} else if (type == 'video') {
 						  				var variants = tweet.extended_entities.media[i].video_info.variants;
 						  				for (var v = 0; v < variants.length; v++) {
@@ -42,6 +42,7 @@ Timeline.prototype = {
 						  				// console.log(tweet.extended_entities.media[i].media_url);
 						  			}
 					  			}
+					  			console.log(tweet.media);
 					  		}
 					  		cls.tweets.push(tweet);
 
@@ -100,8 +101,9 @@ Timeline.prototype = {
 					console.log('a');
 				},
 
-				openImageWindow: function(url, event) {
-					var imageWindow = new BrowserWindow({useContentSize: true, webPreferences: { images: true }});
+				openImageWindow: function(url, height, width, event) {
+					console.log(height);
+					var imageWindow = new BrowserWindow({height: height, width: width});
 					imageWindow.loadUrl(url);
 
 					imageWindow.on('closed', function() {
