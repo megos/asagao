@@ -74,6 +74,9 @@
                     {{{tweet.text | br2nl}}}
                   </div>
                 </ons-col>
+                <ons-col width="50px" v-for="m in tweet.media">
+                  <img v-bind:src="m" class="timeline-image">
+                </ons-col>
               </ons-row>
             </ons-list-item>
           </ons-list>

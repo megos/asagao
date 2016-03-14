@@ -22,6 +22,27 @@ Timeline.prototype = {
 
 					  		// 改行コード
 					  		tweet.text = tweet.text.replace(/[\n\r]/g, '<br>');
+
+					  		// 画像、動画がある場合
+					  		if (tweet.extended_entities != null) {
+					  			tweet.media = [];
+					  			var media = tweet.extended_entities.media;
+					  			for (var i = 0; i < media.length; i++) {
+						  			var type = tweet.extended_entities.media[i].type;
+						  			if (type == 'photo') {
+						  				// tweet.text += ' <a href src=\"tweet.extended_entities.media[i].media_url\">image' + (i + 1) + '</a>';
+						  				tweet.media.push(tweet.extended_entities.media[i].media_url);
+						  			} else if (type == 'video') {
+						  				var variants = tweet.extended_entities.media[i].video_info.variants;
+						  				for (var v = 0; v < variants.length; v++) {
+						  					if (variants[i]['content_type'] == 'video/mp4') {
+						  						console.log(variants[i]['url']);
+						  					}
+						  				}
+						  				// console.log(tweet.extended_entities.media[i].media_url);
+						  			}
+					  			}
+					  		}
 					  		cls.tweets.push(tweet);
 
 				  		}
