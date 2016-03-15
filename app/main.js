@@ -1,6 +1,5 @@
 var remote = require('remote');
 var BrowserWindow = remote.require('browser-window');
-var storage = require('electron-json-storage');
 var Twitter = require('twitter');
 var TwitterAuth = require('./app/auth');
 var Vue = require('vue');
