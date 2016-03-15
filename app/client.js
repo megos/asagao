@@ -16,3 +16,5 @@ Client.prototype = {
 		return this.client;
 	}
 }
+
+module.exports = Client;

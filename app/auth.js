@@ -1,6 +1,3 @@
-var browserWindow = require('browser-window');
-var storage = require('electron-json-storage');
-
 var TwitterAuth = function(consumerKey, consumerSecret) {
   this.consumerKey = consumerKey;
   this.consumerSecret = consumerSecret;
@@ -18,7 +15,7 @@ TwitterAuth.prototype.getTwitterAuth = function() {
 
   twitter.getRequestToken(function(error, requestToken, requestTokenSecret) {
     var url = twitter.getAuthUrl(requestToken);
-    var loginWindow = new browserWindow({width: 800, height: 600});
+    var loginWindow = new BrowserWindow({width: 800, height: 600});
     loginWindow.webContents.on('will-navigate', function (event, url) {
       var matched;
       if(matched = url.match(/\?oauth_token=([^&]*)&oauth_verifier=([^&]*)/)) {
@@ -27,9 +24,7 @@ TwitterAuth.prototype.getTwitterAuth = function() {
             accessTokenKey: accessToken,
             accessTokenSecret: accessTokenSecret
           };
-          storage.set('auth', auth, function(error) {
-            if (error) throw error;
-          });
+          localStorage.setItem('auth', JSON.stringify(auth));
         });
       }
       event.preventDefault();

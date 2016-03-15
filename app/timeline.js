@@ -89,7 +89,6 @@ Timeline.prototype = {
 					var cls = this;
 					self.client.post('statuses/update', {status: this.tweettext},  function(error, tweet, response){
 						if (!error) {
-							  cls.tweets.unshift(tweet);  // Tweet body. 
 							  console.log(response);  // Raw response object. 
 							  cls.tweettext = '';
 
@@ -116,3 +115,5 @@ Timeline.prototype = {
 		});
 	}
 }
+
+module.exports = Timeline;
