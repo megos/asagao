@@ -7,6 +7,7 @@ var moment = require('moment');
 var settings = require('./app/settings');
 var Client = require('./app/client');
 var Timeline = require('./app/timeline');
+var Parser = require('./app/parser');
 var accessTokenKey = '';
 var accessTokenSecret = '';
 var client = '';
@@ -31,7 +32,4 @@ console.log(client);
 twitterClient = client.getClient();
 
 timeline = new Timeline(twitterClient);
-
-setTimeout(function() {
-	timeline.getTimeline();
-}, 1);
+var parser = new Parser();
