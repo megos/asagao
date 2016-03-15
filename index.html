@@ -75,7 +75,8 @@
                   </div>
 
                   <div id="imagethumb" v-for="m in tweet.media" style="float:left; margin: 2px;">
-                      <img v-on:click="openImageWindow(m.url, m.h, m.w, $event)" src="{{m.url}}:thumb" width="100px">
+                      <img v-if="m.url_video" v-on:click="openImageWindow(m.url_video, m.height, m.width, $event)" v-bind:src="m.url_thumb" width="100px">
+                      <img v-else v-on:click="openImageWindow(m.url_image, m.height, m.width, $event)" v-bind:src="m.url_thumb" width="100px">
                   </div>
                 </ons-col>
               </ons-row>

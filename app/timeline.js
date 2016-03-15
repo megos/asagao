@@ -31,15 +31,16 @@ Timeline.prototype = {
 						  			var type = media[i].type;
 						  			if (type == 'photo') {
 						  				// tweet.text += ' <a href src=\"tweet.extended_entities.media[i].media_url\">image' + (i + 1) + '</a>';
-						  				tweet.media.push({url: media[i].media_url, h: media[i].sizes.medium.h, w: media[i].sizes.medium.w});
+						  				tweet.media.push({url_thumb: media[i].media_url + ':thumb', url_image: media[i].media_url, height: media[i].sizes.medium.h, width: media[i].sizes.medium.w});
 						  			} else if (type == 'video') {
 						  				var variants = tweet.extended_entities.media[i].video_info.variants;
 						  				for (var v = 0; v < variants.length; v++) {
-						  					if (variants[i]['content_type'] == 'video/mp4') {
-						  						console.log(variants[i]['url']);
+						  					// TODO: ビットレートの対応
+						  					if (variants[v].content_type == 'video/mp4') {
+						  						tweet.media.push({url_thumb: media[i].media_url, url_video: variants[v].url, height: media[i].sizes.medium.h, width: media[i].sizes.medium.w});
+						  						break;
 						  					}
 						  				}
-						  				// console.log(tweet.extended_entities.media[i].media_url);
 						  			}
 					  			}
 					  			console.log(tweet.media);
