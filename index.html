@@ -51,12 +51,12 @@
           <ons-col width="80%">
             <textarea class="textarea" row="2" width="100%" v-model="tweettext"></textarea>
           </ons-col>
-          <ons-col width="20%">
-            <ons-button modifier="cta" v-on:click="tweet">Tweet</ons-button>
+          <ons-col width="20%" style="text-align: center;">
+            <ons-button class="tweetbutton" modifier="cta" v-on:click="tweet">Tweet</ons-button>
           </ons-col>
         </ons-row>
 
-          <ons-list class="timeline" modifier="inset" v-for="tweet in tweets">
+          <ons-list class="timeline" v-for="tweet in tweets">
             <ons-list-item class="timeline-li" modifier="tappable">
               <ons-row>
                 <ons-col width="50px">
