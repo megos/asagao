@@ -12,6 +12,7 @@ setTimeout(function() {
                 for (var i = 0; i < tweetsRow.length; i++) {
                     cls.tweets.push(parser.tweetParse(tweetsRow[i]));
                 }
+                console.log(cls.tweets);
                 isInitialized = true;
             });
             timeline.getUserStream(function(data) {

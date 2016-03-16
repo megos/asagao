@@ -15,9 +15,17 @@
   vertical-align: -4px;
 }
 
+.timeline {
+  padding-top: 52px;
+}
+
 .timeline-li {
   line-height: 1;
-  padding: 10px;
+  padding: 5px;
+}
+
+.timeline-li-frame {
+  border-left: 2px solid gray;
 }
 
 .timeline-image {
@@ -43,7 +51,8 @@
 
 .timeline-id {
   font-size: 11px;
-  opacity: 0.4;
+  color: gray;
+  font-weight: 1000;
 }
 
 .timeline-message {
@@ -57,7 +66,19 @@
   width: 100%;
 }
 
+.tweetarea {
+  position: fixed;
+  top: 42px;
+  z-index: 10;
+  left: 0;
+  background-color: white;
+}
+
 .tweetbutton {
   width: 100%;
   height: 100%;
+}
+
+.imagethumb {
+  display: inline;
 }

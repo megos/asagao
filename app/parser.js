@@ -37,6 +37,12 @@ Parser.prototype = {
 					}
 				}
 			}
+
+			// コメント付き公式リツイート
+			if (tweet.is_quote_status) {
+				console.log(tweet.quoted_status);
+				tweet.rt = this.tweetParse(tweet.quoted_status);
+			}
 			return tweet;
 		}
 	}
