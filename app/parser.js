@@ -38,6 +38,14 @@ Parser.prototype = {
 				}
 			}
 
+			// 公式リツイート
+			if (tweet.retweeted_status) {
+				var retweeted_user = tweet.user.name;
+				tweet = this.tweetParse(tweet.retweeted_status);
+				tweet.retweeted = true;
+				tweet.retweeted_user = retweeted_user;
+			}
+
 			// コメント付き公式リツイート
 			if (tweet.is_quote_status) {
 				console.log(tweet.quoted_status);

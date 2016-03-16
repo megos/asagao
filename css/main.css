@@ -34,6 +34,10 @@
   border-radius: 4px;
 }
 
+.retweeted {
+  border-left: 2px solid gray;
+}
+
 .timeline-date {
   float: right;
   font-size: 12px;
@@ -81,4 +85,5 @@
 
 .imagethumb {
   display: inline;
+  border-radius: 4px;
 }
