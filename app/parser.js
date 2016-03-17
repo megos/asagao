@@ -23,20 +23,24 @@ Parser.prototype = {
 										  height: media[mi].sizes.medium.h,
 										  width: media[mi].sizes.medium.w});
 					} else if (type == 'video') {
-						var variants = tweet.extended_entities.media[i].video_info.variants;
+						var variants = tweet.extended_entities.media[mi].video_info.variants;
 						for (var vi = 0; vi < variants.length; vi++) {
 							// TODO: ビットレートの対応
 							if (variants[vi].content_type == 'video/mp4') {
 								tweet.media.push({url_thumb: media[mi].media_url,
 												  url_video: variants[vi].url,
 												  height: media[mi].sizes.medium.h,
-												  width: media[i].sizes.medium.w});
+												  width: media[mi].sizes.medium.w});
 								break;
 							}
 						}
 					}
 				}
 			}
+
+			// ユーザー(@hoge)、ハッシュタグ、URLをリンクに変更
+			console.log(autolinker);
+			tweet.text = autolinker.link(tweet.text);
 
 			// 公式リツイート
 			if (tweet.retweeted_status) {

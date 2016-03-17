@@ -61,9 +61,10 @@
 
 .timeline-message {
   margin-top: 4px;
+  margin-bottom: 4px;
   font-size: 12px;
-  opacity: 0.8;
-  line-height: 1.15;
+  opacity: 0.9;
+  line-height: 1.3;
 }
 
 .textarea {

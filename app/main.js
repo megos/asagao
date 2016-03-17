@@ -4,6 +4,7 @@ var Twitter = require('twitter');
 var TwitterAuth = require('./app/auth');
 var Vue = require('vue');
 var moment = require('moment');
+var Autolinker = require('autolinker');
 var settings = require('./app/settings');
 var Client = require('./app/client');
 var Timeline = require('./app/timeline');
@@ -14,6 +15,8 @@ var client = '';
 
 // 初期設定
 moment.locale('ja');
+var autolinker = new Autolinker({twitter: true, hashtag: 'twitter'});
+
 
 if (!localStorage.getItem('auth')) {
 	var twitterAuth = new TwitterAuth(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET);
@@ -33,3 +36,13 @@ twitterClient = client.getClient();
 
 timeline = new Timeline(twitterClient);
 var parser = new Parser();
+
+
+
+var shell = require('electron').shell;
+var webview = document.getElementById('main');
+
+webview.addEventListener('new-window', function(e){
+	console.log(e);
+    shell.openExternal(e.url);
+});
