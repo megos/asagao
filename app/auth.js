@@ -9,7 +9,7 @@ TwitterAuth.prototype.getTwitterAuth = function() {
     var twitter = new twitterAPI({
         consumerKey: this.consumerKey,
         consumerSecret: this.consumerSecret,
-        callback: 'file://' + __dirname + '/../callback.html'
+        callback: 'file://' + __dirname + '/../view/callback.html'
     });
 
 
