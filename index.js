@@ -15,14 +15,18 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-	mainWindow = new browserWindow({width: 600, height: 500});
+	mainWindow = new browserWindow({width: 600, height: 500, webPreferences: {webSecurity: false}});
+	mainWindow.loadUrl('file://' + __dirname + '/login.html');
+	console.log(mainWindow.localStorage);
+	mainWindow.on('closed', function() {
+		mainWindow = null;
+	});
+
 	mainWindow.webContents.on('new-window', function(event, url) {
 		event.preventDefault();
 		shell.openExternal(url);
-	})
-	mainWindow.loadUrl('file://' + __dirname + '/index.html');
-	mainWindow.toggleDevTools();
+	});
 	mainWindow.on('closed', function() {
 		mainWindow = null;
-	})
+	});
 });

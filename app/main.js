@@ -1,7 +1,6 @@
 var remote = require('remote');
 var BrowserWindow = remote.require('browser-window');
 var Twitter = require('twitter');
-var TwitterAuth = require('./app/auth');
 var Vue = require('vue');
 var moment = require('moment');
 var Autolinker = require('autolinker');
@@ -17,11 +16,6 @@ var client = '';
 moment.locale('ja');
 var autolinker = new Autolinker({twitter: true, hashtag: 'twitter'});
 
-
-if (!localStorage.getItem('auth')) {
-	var twitterAuth = new TwitterAuth(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET);
-	twitterAuth.getTwitterAuth();
-}
 
 var auth = JSON.parse(localStorage.getItem('auth'));
 accessTokenKey = auth.accessTokenKey;
