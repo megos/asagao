@@ -38,8 +38,13 @@ Parser.prototype = {
 				}
 			}
 
+			// 短縮URL展開
+			var urls = tweet.entities.urls;
+			for (var ui = 0; ui < urls.length; ui++) {
+				tweet.text = tweet.text.replace(urls[ui].url, urls[ui].expanded_url);
+			}
+
 			// ユーザー(@hoge)、ハッシュタグ、URLをリンクに変更
-			console.log(autolinker);
 			tweet.text = autolinker.link(tweet.text);
 
 			// 公式リツイート

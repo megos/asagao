@@ -1,10 +1,13 @@
 var Timeline = function(client) {
 	this.client = client;
+	this.params = {
+		include_entities: true
+	};
 };
 
 Timeline.prototype = {
 	getTimeline: function(callback) {
-		this.client.get('statuses/home_timeline', function(error, tweets, response){
+		this.client.get('statuses/home_timeline', this.params, function(error, tweets, response){
 			if (!error) {
 				callback(tweets);
 			} else {
@@ -15,7 +18,7 @@ Timeline.prototype = {
 	},
 
 	getUserStream: function(callback) {
-		this.client.stream('user', function(stream) {
+		this.client.stream('user', this.params, function(stream) {
 			stream.on('data', function(data) {
 				console.log(data);
 				callback(data);
