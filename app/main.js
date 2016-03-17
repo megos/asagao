@@ -36,13 +36,3 @@ twitterClient = client.getClient();
 
 timeline = new Timeline(twitterClient);
 var parser = new Parser();
-
-
-
-var shell = require('shell');
-var webview = document.getElementById('main');
-
-webview.addEventListener('new-window', function(e){
-	console.log(e);
-    shell.openExternal(e.url);
-});
