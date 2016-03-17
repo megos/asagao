@@ -15,9 +15,9 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-	mainWindow = new browserWindow({width: 600, height: 500, webPreferences: {webSecurity: false}});
+	mainWindow = new browserWindow({width: 500, height: 600, webPreferences: {webSecurity: false}});
 	mainWindow.loadURL('file://' + __dirname + '/view/login.html');
-	console.log(mainWindow.localStorage);
+
 	mainWindow.on('closed', function() {
 		mainWindow = null;
 	});
@@ -26,6 +26,7 @@ app.on('ready', function() {
 		event.preventDefault();
 		shell.openExternal(url);
 	});
+	
 	mainWindow.on('closed', function() {
 		mainWindow = null;
 	});
