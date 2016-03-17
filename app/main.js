@@ -16,7 +16,6 @@ var client = '';
 moment.locale('ja');
 var autolinker = new Autolinker({twitter: true, hashtag: 'twitter'});
 
-
 var auth = JSON.parse(localStorage.getItem('auth'));
 accessTokenKey = auth.accessTokenKey;
 accessTokenSecret = auth.accessTokenSecret;

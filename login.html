@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>asagao</title>
+</head>
+<body>
+  <script>
+	var TwitterAuth = require('./app/auth');
+	var settings = require('./app/settings');
+	var remote = require('remote');
+
+	var mainWindow = remote.getCurrentWindow();
+
+	if (!localStorage.getItem('auth')) {
+	  var twitterAuth = new TwitterAuth(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET);
+	  twitterAuth.getTwitterAuth();
+	} else {
+	  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+	}
+  </script>
+</body>
+</html>

@@ -16,7 +16,7 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
 	mainWindow = new browserWindow({width: 600, height: 500, webPreferences: {webSecurity: false}});
-	mainWindow.loadUrl('file://' + __dirname + '/login.html');
+	mainWindow.loadURL('file://' + __dirname + '/login.html');
 	console.log(mainWindow.localStorage);
 	mainWindow.on('closed', function() {
 		mainWindow = null;

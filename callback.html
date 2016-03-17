@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>asagao</title>
+</head>
+<body>
+  <script>
+  	var twitterAPI = require('node-twitter-api');
+	var settings = require('./app/settings');
+	var remote = require('remote');
+
+	var twitter = new twitterAPI({
+	    consumerKey: settings.TWITTER_CONSUMER_KEY,
+	    consumerSecret: settings.TWITTER_CONSUMER_SECRET,
+	    callback: 'file://' + __dirname + '/index.html'
+	});
+
+	var token = JSON.parse(localStorage.getItem('token'));
+	console.log(token);
+	var requestToken = token.requestToken;
+	var requestTokenSecret = token.requestTokenSecret;
+	var mainWindow = remote.getCurrentWindow();
+	var url = mainWindow.getURL();
+
+	if (matched = url.match(/\?oauth_token=([^&]*)&oauth_verifier=([^&]*)/)) {
+	    twitter.getAccessToken(requestToken, requestTokenSecret, matched[2], function(error, accessToken, accessTokenSecret) {
+	    	if (!error) {
+		        var auth = {
+		            accessTokenKey: accessToken,
+		            accessTokenSecret: accessTokenSecret
+		        };
+		        localStorage.setItem('auth', JSON.stringify(auth));
+		        mainWindow.loadURL('file://' + __dirname + '/index.html');
+	    	} else {
+	    		throw error;
+	    	}
+	    });
+	}
+  </script>
+</body>
+</html>
