@@ -4,18 +4,18 @@ var Timeline = function(client) {
 
 Timeline.prototype = {
 	getTimeline: function(callback) {
-		var self = this;
-		self.client.get('statuses/home_timeline', function(error, tweets, response){
+		this.client.get('statuses/home_timeline', function(error, tweets, response){
 			if (!error) {
 				callback(tweets);
+			} else {
+				throw error;
 			}
 		});
 
 	},
 
 	getUserStream: function(callback) {
-		var self = this;
-		self.client.stream('user', function(stream) {
+		this.client.stream('user', function(stream) {
 			stream.on('data', function(data) {
 				console.log(data);
 				callback(data);
@@ -25,6 +25,18 @@ Timeline.prototype = {
 				throw error;
 			});
 		});
+	},
+
+	postTweet: function(tweet, callback) {
+        this.client.post('statuses/update', {
+            status: tweet
+        }, function(error, tweet, response) {
+            if (!error) {
+                callback(response);
+            } else {
+                throw error;
+            }
+        });
 	}
 };
 

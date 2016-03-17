@@ -7,24 +7,24 @@ setTimeout(function() {
             tweettext: ''
         },
         created: function() {
-            var cls = this;
+            var self = this;
             timeline.getTimeline(function(tweetsRow) {
                 for (var i = 0; i < tweetsRow.length; i++) {
-                    cls.tweets.push(parser.tweetParse(tweetsRow[i]));
+                    self.tweets.push(parser.tweetParse(tweetsRow[i]));
                 }
-                console.log(cls.tweets);
+                console.log(self.tweets);
                 isInitialized = true;
             });
             timeline.getUserStream(function(data) {
                 console.log(data);
                 if (data.created_at != null && data.text != null) {
-                    cls.tweets.unshift(parser.tweetParse(data));
+                    self.tweets.unshift(parser.tweetParse(data));
                 } else if (data.delete != null) {
                     console.log(data);
-                    for (var i = 0; i < cls.tweets.length; i++) {
+                    for (var i = 0; i < self.tweets.length; i++) {
                         // 削除tweet id確認
-                        if ((cls.tweets[i].id == data.delete.status.id) && (cls.tweets[i].user.id == data.delete.status.user_id)) {
-                            cls.tweets.splice(i, 1);
+                        if ((self.tweets[i].id == data.delete.status.id) && (self.tweets[i].user.id == data.delete.status.user_id)) {
+                            self.tweets.splice(i, 1);
                         }
                     }
                 }
@@ -32,16 +32,9 @@ setTimeout(function() {
         },
         methods: {
             tweet: function(event) {
-                var cls = this;
-                self.client.post('statuses/update', {
-                    status: this.tweettext
-                }, function(error, tweet, response) {
-                    if (!error) {
-                        console.log(response); // Raw response object. 
-                        cls.tweettext = '';
-                    } else {
-                        console.log(error);
-                    }
+                var self = this;
+                timeline.postTweet(this.tweettext, function(callback) {
+                    self.tweettext = '';
                 });
             },
             a: function(event) {

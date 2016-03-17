@@ -39,7 +39,7 @@ var parser = new Parser();
 
 
 
-var shell = require('electron').shell;
+var shell = require('shell');
 var webview = document.getElementById('main');
 
 webview.addEventListener('new-window', function(e){
