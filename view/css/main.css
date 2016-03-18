@@ -96,3 +96,9 @@
   display: inline;
   border-radius: 4px;
 }
+
+/* onsenui2.0beta7 bug?
+  .list__item__center -> margin-left: 26px; */
+.list__item__center {
+  margin-left: 0;
+}
