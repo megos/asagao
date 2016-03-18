@@ -17,6 +17,18 @@ Timeline.prototype = {
 
 	},
 
+	getMentionsTimeline: function(callback) {
+		this.client.get('statuses/mentions_timeline', this.params, function(error, tweets, response){
+			if (!error) {
+				console.log(tweets);
+				callback(tweets);
+			} else {
+				throw error;
+			}
+		});
+
+	},
+
 	getUserStream: function(callback) {
 		this.client.stream('user', this.params, function(stream) {
 			stream.on('data', function(data) {

@@ -29,3 +29,5 @@ twitterClient = client.getClient();
 
 timeline = new Timeline(twitterClient);
 var parser = new Parser();
+
+Vue.config.debug = true

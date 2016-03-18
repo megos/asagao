@@ -2,8 +2,8 @@ setTimeout(function() {
     var timelineVue = new Vue({
         el: '#main',
         data: {
-            isInitialized: false,
             tweets: [],
+            mentions: [],
             tweettext: ''
         },
         created: function() {
@@ -13,7 +13,6 @@ setTimeout(function() {
                     self.tweets.push(parser.tweetParse(tweetsRow[i]));
                 }
                 console.log(self.tweets);
-                isInitialized = true;
             });
             timeline.getUserStream(function(data) {
                 console.log(data);
@@ -29,6 +28,11 @@ setTimeout(function() {
                     }
                 }
             });
+            timeline.getMentionsTimeline(function(tweetsRow) {
+                for (var i = 0; i < tweetsRow.length; i++) {
+                    self.mentions.push(parser.tweetParse(tweetsRow[i]));
+                }
+            });
         },
         methods: {
             tweet: function(event) {
@@ -37,8 +41,9 @@ setTimeout(function() {
                     self.tweettext = '';
                 });
             },
-            a: function(event) {
-                console.log('a');
+            getMentions: function(event) {
+                var men = timelineVue.$get('mentions');
+                timelineVue.$watch('mentions', men);
             },
             openImageWindow: function(url, height, width, event) {
                 // TODO: マジックナンバーをどうにかする
@@ -54,4 +59,4 @@ setTimeout(function() {
             }
         }
     });
-}, 1);
+}, 0);
