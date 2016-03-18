@@ -16,17 +16,19 @@
 
     <ons-tabbar var="tab">
       <ons-tab page="timeline.html" label="Home" icon="ion-home" active="true" persistent></ons-tab>
-      <ons-tab page="mentions.html" label="Mentions" icon="ion-at" persistent v-on:click="getMentions"></ons-tab>
+      <ons-tab page="mentions.html" label="Mentions" icon="ion-at" persistent></ons-tab>
     </ons-tabbar>
 
 
-    <ons-row class="tweetarea">
+    <ons-row class="tweet-area">
       <ons-col width="80%">
         <textarea class="textarea" rows="3" width="100%" maxlength="140" v-model="tweettext"></textarea>
       </ons-col>
-      <ons-col width="20%" style="text-align: center;">
-        <ons-button class="tweetbutton" modifier="large" v-on:click="tweet">Tweet</ons-button>
-        <span>{{140-tweettext.length}}</span>
+      <ons-col width="5%" class="tweet-length">
+        {{140-tweettext.length}}
+      </ons-col>
+      <ons-col width="15%" style="text-align: center;">
+        <ons-button class="tweet-button" v-on:click="tweet">Tweet</ons-button>
       </ons-col>
     </ons-row>
 

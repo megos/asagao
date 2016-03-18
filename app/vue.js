@@ -41,10 +41,6 @@ setTimeout(function() {
                     self.tweettext = '';
                 });
             },
-            getMentions: function(event) {
-                var men = timelineVue.$get('mentions');
-                timelineVue.$watch('mentions', men);
-            },
             openImageWindow: function(url, height, width, event) {
                 // TODO: マジックナンバーをどうにかする
                 var titleBarHeight = 22;

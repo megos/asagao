@@ -22,7 +22,7 @@
     "autolinker": "^0.24.1",
     "moment": "^2.12.0",
     "node-twitter-api": "^1.7.0",
-    "onsenui": "^2.0.0-beta",
+    "onsenui": "^2.0.0-beta.7",
     "twitter": "^1.2.5",
     "vue": "^1.0.17"
   }

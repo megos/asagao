@@ -73,12 +73,23 @@
   opacity: 0.9;
 }
 
-.tweetarea {
+.tweet-area {
   position: fixed;
   top: 0;
   z-index: 10;
   left: 0;
   background-color: white;
+}
+
+.tweet-length {
+  position: absolute;
+  bottom: 0;
+}
+
+.tweet-button {
+  position: absolute;
+  top: 10%;
+  right: 1%;
 }
 
 .imagethumb {
