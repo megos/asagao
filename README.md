@@ -1,9 +1,12 @@
 # asagao
 electron twitter client
 
-## Features(予定)
-- UserStream対応
-- 添付画像、動画対応
+![timeline](screenshot/timeline.png)
+
+## Features
+- UserStream
+- 画像、動画展開
+- コメント付き公式リツイート表示
 
 ## Licence
 
