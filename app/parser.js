@@ -42,6 +42,18 @@ Parser.prototype = {
 			var urls = tweet.entities.urls;
 			for (var ui = 0; ui < urls.length; ui++) {
 				tweet.text = tweet.text.replace(urls[ui].url, urls[ui].expanded_url);
+
+				// instagram
+				var shortcode = '';
+				if (shortcode = urls[ui].display_url.match(/^instagram\.com\/p\/(.*)\//)) {
+					if (!tweet.media) {
+						tweet.media = [];
+					}
+					tweet.media.push({url_thumb: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=t',
+									  url_image: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l',
+									  height   :  500,
+									  width    :  500});
+				}
 			}
 
 			// ユーザー(@hoge)、ハッシュタグ、URLをリンクに変更
