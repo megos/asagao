@@ -49,6 +49,7 @@ Parser.prototype = {
 					if (!tweet.media) {
 						tweet.media = [];
 					}
+					// TODO: 画像サイズを調べる
 					tweet.media.push({url_thumb: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=t',
 									  url_image: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l',
 									  height   :  500,

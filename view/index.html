@@ -24,7 +24,7 @@
       <ons-col width="80%">
         <textarea class="textarea" rows="3" width="100%" maxlength="140" v-model="tweettext"></textarea>
       </ons-col>
-      <ons-col width="5%" class="tweet-length">
+      <ons-col v-show="tweettext" style="display:none;" width="5%" class="tweet-length">
         {{140-tweettext.length}}
       </ons-col>
       <ons-col width="15%" style="text-align: center;">
@@ -36,7 +36,7 @@
       <ons-page id="timeline">
 
         <ons-list class="timeline">
-          <ons-list-item v-for="tweet in tweets" class="timeline-li" modifier="tappable">
+          <ons-list-item v-show="tweets" style="display:none;" v-for="tweet in tweets" class="timeline-li" modifier="tappable">
             <ons-row>
               <ons-col v-if="tweet.retweeted" class="retweeted" width="50px">
                 <img v-bind:src="tweet.user.profile_image_url" class="timeline-image">
