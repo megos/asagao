@@ -1,5 +1,12 @@
 var Parser = function() {
 
+	this.moment = require('moment');
+	var Autolinker = require('autolinker');
+	// 初期設定
+	this.moment.locale('ja');
+	this.autolinker = new Autolinker({twitter: true, hashtag: 'twitter'});
+
+
 };
 
 Parser.prototype = {
@@ -10,7 +17,7 @@ Parser.prototype = {
 			tweet.media = [];
 
 			// 相対時間に変更
-			tweet.created_at = moment(tweet.created_at).fromNow();
+			tweet.created_at = this.moment(tweet.created_at).fromNow();
 
 			// 改行コード
 			tweet.text = tweet.text.replace(/[\n\r]/g, '<br>');
@@ -67,7 +74,7 @@ Parser.prototype = {
 			}
 
 			// ユーザー(@hoge)、ハッシュタグ、URLをリンクに変更
-			tweet.text = autolinker.link(tweet.text);
+			tweet.text = this.autolinker.link(tweet.text);
 
 			// 公式リツイート
 			if (tweet.retweeted_status) {
