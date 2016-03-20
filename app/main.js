@@ -15,9 +15,9 @@ accessTokenKey = auth.accessTokenKey;
 accessTokenSecret = auth.accessTokenSecret;
 console.log(auth);
 client = new Client(settings.TWITTER_CONSUMER_KEY,
-					settings.TWITTER_CONSUMER_SECRET,
-					accessTokenKey,
-					accessTokenSecret);
+                    settings.TWITTER_CONSUMER_SECRET,
+                    accessTokenKey,
+                    accessTokenSecret);
 console.log(client);
 var twitterClient = client.getClient();
 
