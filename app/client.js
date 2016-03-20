@@ -1,8 +1,11 @@
 var Client = function(consumer_key, consumer_secret, access_token_key, access_token_secret) {
-  this.consumer_key = consumer_key;
-  this.consumer_secret = consumer_secret;
-  this.access_token_key = access_token_key;
-  this.access_token_secret = accessTokenSecret;
+  var Twitter = require('twitter');
+
+  this.consumer_key        = consumer_key;
+  this.consumer_secret     = consumer_secret;
+  this.access_token_key    = access_token_key;
+  this.access_token_secret = access_token_secret;
+
   this.client = new Twitter({
     consumer_key: this.consumer_key,
     consumer_secret: this.consumer_secret,

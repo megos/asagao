@@ -1,6 +1,5 @@
 var remote = require('remote');
 var BrowserWindow = remote.require('browser-window');
-var Twitter = require('twitter');
 var Vue = require('vue');
 var settings = require('../app/settings');
 var Client = require('../app/client');
