@@ -5,6 +5,10 @@ var Parser = function() {
 Parser.prototype = {
 	tweetParse: function(tweet) {
 		if (tweet.created_at != null && tweet.text != null) {
+
+
+			tweet.media = [];
+
 			// 相対時間に変更
 			tweet.created_at = moment(tweet.created_at).fromNow();
 
@@ -13,7 +17,6 @@ Parser.prototype = {
 
 			// 画像、動画がある場合
 			if (tweet.extended_entities != null) {
-				tweet.media = [];
 				var media = tweet.extended_entities.media;
 				for (var mi = 0; mi < media.length; mi++) {
 					var type = media[mi].type;
@@ -46,12 +49,18 @@ Parser.prototype = {
 				// instagram
 				var shortcode = '';
 				if (shortcode = urls[ui].display_url.match(/^instagram\.com\/p\/(.*)\//)) {
-					if (!tweet.media) {
-						tweet.media = [];
-					}
 					// TODO: 画像サイズを調べる
 					tweet.media.push({url_thumb: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=t',
 									  url_image: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l',
+									  height   :  500,
+									  width    :  500});
+				}
+
+				// twipple
+				var imageId = '';
+				if (imageId = urls[ui].display_url.match(/^p\.twipple\.jp\/(.*)/)) {
+					tweet.media.push({url_thumb: 'http://p.twipple.jp/show/thumb/' + imageId[1],
+									  url_image: 'http://p.twipple.jp/show/large/' + imageId[1],
 									  height   :  500,
 									  width    :  500});
 				}
