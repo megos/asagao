@@ -4,6 +4,7 @@ setTimeout(function() {
     template: '#tweet-component'
   });
   Vue.component('timeline-home', tweetComponent);
+  Vue.component('timeline-mentions', tweetComponent);
 
   var timelineVue = new Vue({
     el: '#main',

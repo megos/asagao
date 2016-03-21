@@ -47,56 +47,7 @@
       <ons-page>
 
         <ons-list class="timeline">
-          <ons-list-item v-for="tweet in mentions" class="timeline-li" modifier="tappable">
-            <ons-row>
-              <ons-col v-if="tweet.retweeted" class="retweeted" width="50px">
-                <img v-bind:src="tweet.user.profile_image_url" class="timeline-image">
-              </ons-col>
-              <ons-col v-else width="50px">
-                <img v-bind:src="tweet.user.profile_image_url" class="timeline-image">
-              </ons-col>
-
-              <ons-col>
-                <div class="timeline-date">{{tweet.relative_created_at}}</div>
-                <div class="timline-from">
-                  <span class="timeline-name">{{tweet.user.name}}</span>
-                  <span class="timeline-id">@{{tweet.user.screen_name}}</span>
-                </div>
-
-                <div class="timeline-message">
-                  {{{tweet.text | br2nl}}}
-                </div>
-
-                <ons-list-item class="timeline-li timeline-li-frame" v-if=tweet.rt>
-                  <ons-col>
-                    <div class="timeline-date">{{tweet.rt.relative_created_at}}</div>
-                    <div class="timline-from">
-                      <span class="timeline-name">{{tweet.rt.user.name}}</span>
-                      <span class="timeline-id">@{{tweet.rt.user.screen_name}}</span>
-                    </div>
-
-                    <div class="timeline-message">
-                      {{{tweet.rt.text | br2nl}}}
-                    </div>
-
-                    <div class="imagethumb" v-for="m in tweet.rt.media">
-                    <img v-if="m.url_video" v-on:click="openImageWindow(m.url_video, m.height, m.width, $event)" v-bind:src="m.url_thumb" width="100px">
-                    <img v-else v-on:click="openImageWindow(m.url_image, m.height, m.width, $event)" v-bind:src="m.url_thumb" width="100px">
-                    </div>
-                  </ons-col>
-                </ons-list-item>
-
-                <div class="imagethumb" v-for="m in tweet.media">
-                    <img v-if="m.url_video" v-on:click="openImageWindow(m.url_video, m.height, m.width, $event)" v-bind:src="m.url_thumb" width="100px">
-                    <img v-else v-on:click="openImageWindow(m.url_image, m.height, m.width, $event)" v-bind:src="m.url_thumb" width="100px">
-                </div>
-
-                <div class="timeline-name" v-if="tweet.retweeted">
-                  Retweeted by {{tweet.retweeted_user}}
-                </div>
-              </ons-col>
-            </ons-row>
-          </ons-list-item>
+          <timeline-mentions v-for="tweet in mentions" :tweet="tweet"></timeline-mentions>
         </ons-list>
 
 
