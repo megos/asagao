@@ -16,7 +16,7 @@ Parser.prototype = {
       tweet.media = [];
 
       // 相対時間に変更
-      tweet.created_at = this.moment(tweet.created_at).fromNow();
+      tweet.relative_created_at = this.moment(tweet.created_at).fromNow();
 
       // 改行コード
       tweet.text = tweet.text.replace(/[\n\r]/g, '<br>');
