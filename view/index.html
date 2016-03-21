@@ -55,6 +55,10 @@
                 <div class="timeline-message">
                   {{{tweet.text | br2nl}}}
                 </div>
+                
+                <div class="timeline-reply">
+                  <ons-icon icon="ion-reply"></ons-icon>
+                </div>
 
                 <ons-list-item class="timeline-li timeline-li-frame" v-if=tweet.rt>
                   <ons-col>
@@ -106,7 +110,7 @@
               </ons-col>
 
               <ons-col>
-                <div class="timeline-date">{{tweet.created_at}}</div>
+                <div class="timeline-date">{{tweet.relative_created_at}}</div>
                 <div class="timline-from">
                   <span class="timeline-name">{{tweet.user.name}}</span>
                   <span class="timeline-id">@{{tweet.user.screen_name}}</span>

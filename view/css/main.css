@@ -67,6 +67,10 @@
   line-height: 1.3;
 }
 
+.timeline-reply {
+  float: right;
+}
+
 .textarea {
   width: 100%;
   font-size: 12px;
