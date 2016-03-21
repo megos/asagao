@@ -1,4 +1,10 @@
 setTimeout(function() {
+  var tweetComponent = Vue.extend({
+    props: ['tweet'],
+    template: '#tweet-component'
+  });
+  Vue.component('timeline-home', tweetComponent);
+
   var timelineVue = new Vue({
     el: '#main',
     data: {
