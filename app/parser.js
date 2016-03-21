@@ -98,6 +98,12 @@ Parser.prototype = {
       }
       return tweet;
     }
+  },
+
+  setRelativeCreatedAt: function(tweet) {
+    // 相対時間に変更
+    tweet.relative_created_at = this.moment(tweet.created_at).fromNow();
+    return tweet;
   }
 };
 

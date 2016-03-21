@@ -8,17 +8,22 @@ setTimeout(function() {
     },
     created: function() {
       var self = this;
+
       timeline.getTimeline(function(tweetsRow) {
         for (var i = 0; i < tweetsRow.length; i++) {
           self.tweets.push(parser.tweetParse(tweetsRow[i]));
         }
         console.log(self.tweets);
       });
+
       timeline.getUserStream(function(data) {
         console.log(data);
         if (data.created_at != null && data.text != null) {
+          for (var i = 0; i < self.tweets.length; i++) {
+            self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
+          }
           self.tweets.unshift(parser.tweetParse(data));
-        } else if (data.delete !== null) {
+        } else if (data.delete != null) {
           console.log(data);
           for (var i = 0; i < self.tweets.length; i++) {
             // 削除tweet id確認
@@ -28,6 +33,7 @@ setTimeout(function() {
           }
         }
       });
+
       timeline.getMentionsTimeline(function(tweetsRow) {
         for (var i = 0; i < tweetsRow.length; i++) {
           self.mentions.push(parser.tweetParse(tweetsRow[i]));
