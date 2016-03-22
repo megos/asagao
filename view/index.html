@@ -22,7 +22,7 @@
 
     <ons-row class="tweet-area">
       <ons-col width="80%">
-        <textarea class="textarea" rows="3" width="100%" maxlength="140" v-model="tweettext"></textarea>
+        <textarea class="textarea textarea--transparent" rows="3" width="100%" maxlength="140" v-model="tweettext"></textarea>
       </ons-col>
       <ons-col v-show="tweettext" style="display:none;" width="5%" class="tweet-length">
         {{140-tweettext.length}}
