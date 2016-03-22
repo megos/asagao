@@ -1,11 +1,11 @@
-var Timeline = function(client) {
+var TwitterManager = function(client) {
   this.client = client;
   this.params = {
     include_entities: true
   };
 };
 
-Timeline.prototype = {
+TwitterManager.prototype = {
   getTimeline: function(callback) {
     this.client.get('statuses/home_timeline', this.params, function(error, tweets, response) {
       if (!error) {
@@ -55,4 +55,4 @@ Timeline.prototype = {
   }
 };
 
-module.exports = Timeline;
+module.exports = TwitterManager;

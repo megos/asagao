@@ -3,7 +3,7 @@ var BrowserWindow = remote.require('browser-window');
 var Vue = require('vue');
 var settings = require('../app/settings');
 var Client = require('../app/client');
-var Timeline = require('../app/timeline');
+var TwitterManager = require('../app/twitter-manager');
 var Parser = require('../app/parser');
 
 var auth = JSON.parse(localStorage.getItem('auth'));
@@ -15,7 +15,7 @@ var client = new Client(settings.TWITTER_CONSUMER_KEY,
 
 var twitterClient = client.getClient();
 
-var timeline = new Timeline(twitterClient);
+var twitterManager = new TwitterManager(twitterClient);
 var parser = new Parser();
 
 var tweetComponent = Vue.extend({
@@ -49,14 +49,14 @@ var timelineVue = new Vue({
   created: function() {
     var self = this;
 
-    timeline.getTimeline(function(tweetsRow) {
+    twitterManager.getTimeline(function(tweetsRow) {
       for (var i = 0; i < tweetsRow.length; i++) {
         self.tweets.push(parser.tweetParse(tweetsRow[i]));
       }
       console.log(self.tweets);
     });
 
-    timeline.getUserStream(function(data) {
+    twitterManager.getUserStream(function(data) {
       console.log(data);
       if (data.created_at != null && data.text != null) {
         for (var i = 0; i < self.tweets.length; i++) {
@@ -74,7 +74,7 @@ var timelineVue = new Vue({
       }
     });
 
-    timeline.getMentionsTimeline(function(tweetsRow) {
+    twitterManager.getMentionsTimeline(function(tweetsRow) {
       for (var i = 0; i < tweetsRow.length; i++) {
         self.mentions.push(parser.tweetParse(tweetsRow[i]));
       }
@@ -83,7 +83,7 @@ var timelineVue = new Vue({
   methods: {
     tweet: function(event) {
       var self = this;
-      timeline.postTweet(this.tweettext, function(callback) {
+      twitterManager.postTweet(this.tweettext, function(callback) {
         self.tweettext = '';
       });
     }
