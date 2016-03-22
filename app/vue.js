@@ -1,7 +1,21 @@
 setTimeout(function() {
   var tweetComponent = Vue.extend({
     props: ['tweet'],
-    template: '#tweet-component'
+    template: '#tweet-component',
+    methods: {
+      openImageWindow: function(url, height, width, event) {
+        // TODO: マジックナンバーをどうにかする
+        var titleBarHeight = 22;
+        var imageWindow = new BrowserWindow({
+          height: height + titleBarHeight,
+          width: width
+        });
+        imageWindow.loadUrl(url);
+        imageWindow.on('closed', function() {
+          imageWindow = null;
+        });
+      }
+    }
   });
   Vue.component('timeline-home', tweetComponent);
   Vue.component('timeline-mentions', tweetComponent);
@@ -52,18 +66,6 @@ setTimeout(function() {
         var self = this;
         timeline.postTweet(this.tweettext, function(callback) {
           self.tweettext = '';
-        });
-      },
-      openImageWindow: function(url, height, width, event) {
-        // TODO: マジックナンバーをどうにかする
-        var titleBarHeight = 22;
-        var imageWindow = new BrowserWindow({
-          height: height + titleBarHeight,
-          width: width
-        });
-        imageWindow.loadUrl(url);
-        imageWindow.on('closed', function() {
-          imageWindow = null;
         });
       }
     }
