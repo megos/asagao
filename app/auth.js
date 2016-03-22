@@ -3,7 +3,7 @@ var TwitterAuth = function(consumerKey, consumerSecret) {
   this.consumerSecret = consumerSecret;
 };
 
-TwitterAuth.prototype.getTwitterAuth = function() {
+TwitterAuth.prototype.getTwitterAuth = function(mainWindow) {
   var twitterAPI = require('node-twitter-api');
 
   var twitter = new twitterAPI({
