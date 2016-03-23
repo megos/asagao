@@ -6,6 +6,14 @@ var TwitterManager = function(client) {
 };
 
 TwitterManager.prototype = {
+  getUserInfo: function(userId, callback) {
+    this.client.get('users/show', {
+      user_id: userId
+    }, function(error, data, response) {
+      console.log(data);
+    })
+  },
+
   getTimeline: function(callback) {
     this.client.get('statuses/home_timeline', this.params, function(error, tweets, response) {
       if (!error) {
@@ -20,7 +28,6 @@ TwitterManager.prototype = {
   getMentionsTimeline: function(callback) {
     this.client.get('statuses/mentions_timeline', this.params, function(error, tweets, response) {
       if (!error) {
-        console.log(tweets);
         callback(tweets);
       } else {
         throw error;
@@ -32,7 +39,6 @@ TwitterManager.prototype = {
   getUserStream: function(callback) {
     this.client.stream('user', this.params, function(stream) {
       stream.on('data', function(data) {
-        console.log(data);
         callback(data);
       });
 

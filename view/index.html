@@ -56,7 +56,7 @@
 
     <script id="tweet-component" type="x-template">
 
-      <ons-list-item class="timeline-li" modifier="tappable">
+      <ons-list-item class="timeline-li">
             <ons-row>
           <ons-col v-if="tweet.retweeted" class="retweeted" width="50px">
             <img v-bind:src="tweet.user.profile_image_url" class="timeline-image">
@@ -74,7 +74,7 @@
 
             
             <div class="timeline-actions">
-              <div><ons-icon icon="ion-ios-undo-outline"></ons-icon></div>
+              <div><ons-icon icon="fa-reply" v-on:click="setReply(tweet.user.id, tweet.id, $event)"></ons-icon></div>
               <div><ons-icon icon="ion-ios-star-outline"></ons-icon></div>
             </div>
             <div class="timeline-message">

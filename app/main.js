@@ -7,6 +7,7 @@ var TwitterManager = require('../app/twitter-manager');
 var Parser = require('../app/parser');
 
 var auth = JSON.parse(localStorage.getItem('auth'));
+var userId = localStorage.getItem('userId');
 
 var client = new Client(settings.TWITTER_CONSUMER_KEY,
                     settings.TWITTER_CONSUMER_SECRET,
@@ -22,6 +23,11 @@ var tweetComponent = Vue.extend({
   props: ['tweet'],
   template: '#tweet-component',
   methods: {
+
+    setReply: function(userId, tweetId, event) {
+      console.log(userId + ' ' + tweetId);
+    },
+
     openImageWindow: function(url, height, width, event) {
       // TODO: マジックナンバーをどうにかする
       var titleBarHeight = 22;
@@ -48,7 +54,7 @@ var timelineVue = new Vue({
   },
   created: function() {
     var self = this;
-
+    twitterManager.getUserInfo(userId, function(){});
     twitterManager.getTimeline(function(tweetsRow) {
       for (var i = 0; i < tweetsRow.length; i++) {
         self.tweets.push(parser.tweetParse(tweetsRow[i]));

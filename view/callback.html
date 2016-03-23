@@ -29,6 +29,8 @@
             accessTokenKey: accessToken,
             accessTokenSecret: accessTokenSecret
           };
+          var userId = accessToken.replace(/^([0-9]*)\-.*/, '$1');
+          localStorage.setItem('userId', userId);
           localStorage.setItem('auth', JSON.stringify(auth));
           mainWindow.loadURL('file://' + __dirname + '/index.html');
         } else {
