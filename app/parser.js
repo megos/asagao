@@ -33,7 +33,7 @@ Parser.prototype = {
               height: media[mi].sizes.medium.h,
               width: media[mi].sizes.medium.w
             });
-          } else if (type == 'video') {
+          } else if (type == 'video' || type == 'animated_gif') {
             var variants = tweet.extended_entities.media[mi].video_info.variants;
             for (var vi = 0; vi < variants.length; vi++) {
               // TODO: ビットレートの対応
