@@ -24,7 +24,7 @@ var tweetComponent = Vue.extend({
   template: '#tweet-component',
   methods: {
 
-    setReply: function(userId, tweetId, event) {
+    setReply: function(userId, tweetId) {
       console.log(userId + ' ' + tweetId);
     },
 
@@ -48,13 +48,17 @@ Vue.component('timeline-mentions', tweetComponent);
 var timelineVue = new Vue({
   el: '#main',
   data: {
+    user: [],
     tweets: [],
     mentions: [],
     tweettext: ''
   },
   created: function() {
     var self = this;
-    twitterManager.getUserInfo(userId, function(){});
+    twitterManager.getUserInfo(userId, function(user){
+      self.user = user;
+    });
+
     twitterManager.getTimeline(function(tweetsRow) {
       for (var i = 0; i < tweetsRow.length; i++) {
         self.tweets.push(parser.tweetParse(tweetsRow[i]));

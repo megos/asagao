@@ -21,7 +21,10 @@
 
 
     <ons-row class="tweet-area">
-      <ons-col width="80%">
+      <ons-col width="10%">
+        <img v-bind:src="user.profile_image_url" class="timeline-image">
+      </ons-col>
+      <ons-col width="70%">
         <textarea class="textarea textarea--transparent" rows="3" width="100%" maxlength="140" v-model="tweettext"></textarea>
       </ons-col>
       <ons-col v-show="tweettext" style="display:none;" width="5%" class="tweet-length">
@@ -74,7 +77,7 @@
 
             
             <div class="timeline-actions">
-              <div><ons-icon icon="fa-reply" v-on:click="setReply(tweet.user.id, tweet.id, $event)"></ons-icon></div>
+              <div><ons-icon icon="fa-reply" v-on:click="setReply(tweet.user.id, tweet.id)"></ons-icon></div>
               <div><ons-icon icon="ion-ios-star-outline"></ons-icon></div>
             </div>
             <div class="timeline-message">
