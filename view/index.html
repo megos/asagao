@@ -75,6 +75,11 @@
               <span class="timeline-name">{{tweet.user.name}}</span>
               <span class="timeline-id">@{{tweet.user.screen_name}}</span>
             </div>
+            
+            <div class="timeline-actions">
+              <ons-icon icon="fa-reply" v-on:click="setReply(tweet.user.id, tweet.id)">
+              <div><ons-icon icon="ion-ios-star-outline"></ons-icon></div>
+            </div>
 
             <div class="timeline-message">
               {{{tweet.text | br2nl}}}
@@ -87,6 +92,10 @@
                   <span class="timeline-name">{{tweet.rt.user.name}}</span>
                   <span class="timeline-id">@{{tweet.rt.user.screen_name}}</span>
                 </div>
+
+
+
+
 
                 <div class="timeline-message">
                   {{{tweet.rt.text | br2nl}}}
@@ -106,14 +115,6 @@
 
             <div class="timeline-name" v-if="tweet.retweeted">
               Retweeted by {{tweet.retweeted_user}}
-            </div>
-          </ons-col>
-
-          <ons-col width="4%">
-
-            <div class="timeline-actions">
-              <ons-icon icon="fa-reply" v-on:click="setReply(tweet.user.id, tweet.id)">
-              <div><ons-icon icon="ion-ios-star-outline"></ons-icon></div>
             </div>
           </ons-col>
         </ons-row>
