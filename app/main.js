@@ -23,9 +23,9 @@ var tweetComponent = Vue.extend({
   props: ['tweet'],
   template: '#tweet-component',
   methods: {
-
-    setReply: function(userId, tweetId) {
-      console.log(userId + ' ' + tweetId);
+    // TODO: componentからbindできないか
+    setReply: function(screenName, userId, tweetId) {
+      timelineVue.setReply(screenName, userId, tweetId);
     },
 
     openImageWindow: function(url, height, width, event) {
@@ -96,6 +96,11 @@ var timelineVue = new Vue({
       twitterManager.postTweet(this.tweettext, function(callback) {
         self.tweettext = '';
       });
+    },
+
+    setReply: function(screenName, userId, tweetId) {
+      this.tweettext = '@' + screenName + ' ';
+      document.getElementById('tweettext').focus();
     }
   }
 });
