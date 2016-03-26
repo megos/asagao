@@ -65,6 +65,18 @@ TwitterManager.prototype = {
         throw error;
       }
     });
+  },
+
+  deleteTweet: function(tweetId, callback) {
+    this.client.post('statuses/destroy', {
+      id: tweetId
+    }, function(error) {
+      if (!error) {
+
+      } else {
+        throw error;
+      }
+    });
   }
 };
 

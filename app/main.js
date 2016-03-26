@@ -1,4 +1,5 @@
 var remote = require('remote');
+var dialog = remote.require('dialog');
 var BrowserWindow = remote.require('browser-window');
 var Vue = require('vue');
 var settings = require('../app/settings');
@@ -29,7 +30,18 @@ var tweetComponent = Vue.extend({
     },
 
     deleteTweet: function(tweetId) {
-      // TODO: tweet削除
+      var curWindow = remote.getCurrentWindow();
+      var options = {
+        type: 'info',
+        buttons: ['Yes', 'No'],
+        message: 'ツイートを削除してもよろしいですか'
+      };
+      dialog.showMessageBox(curWindow, options, function(callback) {
+        // yes: 0, no: 1
+        if (callback === 0) {
+          twitterManager.deleteTweet(tweetId);
+        }
+      });
     },
 
     openImageWindow: function(url, height, width, event) {
