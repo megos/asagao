@@ -39,7 +39,7 @@
       <ons-page id="timeline">
 
         <ons-list class="timeline">
-          <timeline-home v-for="tweet in tweets" :tweet="tweet"></timeline-home>
+          <timeline-home v-for="tweet in tweets" :tweet="tweet" :user="user"></timeline-home>
         </ons-list>
 
 
@@ -50,7 +50,7 @@
       <ons-page>
 
         <ons-list class="timeline">
-          <timeline-mentions v-for="tweet in mentions" :tweet="tweet"></timeline-mentions>
+          <timeline-mentions v-for="tweet in mentions" :tweet="tweet" :user="user"></timeline-mentions>
         </ons-list>
 
 
@@ -77,8 +77,8 @@
             </div>
             
             <div class="timeline-actions">
-              <ons-icon icon="fa-reply" v-on:click="setReply(tweet.user.screen_name, tweet.id_str)">
-              <div><ons-icon icon="ion-ios-star-outline"></ons-icon></div>
+              <ons-icon v-if="tweet.user.id_str == user.id_str" icon="fa-trash" v-on:click="deleteTweet(tweet.id_str)"></ons-icon>
+              <ons-icon v-else icon="fa-reply" v-on:click="setReply(tweet.user.screen_name, tweet.id_str)"></ons-icon>
             </div>
 
             <div class="timeline-message">

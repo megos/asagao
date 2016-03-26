@@ -20,12 +20,16 @@ var twitterManager = new TwitterManager(twitterClient);
 var parser = new Parser();
 
 var tweetComponent = Vue.extend({
-  props: ['tweet'],
+  props: ['tweet', 'user'],
   template: '#tweet-component',
   methods: {
     // TODO: componentからbindできないか
     setReply: function(screenName, tweetId) {
       timelineVue.setReply(screenName, tweetId);
+    },
+
+    deleteTweet: function(tweetId) {
+      // TODO: tweet削除
     },
 
     openImageWindow: function(url, height, width, event) {
