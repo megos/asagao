@@ -15,6 +15,12 @@
   vertical-align: -4px;
 }
 
+.profile-image-col {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
 .timeline {
   padding-top: 52px;
 }
@@ -85,6 +91,7 @@
   z-index: 10;
   left: 0;
   background-color: white;
+  border-bottom: 1px solid gray;
 }
 
 .tweet-length {

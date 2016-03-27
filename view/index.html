@@ -21,8 +21,8 @@
 
 
     <ons-row class="tweet-area">
-      <ons-col width="10%">
-        <img v-bind:src="user.profile_image_url" class="timeline-image">
+      <ons-col width="10%" class="profile-image-col">
+        <img v-bind:src="user.profile_image_url" class="timeline-image" style="margin-top: 6px;">
       </ons-col>
       <ons-col width="70%">
         <textarea class="textarea textarea--transparent" id="tweettext" rows="3" width="100%" maxlength="140" v-model="tweettext"></textarea>
