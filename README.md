@@ -5,7 +5,12 @@ electron twitter client
 
 ## Features
 - UserStream
-- 画像、動画展開
+- 画像
+ - Twitter公式
+ - Instagram
+ - ついっぷる
+- 動画
+ - Twitter公式
 - コメント付き公式リツイート表示
 
 ## Licence
