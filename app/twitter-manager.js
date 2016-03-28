@@ -55,7 +55,7 @@ TwitterManager.prototype = {
   postTweet: function(tweet, replyScreenName, inReplyToStatusId, callback) {
     var params = [];
     params.status = tweet;
-    if (inReplyToStatusId !== '' && (tweet.indexOf('@' + replyScreenName) != -1)) {
+    if (inReplyToStatusId !== '' && (tweet.indexOf('@' + replyScreenName) !== -1)) {
       params.in_reply_to_status_id = inReplyToStatusId;
     }
     this.client.post('statuses/update', params, function(error, tweet, response) {
