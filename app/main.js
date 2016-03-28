@@ -81,16 +81,20 @@ var timelineVue = new Vue({
       for (var i = 0; i < tweetsRow.length; i++) {
         self.tweets.push(parser.tweetParse(tweetsRow[i]));
       }
-      console.log(self.tweets);
     });
 
     twitterManager.getUserStream(function(data) {
-      console.log(data);
       if (data.created_at != null && data.text != null) {
         for (var i = 0; i < self.tweets.length; i++) {
           self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
         }
+
         self.tweets.unshift(parser.tweetParse(data));
+
+        if (data.text.indexOf('@' + self.user.screen_name) !== -1) {
+          self.mentions.unshift(parser.tweetParse(data));
+        }
+
       } else if (data.delete != null) {
         console.log(data);
         for (var i = 0; i < self.tweets.length; i++) {
