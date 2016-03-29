@@ -71,9 +71,7 @@ TwitterManager.prototype = {
     this.client.post('statuses/destroy', {
       id: tweetId
     }, function(error) {
-      if (!error) {
-
-      } else {
+      if (error) {
         throw error;
       }
     });

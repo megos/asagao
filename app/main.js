@@ -69,7 +69,7 @@ var timelineVue = new Vue({
     mentions: [],
     tweettext: '',
     replyScreenName: '',
-    inReplyToStatusId: '',
+    inReplyToStatusId: ''
   },
   created: function() {
     var self = this;
