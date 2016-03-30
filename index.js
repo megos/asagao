@@ -26,8 +26,4 @@ app.on('ready', function() {
 		event.preventDefault();
 		shell.openExternal(url);
 	});
-	
-	mainWindow.on('closed', function() {
-		mainWindow = null;
-	});
 });
