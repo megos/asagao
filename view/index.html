@@ -74,6 +74,7 @@
             <div class="timline-from">
               <span class="timeline-name">{{tweet.user.name}}</span>
               <span class="timeline-id">@{{tweet.user.screen_name}}</span>
+              <span v-if="tweet.user.protected" class="timeline-protected"><ons-icon icon="fa-lock"></ons-icon></span>
             </div>
             
             <div class="timeline-actions">
@@ -91,6 +92,7 @@
                 <div class="timline-from">
                   <span class="timeline-name">{{tweet.rt.user.name}}</span>
                   <span class="timeline-id">@{{tweet.rt.user.screen_name}}</span>
+                  <span v-if="tweet.user.protected" class="timeline-protected"><ons-icon icon="fa-lock"></ons-icon></span>
                 </div>
 
 

@@ -65,6 +65,11 @@
   font-weight: 1000;
 }
 
+.timeline-protected {
+  font-size: 11px;
+  color: gray;
+}
+
 .timeline-message {
   margin-top: 4px;
   margin-bottom: 4px;
