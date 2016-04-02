@@ -104,15 +104,15 @@
                 </div>
 
                 <div class="imagethumb" v-for="m in tweet.rt.media">
-                <img v-if="m.url_video" v-on:click="openImageWindow(m.url_video, m.height, m.width, $event)" v-bind:src="m.url_thumb" width="100px">
-                <img v-else v-on:click="openImageWindow(m.url_image, m.height, m.width, $event)" v-bind:src="m.url_thumb" width="100px">
+                <img v-if="m.url_video" v-on:click="openImageWindow(m.url_video, m.height, m.width)" v-bind:src="m.url_thumb" width="100px">
+                <img v-else v-on:click="openImageWindow(m.url_image, m.height, m.width)" v-bind:src="m.url_thumb" width="100px">
                 </div>
               </ons-col>
             </ons-list-item>
 
             <div class="imagethumb" v-for="m in tweet.media">
-                <img v-if="m.url_video" v-on:click="openImageWindow(m.url_video, m.height, m.width, $event)" v-bind:src="m.url_thumb" width="100px">
-                <img v-else v-on:click="openImageWindow(m.url_image, m.height, m.width, $event)" v-bind:src="m.url_thumb" width="100px">
+                <img v-if="m.url_video" v-on:click="openImageWindow(m.url_video, m.height, m.width)" v-bind:src="m.url_thumb" width="100px">
+                <img v-else v-on:click="openImageWindow(m.url_image, m.height, m.width)" v-bind:src="m.url_thumb" width="100px">
             </div>
 
             <div class="timeline-name" v-if="tweet.retweeted">

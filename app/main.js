@@ -44,7 +44,7 @@ var tweetComponent = Vue.extend({
       });
     },
 
-    openImageWindow: function(url, height, width, event) {
+    openImageWindow: function(url, height, width) {
       // TODO: マジックナンバーをどうにかする
       var titleBarHeight = 22;
       var imageWindow = new BrowserWindow({
@@ -96,7 +96,6 @@ var timelineVue = new Vue({
         }
 
       } else if (data.delete != null) {
-        console.log(data);
         for (var i = 0; i < self.tweets.length; i++) {
           // 削除tweet id確認
           if ((self.tweets[i].id == data.delete.status.id) && (self.tweets[i].user.id == data.delete.status.user_id)) {
