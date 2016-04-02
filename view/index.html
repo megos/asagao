@@ -78,8 +78,14 @@
             </div>
             
             <div class="timeline-actions">
-              <ons-icon v-if="tweet.user.id_str == user.id_str" icon="fa-trash" v-on:click="deleteTweet(tweet.id_str)"></ons-icon>
-              <ons-icon v-else icon="fa-reply" v-on:click="setReply(tweet.user.screen_name, tweet.id_str)"></ons-icon>
+              <div>
+                <ons-icon v-if="tweet.user.id_str == user.id_str" icon="fa-trash" v-on:click="deleteTweet(tweet.id_str)"></ons-icon>
+                <ons-icon v-else icon="fa-reply" v-on:click="setReply(tweet.user.screen_name, tweet.id_str)"></ons-icon>
+              </div>
+              <div>
+                <ons-icon v-if="tweet.favorited" icon="fa-star" style="color: yellow"></ons-icon>
+                <ons-icon v-else icon="fa-star-o"></ons-icon>
+              </div>
             </div>
 
             <div class="timeline-message">
