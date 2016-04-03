@@ -29,6 +29,25 @@ var tweetComponent = Vue.extend({
       timelineVue.setReply(screenName, tweetId);
     },
 
+    setFavorite: function(tweetId, flg) {
+      var self = this;
+      // ふぁぼる
+      if (flg) {
+        twitterManager.createFavorite(tweetId, function(response) {
+          if (response) {
+            self.tweet.favorited = true;
+          }
+        });
+      // ふぁぼを取り消す
+      } else {
+        twitterManager.destroyFavorite(tweetId, function(response) {
+          if (response) {
+            self.tweet.favorited = false;
+          }
+        });
+      }
+    },
+
     deleteTweet: function(tweetId) {
       var curWindow = remote.getCurrentWindow();
       var options = {

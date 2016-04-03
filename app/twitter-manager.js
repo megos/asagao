@@ -75,6 +75,30 @@ TwitterManager.prototype = {
         throw error;
       }
     });
+  },
+
+  createFavorite: function(tweetId, callback) {
+    this.client.post('favorites/create', {
+      id: tweetId
+    }, function(error) {
+      if (error) {
+        throw error;
+      } else {
+        callback(true);
+      }
+    });
+  },
+
+  destroyFavorite: function(tweetId, callback) {
+    this.client.post('favorites/destroy', {
+      id: tweetId
+    }, function(error) {
+      if (error) {
+        throw error;
+      } else {
+        callback(true);
+      }
+    })
   }
 };
 

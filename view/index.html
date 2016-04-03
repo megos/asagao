@@ -83,8 +83,8 @@
                 <ons-icon v-else icon="fa-reply" v-on:click="setReply(tweet.user.screen_name, tweet.id_str)"></ons-icon>
               </div>
               <div>
-                <ons-icon v-if="tweet.favorited" icon="fa-star" style="color: yellow"></ons-icon>
-                <ons-icon v-else icon="fa-star-o"></ons-icon>
+                <ons-icon v-if="tweet.favorited" icon="fa-star" v-on:click="setFavorite(tweet.id_str, false)" style="color: yellow"></ons-icon>
+                <ons-icon v-else icon="fa-star-o" v-on:click="setFavorite(tweet.id_str, true)"></ons-icon>
               </div>
             </div>
 
