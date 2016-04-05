@@ -54,12 +54,16 @@
           <timeline-mentions v-for="tweet in mentions" :tweet="tweet" :user="user"></timeline-mentions>
         </ons-list>
 
-
       </ons-page>
     </ons-template>
 
     <ons-template id="favorites.html">
       <ons-page>
+
+        <ons-list class="timeline">
+          <timeline-favorites v-for="tweet in favorites" :tweet="tweet" :user="user"></timeline-favorites>
+        </ons-list>
+
       </ons-page>
     </ons-template>
 
