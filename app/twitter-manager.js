@@ -40,6 +40,17 @@ TwitterManager.prototype = {
 
   },
 
+  getFavoritesList: function(callback) {
+    this.client.get('favorites/list', this.params, function(error, tweets, response) {
+      if (!error) {
+        callback(tweets);
+      } else {
+        throw error;
+      }
+    });
+
+  },
+
   getUserStream: function(callback) {
     this.client.stream('user', this.params, function(stream) {
       stream.on('data', function(data) {
