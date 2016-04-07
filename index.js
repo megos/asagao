@@ -1,8 +1,8 @@
 'use strict';
 
-var app = require('app');
+var app           = require('app');
 var browserWindow = require('browser-window');
-var shell = require('shell');
+var shell         = require('shell');
 
 require('crash-reporter').start();
 
