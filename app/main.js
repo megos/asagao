@@ -83,11 +83,12 @@ Vue.component('timeline-mentions', tweetComponent);
 var timelineVue = new Vue({
   el: '#main',
   data: {
-    user: [],
-    tweets: [],
-    mentions: [],
-    tweettext: '',
-    replyScreenName: '',
+    user             : [],
+    tweets           : [],
+    mentions         : [],
+    favorites        : [],
+    tweettext        : '',
+    replyScreenName  : '',
     inReplyToStatusId: ''
   },
   created: function() {
@@ -127,6 +128,12 @@ var timelineVue = new Vue({
     twitterManager.getMentionsTimeline(function(tweetsRow) {
       for (var i = 0; i < tweetsRow.length; i++) {
         self.mentions.push(parser.tweetParse(tweetsRow[i]));
+      }
+    });
+    
+    twitterManager.getFavoritesList(function(tweetsRow) {
+      for (var i = 0; i < tweetRow.length; i++) {
+        self.favorites.push(parser.tweetParse(tweetRow[i]));
       }
     });
   },
