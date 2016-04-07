@@ -79,79 +79,82 @@ var tweetComponent = Vue.extend({
 });
 Vue.component('timeline-home', tweetComponent);
 Vue.component('timeline-mentions', tweetComponent);
+Vue.component('timeline-favorites', tweetComponent);
 
-var timelineVue = new Vue({
-  el: '#main',
-  data: {
-    user             : [],
-    tweets           : [],
-    mentions         : [],
-    favorites        : [],
-    tweettext        : '',
-    replyScreenName  : '',
-    inReplyToStatusId: ''
-  },
-  created: function() {
-    var self = this;
-    twitterManager.getUserInfo(userId, function(user){
-      self.user = user;
-    });
+setTimeout(function() {
+  var timelineVue = new Vue({
+    el: '#main',
+    data: {
+      user             : [],
+      tweets           : [],
+      mentions         : [],
+      favorites        : [],
+      tweettext        : '',
+      replyScreenName  : '',
+      inReplyToStatusId: ''
+    },
+    created: function() {
+      var self = this;
+      twitterManager.getUserInfo(userId, function(user){
+        self.user = user;
+      });
 
-    twitterManager.getTimeline(function(tweetsRow) {
-      for (var i = 0; i < tweetsRow.length; i++) {
-        self.tweets.push(parser.tweetParse(tweetsRow[i]));
-      }
-    });
-
-    twitterManager.getUserStream(function(data) {
-      if (data.created_at != null && data.text != null) {
-        for (var i = 0; i < self.tweets.length; i++) {
-          self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
+      twitterManager.getTimeline(function(tweetsRow) {
+        for (var i = 0; i < tweetsRow.length; i++) {
+          self.tweets.push(parser.tweetParse(tweetsRow[i]));
         }
+      });
 
-        self.tweets.unshift(parser.tweetParse(data));
+      twitterManager.getUserStream(function(data) {
+        if (data.created_at != null && data.text != null) {
+          for (var i = 0; i < self.tweets.length; i++) {
+            self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
+          }
 
-        if (data.text.indexOf('@' + self.user.screen_name) !== -1) {
-          self.mentions.unshift(parser.tweetParse(data));
-        }
+          self.tweets.unshift(parser.tweetParse(data));
 
-      } else if (data.delete != null) {
-        for (var i = 0; i < self.tweets.length; i++) {
-          // 削除tweet id確認
-          if ((self.tweets[i].id == data.delete.status.id) && (self.tweets[i].user.id == data.delete.status.user_id)) {
-            self.tweets.splice(i, 1);
+          if (data.text.indexOf('@' + self.user.screen_name) !== -1) {
+            self.mentions.unshift(parser.tweetParse(data));
+          }
+
+        } else if (data.delete != null) {
+          for (var i = 0; i < self.tweets.length; i++) {
+            // 削除tweet id確認
+            if ((self.tweets[i].id == data.delete.status.id) && (self.tweets[i].user.id == data.delete.status.user_id)) {
+              self.tweets.splice(i, 1);
+            }
           }
         }
-      }
-    });
+      });
 
-    twitterManager.getMentionsTimeline(function(tweetsRow) {
-      for (var i = 0; i < tweetsRow.length; i++) {
-        self.mentions.push(parser.tweetParse(tweetsRow[i]));
-      }
-    });
-    
-    twitterManager.getFavoritesList(function(tweetsRow) {
-      for (var i = 0; i < tweetRow.length; i++) {
-        self.favorites.push(parser.tweetParse(tweetRow[i]));
-      }
-    });
-  },
-  methods: {
-    tweet: function(event) {
-      var self = this;
-      twitterManager.postTweet(this.tweettext, this.replyScreenName, this.inReplyToStatusId, function(callback) {
-        self.tweettext = '';
-        self.replyScreenName = '';
-        self.inReplyToStatusId = '';
+      twitterManager.getMentionsTimeline(function(tweetsRow) {
+        for (var i = 0; i < tweetsRow.length; i++) {
+          self.mentions.push(parser.tweetParse(tweetsRow[i]));
+        }
+      });
+
+      twitterManager.getFavoritesList(function(tweetsRow) {
+        for (var i = 0; i < tweetsRow.length; i++) {
+          self.favorites.push(parser.tweetParse(tweetsRow[i]));
+        }
       });
     },
+    methods: {
+      tweet: function(event) {
+        var self = this;
+        twitterManager.postTweet(this.tweettext, this.replyScreenName, this.inReplyToStatusId, function(callback) {
+          self.tweettext = '';
+          self.replyScreenName = '';
+          self.inReplyToStatusId = '';
+        });
+      },
 
-    setReply: function(screenName, tweetId) {
-      this.tweettext = '@' + screenName + ' ';
-      this.replyScreenName = screenName;
-      this.inReplyToStatusId = tweetId;
-      document.getElementById('tweettext').focus();
+      setReply: function(screenName, tweetId) {
+        this.tweettext = '@' + screenName + ' ';
+        this.replyScreenName = screenName;
+        this.inReplyToStatusId = tweetId;
+        document.getElementById('tweettext').focus();
+      }
     }
-  }
-});
+  });
+}, 1);
