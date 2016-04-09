@@ -151,7 +151,7 @@ setTimeout(function() {
             }
 
             for (var i = tweetsRow.length - 1; i >= 0; i--) {
-              self.tweets.push(parser.tweetParse(tweetsRow[i]));
+              self.tweets.unshift(parser.tweetParse(tweetsRow[i]));
             }
           }
         });
