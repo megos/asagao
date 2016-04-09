@@ -91,53 +91,11 @@ setTimeout(function() {
       favorites        : [],
       tweettext        : '',
       replyScreenName  : '',
-      inReplyToStatusId: ''
+      inReplyToStatusId: '',
+      title            : 'Timeline'
     },
     created: function() {
-      var self = this;
-      twitterManager.getUserInfo(userId, function(user){
-        self.user = user;
-      });
-
-      twitterManager.getTimeline(function(tweetsRow) {
-        for (var i = 0; i < tweetsRow.length; i++) {
-          self.tweets.push(parser.tweetParse(tweetsRow[i]));
-        }
-      });
-
-      twitterManager.getUserStream(function(data) {
-        if (data.created_at != null && data.text != null) {
-          for (var i = 0; i < self.tweets.length; i++) {
-            self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
-          }
-
-          self.tweets.unshift(parser.tweetParse(data));
-
-          if (data.text.indexOf('@' + self.user.screen_name) !== -1) {
-            self.mentions.unshift(parser.tweetParse(data));
-          }
-
-        } else if (data.delete != null) {
-          for (var i = 0; i < self.tweets.length; i++) {
-            // 削除tweet id確認
-            if ((self.tweets[i].id == data.delete.status.id) && (self.tweets[i].user.id == data.delete.status.user_id)) {
-              self.tweets.splice(i, 1);
-            }
-          }
-        }
-      });
-
-      twitterManager.getMentionsTimeline(function(tweetsRow) {
-        for (var i = 0; i < tweetsRow.length; i++) {
-          self.mentions.push(parser.tweetParse(tweetsRow[i]));
-        }
-      });
-
-      twitterManager.getFavoritesList(function(tweetsRow) {
-        for (var i = 0; i < tweetsRow.length; i++) {
-          self.favorites.push(parser.tweetParse(tweetsRow[i]));
-        }
-      });
+      this.tweetload(true);
     },
     methods: {
       tweet: function(event) {
@@ -154,6 +112,74 @@ setTimeout(function() {
         this.replyScreenName = screenName;
         this.inReplyToStatusId = tweetId;
         document.getElementById('tweettext').focus();
+      },
+
+      setTitle: function(title) {
+        this.title = title;
+      },
+
+      tweetload: function(isFirst) {
+        var self = this;
+
+        var timelineId  = null;
+        var mentionsId  = null;
+        var favoritesId = null;
+
+        if (this.tweets.length > 0) {
+          timelineId = this.tweets[0].id_str;
+        }
+        if (this.mentions.length > 0) {
+          mentionsId = this.mentions[0].id_str;
+        }
+        if (this.favorites.length > 0) {
+          favoritesId = this.favorites[0].id_str;
+        }
+
+        twitterManager.getUserInfo(userId, function(user){
+          self.user = user;
+        });
+
+        twitterManager.getTimeline(timelineId, function(tweetsRow) {
+          for (var i = 0; i < tweetsRow.length; i++) {
+            self.tweets.push(parser.tweetParse(tweetsRow[i]));
+          }
+        });
+
+        if (isFirst) {
+          twitterManager.getUserStream(function(data) {
+            if (data.created_at != null && data.text != null) {
+              for (var i = 0; i < self.tweets.length; i++) {
+                self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
+              }
+
+              self.tweets.unshift(parser.tweetParse(data));
+
+              if (data.text.indexOf('@' + self.user.screen_name) !== -1) {
+                self.mentions.unshift(parser.tweetParse(data));
+              }
+
+            } else if (data.delete != null) {
+              for (var i = 0; i < self.tweets.length; i++) {
+                // 削除tweet id確認
+                if ((self.tweets[i].id == data.delete.status.id) && (self.tweets[i].user.id == data.delete.status.user_id)) {
+                  self.tweets.splice(i, 1);
+                }
+              }
+            }
+          });
+        }
+
+        twitterManager.getMentionsTimeline(mentionsId, function(tweetsRow) {
+          for (var i = 0; i < tweetsRow.length; i++) {
+            self.mentions.push(parser.tweetParse(tweetsRow[i]));
+          }
+        });
+
+        twitterManager.getFavoritesList(favoritesId, function(tweetsRow) {
+          for (var i = 0; i < tweetsRow.length; i++) {
+            self.favorites.push(parser.tweetParse(tweetsRow[i]));
+          }
+        });
       }
     }
   });

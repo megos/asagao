@@ -91,7 +91,7 @@
 }
 
 .tweet-area {
-  position: fixed;
+  position: relative;
   top: 0;
   z-index: 10;
   left: 0;

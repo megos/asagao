@@ -18,8 +18,12 @@ TwitterManager.prototype = {
     });
   },
 
-  getTimeline: function(callback) {
-    this.client.get('statuses/home_timeline', this.params, function(error, tweets, response) {
+  getTimeline: function(sinceId, callback) {
+    var params = this.params;
+    if (sinceId != null) {
+      params.since_id = sinceId;
+    }
+    this.client.get('statuses/home_timeline', params, function(error, tweets, response) {
       if (!error) {
         callback(tweets);
       } else {
@@ -29,8 +33,12 @@ TwitterManager.prototype = {
 
   },
 
-  getMentionsTimeline: function(callback) {
-    this.client.get('statuses/mentions_timeline', this.params, function(error, tweets, response) {
+  getMentionsTimeline: function(sinceId, callback) {
+    var params = this.params;
+    if (sinceId != null) {
+      params.since_id = sinceId;
+    }
+    this.client.get('statuses/mentions_timeline', params, function(error, tweets, response) {
       if (!error) {
         callback(tweets);
       } else {
@@ -40,8 +48,12 @@ TwitterManager.prototype = {
 
   },
 
-  getFavoritesList: function(callback) {
-    this.client.get('favorites/list', this.params, function(error, tweets, response) {
+  getFavoritesList: function(sinceId, callback) {
+    var params = this.params;
+    if (sinceId != null) {
+      params.since_id = sinceId;
+    }
+    this.client.get('favorites/list', params, function(error, tweets, response) {
       if (!error) {
         callback(tweets);
       } else {

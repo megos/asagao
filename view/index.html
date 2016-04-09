@@ -15,10 +15,21 @@
   <ons-page id="main">
 
     <ons-tabbar var="tab">
-      <ons-tab page="timeline.html" label="Home" icon="fa-home" active="true" persistent></ons-tab>
-      <ons-tab page="mentions.html" label="Mentions" icon="ion-at" persistent></ons-tab>
-      <ons-tab page="favorites.html" label="Favorites" icon="fa-star" persistent></ons-tab>
+      <ons-tab page="timeline.html" label="Home" icon="fa-home" active="true" v-on:click="setTitle('Timeline')" persistent></ons-tab>
+      <ons-tab page="mentions.html" label="Mentions" icon="ion-at" v-on:click="setTitle('Mentions')" persistent></ons-tab>
+      <ons-tab page="favorites.html" label="Favorites" icon="fa-star" v-on:click="setTitle('Favorites')" persistent></ons-tab>
     </ons-tabbar>
+
+    <ons-toolbar>
+      <div class="center">
+        {{title}}
+      </div>
+      <div class="right">
+        <ons-toolbar-button>
+          <ons-icon icon="ion-ios-reload" v-on:click="tweetload(false)" fixed-width="false" style="font-size: 26px; vertical-align: -4px;"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+    </ons-toolbar>
 
 
     <ons-row class="tweet-area">
