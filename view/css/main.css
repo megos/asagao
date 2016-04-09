@@ -65,7 +65,7 @@
   font-weight: 1000;
 }
 
-.timeline-protected {
+.timeline-protected, .timeline-verified {
   font-size: 11px;
   color: gray;
 }
@@ -115,7 +115,7 @@
   border-radius: 4px;
 }
 
-/* onsenui2.0beta7 bug?
+/* onsenui2.0.0-beta.9 bug?
   .list__item__center -> margin-left: 26px; */
 .list__item__center {
   margin-left: 0;
