@@ -3,6 +3,7 @@ var TwitterManager = function(client) {
   this.params = {
     include_entities: true
   };
+  this.stream = null;
 };
 
 TwitterManager.prototype = {
@@ -64,7 +65,15 @@ TwitterManager.prototype = {
   },
 
   getUserStream: function(callback) {
+    var self = this;
     this.client.stream('user', this.params, function(stream) {
+
+      // UserStreamが2重に接続されるのを防ぐ
+      if (self.stream != null) {
+        self.stream.destroy();
+      }
+      self.stream = stream;
+
       stream.on('data', function(data) {
         callback(data);
       });

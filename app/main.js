@@ -156,30 +156,28 @@ setTimeout(function() {
           }
         });
 
-        if (isFirst) {
-          twitterManager.getUserStream(function(data) {
-            if (data.created_at != null && data.text != null) {
-              // 相対時間を更新
-              for (var i = 0; i < self.tweets.length; i++) {
-                self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
-              }
+        twitterManager.getUserStream(function(data) {
+          if (data.created_at != null && data.text != null) {
+            // 相対時間を更新
+            for (var i = 0; i < self.tweets.length; i++) {
+              self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
+            }
 
-              self.tweets.unshift(parser.tweetParse(data));
+            self.tweets.unshift(parser.tweetParse(data));
 
-              if (data.text.indexOf('@' + self.user.screen_name) !== -1) {
-                self.mentions.unshift(parser.tweetParse(data));
-              }
+            if (data.text.indexOf('@' + self.user.screen_name) !== -1) {
+              self.mentions.unshift(parser.tweetParse(data));
+            }
 
-            } else if (data.delete != null) {
-              for (var i = 0; i < self.tweets.length; i++) {
-                // 削除tweet id確認
-                if ((self.tweets[i].id == data.delete.status.id) && (self.tweets[i].user.id == data.delete.status.user_id)) {
-                  self.tweets.splice(i, 1);
-                }
+          } else if (data.delete != null) {
+            for (var i = 0; i < self.tweets.length; i++) {
+              // 削除tweet id確認
+              if ((self.tweets[i].id == data.delete.status.id) && (self.tweets[i].user.id == data.delete.status.user_id)) {
+                self.tweets.splice(i, 1);
               }
             }
-          });
-        }
+          }
+        });
 
         twitterManager.getMentionsTimeline(mentionsId, function(tweetsRow) {
           for (var i = 0; i < tweetsRow.length; i++) {
