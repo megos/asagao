@@ -130,7 +130,7 @@ TwitterManager.prototype = {
       } else {
         callback(true);
       }
-    })
+    });
   }
 };
 
