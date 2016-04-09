@@ -140,14 +140,26 @@ setTimeout(function() {
         });
 
         twitterManager.getTimeline(timelineId, function(tweetsRow) {
-          for (var i = 0; i < tweetsRow.length; i++) {
-            self.tweets.push(parser.tweetParse(tweetsRow[i]));
+          if (isFirst) {
+            for (var i = 0; i < tweetsRow.length; i++) {
+              self.tweets.push(parser.tweetParse(tweetsRow[i]));
+            }
+          } else {
+            // 相対時間を更新
+            for (var i = 0; i < self.tweets.length; i++) {
+              self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
+            }
+
+            for (var i = tweetsRow.length - 1; i >= 0; i--) {
+              self.tweets.push(parser.tweetParse(tweetsRow[i]));
+            }
           }
         });
 
         if (isFirst) {
           twitterManager.getUserStream(function(data) {
             if (data.created_at != null && data.text != null) {
+              // 相対時間を更新
               for (var i = 0; i < self.tweets.length; i++) {
                 self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
               }
