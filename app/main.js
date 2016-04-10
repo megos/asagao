@@ -19,6 +19,7 @@ var twitterClient = client.getClient();
 
 var twitterManager = new TwitterManager(twitterClient);
 var parser = new Parser();
+var timelineVue = null;
 
 var tweetComponent = Vue.extend({
   props: ['tweet', 'user'],
@@ -82,7 +83,7 @@ Vue.component('timeline-mentions', tweetComponent);
 Vue.component('timeline-favorites', tweetComponent);
 
 setTimeout(function() {
-  var timelineVue = new Vue({
+  timelineVue = new Vue({
     el: '#main',
     data: {
       user             : [],
