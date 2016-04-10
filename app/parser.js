@@ -16,7 +16,7 @@ Parser.prototype = {
       tweet.media = [];
 
       // 相対時間に変更
-      tweet.relative_created_at = this.moment(tweet.created_at).fromNow();
+      this.setRelativeCreatedAt(tweet);
 
       // 改行コード
       tweet.text = tweet.text.replace(/[\n\r]/g, '<br>');
@@ -100,9 +100,13 @@ Parser.prototype = {
   },
 
   setRelativeCreatedAt: function(tweet) {
-    // 相対時間に変更
-    tweet.relative_created_at = this.moment(tweet.created_at).fromNow();
-    return tweet;
+
+    // 1週間より前は絶対時間のまま
+    if (this.moment().diff(tweet.created_at, 'days') > 7) {
+      tweet.relative_created_at = this.moment(tweet.created_at).format('YYYY/MM/DD');
+    } else {
+      tweet.relative_created_at = this.moment(tweet.created_at).fromNow();
+    }
   }
 };
 

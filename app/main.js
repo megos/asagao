@@ -147,7 +147,7 @@ setTimeout(function() {
           } else {
             // 相対時間を更新
             for (var i = 0; i < self.tweets.length; i++) {
-              self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
+              parser.setRelativeCreatedAt(self.tweets[i]);
             }
 
             for (var i = tweetsRow.length - 1; i >= 0; i--) {
@@ -160,7 +160,7 @@ setTimeout(function() {
           if (data.created_at != null && data.text != null) {
             // 相対時間を更新
             for (var i = 0; i < self.tweets.length; i++) {
-              self.tweets[i] = parser.setRelativeCreatedAt(self.tweets[i]);
+              parser.setRelativeCreatedAt(self.tweets[i]);
             }
 
             self.tweets.unshift(parser.tweetParse(data));
