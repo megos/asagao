@@ -132,13 +132,15 @@ TwitterManager.prototype = {
       }
     });
   },
-  
+
   getMutesList: function(callback) {
-    this.client.get('mutes/users/ids', function(error, data) {
+    this.client.get('mutes/users/ids', {
+      cursor: -1
+    }, function(error, data) {
       if (error) {
         throw error;
       } else {
-        callback(data);
+        callback(data.ids);
       }
     });
   }

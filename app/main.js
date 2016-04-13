@@ -87,6 +87,7 @@ setTimeout(function() {
     el: '#main',
     data: {
       user             : [],
+      mutes            : [],
       tweets           : [],
       mentions         : [],
       favorites        : [],
@@ -136,9 +137,19 @@ setTimeout(function() {
           favoritesId = this.favorites[0].id_str;
         }
 
-        twitterManager.getUserInfo(userId, function(user){
-          self.user = user;
-        });
+        if (isFirst) {
+          // ユーザ情報
+          twitterManager.getUserInfo(userId, function(user){
+            self.user = user;
+          });
+
+          // ミュート
+          twitterManager.getMutesList(function(data) {
+            self.mutes = data;
+            console.log(self.mutes);
+          });
+
+        }
 
         twitterManager.getTimeline(timelineId, function(tweetsRow) {
           if (isFirst) {
