@@ -146,7 +146,6 @@ setTimeout(function() {
           // ミュート
           twitterManager.getMutesList(function(data) {
             self.mutes = data;
-            console.log(self.mutes);
           });
 
         }
@@ -154,7 +153,9 @@ setTimeout(function() {
         twitterManager.getTimeline(timelineId, function(tweetsRow) {
           if (isFirst) {
             for (var i = 0; i < tweetsRow.length; i++) {
-              self.tweets.push(parser.tweetParse(tweetsRow[i]));
+              if (self.mutes.indexOf(tweetsRow[i].user.id) === -1) {
+                self.tweets.push(parser.tweetParse(tweetsRow[i]));
+              }
             }
           } else {
             // 相対時間を更新
@@ -163,7 +164,9 @@ setTimeout(function() {
             }
 
             for (var i = tweetsRow.length - 1; i >= 0; i--) {
-              self.tweets.unshift(parser.tweetParse(tweetsRow[i]));
+              if (self.mutes.indexOf(tweetsRow[i].user.id) === -1) {
+                self.tweets.unshift(parser.tweetParse(tweetsRow[i]));
+              }
             }
           }
         });
@@ -174,11 +177,12 @@ setTimeout(function() {
             for (var i = 0; i < self.tweets.length; i++) {
               parser.setRelativeCreatedAt(self.tweets[i]);
             }
+            if (self.mutes.indexOf(tweetsRow[i].user.id) === -1) {
+              self.tweets.unshift(parser.tweetParse(data));
 
-            self.tweets.unshift(parser.tweetParse(data));
-
-            if (data.text.indexOf('@' + self.user.screen_name) !== -1) {
-              self.mentions.unshift(parser.tweetParse(data));
+              if (data.text.indexOf('@' + self.user.screen_name) !== -1) {
+                self.mentions.unshift(parser.tweetParse(data));
+              }
             }
 
           } else if (data.delete != null) {
@@ -193,13 +197,17 @@ setTimeout(function() {
 
         twitterManager.getMentionsTimeline(mentionsId, function(tweetsRow) {
           for (var i = 0; i < tweetsRow.length; i++) {
-            self.mentions.push(parser.tweetParse(tweetsRow[i]));
+            if (self.mutes.indexOf(tweetsRow[i].user.id) === -1) {
+              self.mentions.push(parser.tweetParse(tweetsRow[i]));
+            }
           }
         });
 
         twitterManager.getFavoritesList(favoritesId, function(tweetsRow) {
           for (var i = 0; i < tweetsRow.length; i++) {
-            self.favorites.push(parser.tweetParse(tweetsRow[i]));
+            if (self.mutes.indexOf(tweetsRow[i].user.id) === -1) {
+              self.favorites.push(parser.tweetParse(tweetsRow[i]));
+            }
           }
         });
       }
