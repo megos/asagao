@@ -177,7 +177,7 @@ setTimeout(function() {
             for (var i = 0; i < self.tweets.length; i++) {
               parser.setRelativeCreatedAt(self.tweets[i]);
             }
-            if (self.mutes.indexOf(tweetsRow[i].user.id) === -1) {
+            if (self.mutes.indexOf(data.user.id) === -1) {
               self.tweets.unshift(parser.tweetParse(data));
 
               if (data.text.indexOf('@' + self.user.screen_name) !== -1) {
