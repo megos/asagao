@@ -10,13 +10,16 @@ var Parser = function() {
 
 Parser.prototype = {
   tweetParse: function(tweet) {
+    if (tweet == null) {
+      return null;
+    }
     if (tweet.created_at != null && tweet.text != null) {
 
 
       tweet.media = [];
 
       // 相対時間に変更
-      tweet.relative_created_at = this.moment(tweet.created_at).fromNow();
+      this.setRelativeCreatedAt(tweet);
 
       // 改行コード
       tweet.text = tweet.text.replace(/[\n\r]/g, '<br>');
@@ -93,7 +96,6 @@ Parser.prototype = {
 
       // コメント付き公式リツイート
       if (tweet.is_quote_status) {
-        console.log(tweet.quoted_status);
         tweet.rt = this.tweetParse(tweet.quoted_status);
       }
       return tweet;
@@ -101,9 +103,13 @@ Parser.prototype = {
   },
 
   setRelativeCreatedAt: function(tweet) {
-    // 相対時間に変更
-    tweet.relative_created_at = this.moment(tweet.created_at).fromNow();
-    return tweet;
+
+    // 1週間より前は絶対時間のまま
+    if (this.moment().diff(tweet.created_at, 'days') > 7) {
+      tweet.relative_created_at = this.moment(tweet.created_at).format('YYYY/MM/DD');
+    } else {
+      tweet.relative_created_at = this.moment(tweet.created_at).fromNow();
+    }
   }
 };
 
