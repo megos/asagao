@@ -10,6 +10,9 @@ var Parser = function() {
 
 Parser.prototype = {
   tweetParse: function(tweet) {
+    if (tweet == null) {
+      return null;
+    }
     if (tweet.created_at != null && tweet.text != null) {
 
 
