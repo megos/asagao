@@ -1,5 +1,4 @@
 .DS_Store
-app/settings.js
 # Logs
 logs
 *.log
