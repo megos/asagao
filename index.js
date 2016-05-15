@@ -24,10 +24,10 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
-  // mainWindow.webContents.on('new-window', function(event, url) {
-  //   event.preventDefault();
-  //   shell.openExternal(url);
-  // });
+  mainWindow.webContents.on('new-window', function(event, url) {
+    event.preventDefault();
+    shell.openExternal(url);
+  });
 
   // Menu.setApplicationMenu(menu);
 });
