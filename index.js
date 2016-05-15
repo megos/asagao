@@ -1,11 +1,12 @@
 'use strict';
 
-var app           = require('app');
-var browserWindow = require('browser-window');
-var shell         = require('shell');
-var Menu          = require('menu');
+var electron      = require('electron');
+var app           = electron.app;
+var browserWindow = electron.BrowserWindow;
+var shell         = electron.shell;
+var Menu          = electron.Menu;
 
-require('crash-reporter').start();
+// electron.crashReporter.start();
 
 var mainWindow = null;
 
@@ -23,10 +24,10 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
-  mainWindow.webContents.on('new-window', function(event, url) {
-    event.preventDefault();
-    shell.openExternal(url);
-  });
+  // mainWindow.webContents.on('new-window', function(event, url) {
+  //   event.preventDefault();
+  //   shell.openExternal(url);
+  // });
 
   // Menu.setApplicationMenu(menu);
 });
@@ -59,4 +60,4 @@ var template = [
   }
 ];
 
-var menu = Menu.buildFromTemplate(template);
+// var menu = Menu.buildFromTemplate(template);
