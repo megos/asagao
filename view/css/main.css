@@ -27,13 +27,8 @@ a {
   text-align: center;
 }
 
-.timeline {
-  padding-top: 52px;
-}
-
 .timeline-li {
   line-height: 1;
-  padding: 5px;
 }
 
 .timeline-li-frame {
@@ -101,7 +96,6 @@ a {
   top: 0;
   z-index: 10;
   left: 0;
-  background-color: white;
   border-bottom: 1px solid gray;
 }
 
@@ -119,4 +113,10 @@ a {
 .imagethumb {
   display: inline;
   border-radius: 4px;
+}
+
+/** OnsenUI 上書き **/
+/** tweet area確保 **/
+.page__content {
+  top: 52px;
 }
