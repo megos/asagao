@@ -1,11 +1,11 @@
-var remote         = require('remote');
-var dialog         = remote.require('dialog');
-var BrowserWindow  = remote.require('browser-window');
+var remote         = require('electron').remote;
+var dialog         = remote.Dialog;
 var Vue            = require('vue');
 var settings       = require('../app/settings');
 var Client         = require('../app/client');
 var TwitterManager = require('../app/twitter-manager');
 var Parser         = require('../app/parser');
+var ipcRenderer    = require('electron').ipcRenderer;
 
 var auth = JSON.parse(localStorage.getItem('auth'));
 var userId = localStorage.getItem('userId');
@@ -65,19 +65,11 @@ var tweetComponent = Vue.extend({
     },
 
     openImageWindow: function(url, height, width) {
-      // TODO: マジックナンバーをどうにかする
-      var titleBarHeight = 22;
-      var imageWindow = new BrowserWindow({
-        height: height + titleBarHeight,
-        width: width
-      });
-      imageWindow.loadURL(url);
-      imageWindow.on('closed', function() {
-        imageWindow = null;
-      });
+      ipcRenderer.send('open-window', url, height, width);
     }
   }
 });
+
 Vue.component('timeline-home', tweetComponent);
 Vue.component('timeline-mentions', tweetComponent);
 Vue.component('timeline-favorites', tweetComponent);

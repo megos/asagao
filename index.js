@@ -1,13 +1,16 @@
 'use strict';
 
-var app           = require('app');
-var browserWindow = require('browser-window');
-var shell         = require('shell');
-var Menu          = require('menu');
+var electron      = require('electron');
+var app           = electron.app;
+var browserWindow = electron.BrowserWindow;
+var shell         = electron.shell;
+var Menu          = electron.Menu;
+var ipcMain       = electron.ipcMain;
 
-require('crash-reporter').start();
+// electron.crashReporter.start();
 
 var mainWindow = null;
+var imageWindow = null;
 
 app.on('window-all-closed', function() {
   if (process.platform != 'darwin') {
@@ -29,6 +32,19 @@ app.on('ready', function() {
   });
 
   // Menu.setApplicationMenu(menu);
+});
+
+ipcMain.on('open-window', function(event, url, height, width) {
+      // TODO: マジックナンバーをどうにかする
+      var titleBarHeight = 22;
+      imageWindow = new browserWindow({
+        height: height + titleBarHeight,
+        width: width
+      });
+      imageWindow.loadURL(url);
+      imageWindow.on('closed', function() {
+        imageWindow = null;
+      });
 });
 
 var template = [
@@ -59,4 +75,4 @@ var template = [
   }
 ];
 
-var menu = Menu.buildFromTemplate(template);
+// var menu = Menu.buildFromTemplate(template);
