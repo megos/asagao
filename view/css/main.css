@@ -120,3 +120,7 @@ a {
 .page__content {
   top: 52px;
 }
+
+.list__item__center {
+  padding: 5px;
+}

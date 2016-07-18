@@ -35,16 +35,16 @@ app.on('ready', function() {
 });
 
 ipcMain.on('open-window', function(event, url, height, width) {
-      // TODO: マジックナンバーをどうにかする
-      var titleBarHeight = 22;
-      imageWindow = new browserWindow({
-        height: height + titleBarHeight,
-        width: width
-      });
-      imageWindow.loadURL(url);
-      imageWindow.on('closed', function() {
-        imageWindow = null;
-      });
+  // TODO: マジックナンバーをどうにかする
+  var titleBarHeight = 22;
+  imageWindow = new browserWindow({
+    height: height + titleBarHeight,
+    width: width
+  });
+  imageWindow.loadURL(url);
+  imageWindow.on('closed', function() {
+    imageWindow = null;
+  });
 });
 
 var template = [
