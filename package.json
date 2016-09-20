@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/megos/asagao#readme",
   "dependencies": {
-    "autolinker": "^0.24.1",
+    "autolinker": "^1.1.0",
     "moment": "^2.12.0",
     "node-twitter-api": "^1.7.0",
     "onsenui": "^2.0.0",
