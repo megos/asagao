@@ -7,6 +7,26 @@ var TwitterManager = require('../app/twitter-manager');
 var Parser         = require('../app/parser');
 var ipcRenderer    = require('electron').ipcRenderer;
 
+
+const OauthTwitter = require('electron-oauth-twitter');
+
+const twitter = new OauthTwitter({
+      key: settings.TWITTER_CONSUMER_KEY,
+      secret: settings.TWITTER_CONSUMER_SECRET,
+});
+
+twitter.startRequest().then((result) => {
+  const accessToken = result.oauth_access_token;
+  const accessTokenSecret = result.oauth_access_token_secret;
+            const auth = {
+            accessTokenKey: accessToken,
+            accessTokenSecret: accessTokenSecret
+          };
+          localStorage.setItem('auth', JSON.stringify(auth));
+}).catch((error) => {
+  console.error(error, error.stack);
+});
+
 var auth = JSON.parse(localStorage.getItem('auth'));
 var userId = localStorage.getItem('userId');
 

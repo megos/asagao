@@ -20,6 +20,8 @@
   "homepage": "https://github.com/megos/asagao#readme",
   "dependencies": {
     "autolinker": "^1.1.0",
+    "electron-json-storage": "^2.0.0",
+    "electron-oauth-twitter": "^1.0.1",
     "moment": "^2.12.0",
     "node-twitter-api": "^1.7.0",
     "onsenui": "^2.0.0",
