@@ -145,9 +145,9 @@ const initScreen = function() {
 
         if (isFirst) {
           // ユーザ情報
-          // twitterManager.getUserInfo(userId, function(user){
-          //   self.user = user;
-          // });
+          twitterManager.getUserInfo(function(user){
+            self.user = user;
+          });
 
           // ミュート
           twitterManager.getMutesList(function(data) {

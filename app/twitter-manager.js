@@ -7,10 +7,8 @@ var TwitterManager = function(client) {
 };
 
 TwitterManager.prototype = {
-  getUserInfo: function(userId, callback) {
-    this.client.get('users/show', {
-      user_id: userId
-    }, function(error, user, response) {
+  getUserInfo: function(callback) {
+    this.client.get('account/verify_credentials', function(error, user, response) {
       if (!error) {
         callback(user);
       } else {
