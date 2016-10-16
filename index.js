@@ -1,16 +1,51 @@
 'use strict';
 
-var electron      = require('electron');
-var app           = electron.app;
-var browserWindow = electron.BrowserWindow;
-var shell         = electron.shell;
-var Menu          = electron.Menu;
-var ipcMain       = electron.ipcMain;
+const electron      = require('electron');
+const app           = electron.app;
+const browserWindow = electron.BrowserWindow;
+const shell         = electron.shell;
+const Menu          = electron.Menu;
+const ipcMain       = electron.ipcMain;
+const storage       = require('electron-json-storage');
+const settings      = require('./app/settings');
+const OauthTwitter  = require('electron-oauth-twitter');
 
 // electron.crashReporter.start();
 
 var mainWindow = null;
 var imageWindow = null;
+
+const twitter = new OauthTwitter({
+      key: settings.TWITTER_CONSUMER_KEY,
+      secret: settings.TWITTER_CONSUMER_SECRET,
+});
+
+storage.get('auth', function(error, data) {
+  if (error) {
+    throw error
+  }
+
+  if (Object.keys(data).length === 0) {
+
+    twitter.startRequest().then((result) => {
+      const auth = {
+        accessTokenKey: result.oauth_access_token,
+        accessTokenSecret: result.oauth_access_token_secret
+      };
+      storage.set('auth', auth, function(error) {
+        if (error) {
+          throw error;
+        }
+        openMainWindow();
+      });
+    }).catch((error) => {
+      console.error(error, error.stack);
+    });
+
+  } else {
+    openMainWindow();
+  }
+});
 
 app.on('window-all-closed', function() {
   if (process.platform != 'darwin') {
@@ -18,33 +53,17 @@ app.on('window-all-closed', function() {
   }
 });
 
-app.on('ready', function() {
-  mainWindow = new browserWindow({width: 500, height: 600, webPreferences: {webSecurity: false}});
-  mainWindow.loadURL('file://' + __dirname + '/view/login.html');
-
-  mainWindow.on('closed', function() {
-    mainWindow = null;
-  });
-
-  mainWindow.webContents.on('new-window', function(event, url) {
-    event.preventDefault();
-    shell.openExternal(url);
-  });
-
-  // Menu.setApplicationMenu(menu);
-});
-
 ipcMain.on('open-window', function(event, url, height, width) {
-      // TODO: マジックナンバーをどうにかする
-      var titleBarHeight = 22;
-      imageWindow = new browserWindow({
-        height: height + titleBarHeight,
-        width: width
-      });
-      imageWindow.loadURL(url);
-      imageWindow.on('closed', function() {
-        imageWindow = null;
-      });
+  // TODO: マジックナンバーをどうにかする
+  var titleBarHeight = 22;
+  imageWindow = new browserWindow({
+    height: height + titleBarHeight,
+    width: width
+  });
+  imageWindow.loadURL(url);
+  imageWindow.on('closed', function() {
+    imageWindow = null;
+  });
 });
 
 var template = [
@@ -74,5 +93,20 @@ var template = [
     ]
   }
 ];
+
+
+function openMainWindow() {
+  mainWindow = new browserWindow({width: 400, height: 600});
+  mainWindow.loadURL('file://' + __dirname + '/view/index.html');
+
+  mainWindow.on('closed', function() {
+    mainWindow = null;
+  });
+
+  mainWindow.webContents.on('new-window', function(event, url) {
+    event.preventDefault();
+    shell.openExternal(url);
+  });
+}
 
 // var menu = Menu.buildFromTemplate(template);

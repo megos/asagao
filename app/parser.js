@@ -13,6 +13,9 @@ Parser.prototype = {
     if (tweet == null) {
       return null;
     }
+    if (tweet.full_text != null) {
+      tweet.text = tweet.full_text;
+    }
     if (tweet.created_at != null && tweet.text != null) {
 
 

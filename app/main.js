@@ -1,27 +1,41 @@
-var remote         = require('electron').remote;
-var dialog         = remote.Dialog;
-var Vue            = require('vue');
-var settings       = require('../app/settings');
-var Client         = require('../app/client');
-var TwitterManager = require('../app/twitter-manager');
-var Parser         = require('../app/parser');
-var ipcRenderer    = require('electron').ipcRenderer;
+const remote         = require('electron').remote;
+const dialog         = remote.Dialog;
+const Vue            = require('vue');
+const settings       = require('../app/settings');
+const Client         = require('../app/client');
+const TwitterManager = require('../app/twitter-manager');
+const Parser         = require('../app/parser');
+const ipcRenderer    = require('electron').ipcRenderer;
+const storage        = require('electron-json-storage');
 
-var auth = JSON.parse(localStorage.getItem('auth'));
-var userId = localStorage.getItem('userId');
+const parser = new Parser();
 
-var client = new Client(settings.TWITTER_CONSUMER_KEY,
+let auth;
+let client;
+let twitterClient;
+let timelineVue;
+
+
+storage.get('auth', function (error, data) {
+  if (error) throw error;
+
+  auth = data;
+  client = new Client(settings.TWITTER_CONSUMER_KEY,
                         settings.TWITTER_CONSUMER_SECRET,
                         auth.accessTokenKey,
                         auth.accessTokenSecret);
 
-var twitterClient = client.getClient();
+  twitterClient = client.getClient();
 
-var twitterManager = new TwitterManager(twitterClient);
-var parser = new Parser();
-var timelineVue = null;
+  twitterManager = new TwitterManager(twitterClient);
+  initScreen();
 
-var tweetComponent = Vue.extend({
+});
+
+
+
+
+const tweetComponent = Vue.extend({
   props: ['tweet', 'user'],
   template: '#tweet-component',
   methods: {
@@ -74,7 +88,7 @@ Vue.component('timeline-home', tweetComponent);
 Vue.component('timeline-mentions', tweetComponent);
 Vue.component('timeline-favorites', tweetComponent);
 
-setTimeout(function() {
+const initScreen = function() {
   timelineVue = new Vue({
     el: '#main',
     data: {
@@ -131,7 +145,7 @@ setTimeout(function() {
 
         if (isFirst) {
           // ユーザ情報
-          twitterManager.getUserInfo(userId, function(user){
+          twitterManager.getUserInfo(function(user){
             self.user = user;
           });
 
@@ -205,4 +219,4 @@ setTimeout(function() {
       }
     }
   });
-}, 1);
+};

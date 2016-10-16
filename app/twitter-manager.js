@@ -1,16 +1,15 @@
 var TwitterManager = function(client) {
   this.client = client;
   this.params = {
-    include_entities: true
+    include_entities: true,
+    tweet_mode: 'extended'
   };
   this.stream = null;
 };
 
 TwitterManager.prototype = {
-  getUserInfo: function(userId, callback) {
-    this.client.get('users/show', {
-      user_id: userId
-    }, function(error, user, response) {
+  getUserInfo: function(callback) {
+    this.client.get('account/verify_credentials', function(error, user, response) {
       if (!error) {
         callback(user);
       } else {
@@ -66,7 +65,7 @@ TwitterManager.prototype = {
 
   getUserStream: function(callback) {
     var self = this;
-    this.client.stream('user', this.params, function(stream) {
+    this.client.stream('user', self.params, function(stream) {
 
       // UserStreamが2重に接続されるのを防ぐ
       if (self.stream != null) {

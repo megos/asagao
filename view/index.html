@@ -110,7 +110,7 @@
             </div>
 
             <div class="timeline-message">
-              {{{tweet.text | br2nl}}}
+              {{{tweet.text}}}
             </div>
 
             <ons-list-item class="timeline-li timeline-li-frame" v-if=tweet.rt>
@@ -127,7 +127,7 @@
 
 
                 <div class="timeline-message">
-                  {{{tweet.rt.text | br2nl}}}
+                  {{{tweet.rt.text}}}
                 </div>
 
                 <div class="imagethumb" v-for="m in tweet.rt.media">

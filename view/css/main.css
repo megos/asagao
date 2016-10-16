@@ -29,6 +29,7 @@ a {
 
 .timeline-li {
   line-height: 1;
+  padding-left: 0; /** Onsen UI Override **/
 }
 
 .timeline-li-frame {
@@ -119,4 +120,8 @@ a {
 /** tweet area確保 **/
 .page__content {
   top: 52px;
+}
+
+.list__item__center {
+  padding: 5px;
 }
