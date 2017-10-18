@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow } from 'electron'
 import OAuthTwitter from 'electron-oauth-twitter'
+import config from 'config'
 
 /**
  * Set `__static` path to static files in production
@@ -26,9 +27,9 @@ function createWindow () {
     width: 500
   })
 
-  let twitterAuthWindow = new OAuthTwitter({
-    key: 'PsQsR08SaJ38b0zEiU7DeWZDy',
-    secret: 'fNzbIA4Pqo3Avr558vwSJXL4YMAuTurMb9HG8lu6sp7BlJSimf'
+  const twitterAuthWindow = new OAuthTwitter({
+    key: config.get('consumerKey'),
+    secret: config.get('consumerSecret')
   })
 
   twitterAuthWindow.startRequest()
