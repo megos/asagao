@@ -1,6 +1,7 @@
 'use strict'
 
 import { app, BrowserWindow } from 'electron'
+import OAuthTwitter from 'electron-oauth-twitter'
 
 /**
  * Set `__static` path to static files in production
@@ -22,11 +23,23 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     height: 563,
     useContentSize: true,
-    width: 1000
+    width: 500
   })
 
-  mainWindow.loadURL(winURL)
+  let twitterAuthWindow = new OAuthTwitter({
+    key: 'PsQsR08SaJ38b0zEiU7DeWZDy',
+    secret: 'fNzbIA4Pqo3Avr558vwSJXL4YMAuTurMb9HG8lu6sp7BlJSimf'
+  })
 
+  twitterAuthWindow.startRequest()
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.error(err, err.stack)
+    })
+
+  mainWindow.loadURL(winURL)
   mainWindow.on('closed', () => {
     mainWindow = null
   })
