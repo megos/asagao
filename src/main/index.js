@@ -66,6 +66,7 @@ app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    // TODO: If windows or linux, after logined close... 
     app.quit()
   }
 })
