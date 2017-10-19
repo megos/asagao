@@ -5,6 +5,8 @@ import OAuthTwitter from 'electron-oauth-twitter'
 import config from 'config'
 import storage from 'electron-json-storage-sync'
 
+const OAUTH_TOKEN_KEY = 'oauthToken'
+
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -22,7 +24,7 @@ function createWindow () {
   /**
    * Initial window options
    */
-  const oauthInfo = storage.get('oauthInfo')
+  const oauthInfo = storage.get(OAUTH_TOKEN_KEY)
 
   if (oauthInfo.status && oauthInfo.data.oauth_access_token && oauthInfo.data.oauth_access_token_secret) {
     openWindow()
@@ -34,7 +36,7 @@ function createWindow () {
 
     twitterAuthWindow.startRequest()
       .then((res) => {
-        const result = storage.set('oauthInfo', res)
+        const result = storage.set(OAUTH_TOKEN_KEY, res)
         if (result.status) {
           openWindow()
         } else {
