@@ -3,6 +3,7 @@
 import { app, BrowserWindow } from 'electron'
 import OAuthTwitter from 'electron-oauth-twitter'
 import config from 'config'
+import storage from 'electron-json-storage-sync'
 
 /**
  * Set `__static` path to static files in production
@@ -21,24 +22,37 @@ function createWindow () {
   /**
    * Initial window options
    */
+  const oauthInfo = storage.get('oauthInfo')
+
+  if (oauthInfo.status && oauthInfo.data.oauth_access_token && oauthInfo.data.oauth_access_token_secret) {
+    openWindow()
+  } else {
+    const twitterAuthWindow = new OAuthTwitter({
+      key: config.get('consumerKey'),
+      secret: config.get('consumerSecret')
+    })
+
+    twitterAuthWindow.startRequest()
+      .then((res) => {
+        const result = storage.set('oauthInfo', res)
+        if (result.status) {
+          openWindow()
+        } else {
+          console.error('Token save failed!')
+        }
+      })
+      .catch((err) => {
+        console.error(err, err.stack)
+      })
+  }
+}
+
+function openWindow () {
   mainWindow = new BrowserWindow({
     height: 563,
     useContentSize: true,
     width: 500
   })
-
-  const twitterAuthWindow = new OAuthTwitter({
-    key: config.get('consumerKey'),
-    secret: config.get('consumerSecret')
-  })
-
-  twitterAuthWindow.startRequest()
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((err) => {
-      console.error(err, err.stack)
-    })
 
   mainWindow.loadURL(winURL)
   mainWindow.on('closed', () => {
