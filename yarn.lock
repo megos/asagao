@@ -26,6 +26,10 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
 
+"@onsenui/custom-elements@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@onsenui/custom-elements/-/custom-elements-1.0.0.tgz#8e2b5c8968b8d94da70c6e92ecc56b47f79a0ff3"
+
 "@types/node@^8.0.24":
   version "8.0.34"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.34.tgz#55f801fa2ddb2a40dd6dfc15ecfe1dde9c129fe9"
@@ -2037,6 +2041,10 @@ copy-webpack-plugin@^4.0.1:
     lodash "^4.3.0"
     minimatch "^3.0.4"
     node-dir "^0.1.10"
+
+core-js@2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
 
 core-js@^2.2.0, core-js@^2.4.0, core-js@^2.5.0:
   version "2.5.1"
@@ -5428,6 +5436,13 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+onsenui@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/onsenui/-/onsenui-2.6.1.tgz#6b9c6183ddb440e28f214b7c5c1c42ecbc21d3c1"
+  dependencies:
+    "@onsenui/custom-elements" "1.0.0"
+    core-js "2.4.1"
+
 opn@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/opn/-/opn-5.1.0.tgz#72ce2306a17dbea58ff1041853352b4a8fc77519"
@@ -7565,6 +7580,10 @@ vue-loader@^13.0.5:
     vue-hot-reload-api "^2.2.0"
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
+
+vue-onsenui@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/vue-onsenui/-/vue-onsenui-2.2.1.tgz#689fa76072a1f2a3e60ceca22c23150e11848ba1"
 
 vue-router@^2.5.3:
   version "2.8.1"
