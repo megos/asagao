@@ -2711,6 +2711,13 @@ electron-is-dev@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
 
+electron-json-storage-sync@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/electron-json-storage-sync/-/electron-json-storage-sync-1.1.0.tgz#081594d970d9572bd51625a5ab4b29d7a4d20bbc"
+  dependencies:
+    mkdirp "^0.5.1"
+    rimraf "^2.6.1"
+
 electron-localshortcut@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/electron-localshortcut/-/electron-localshortcut-3.0.2.tgz#df9cebe64140f4e58b680aacb2bd6278ae38ee61"
