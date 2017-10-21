@@ -37,6 +37,11 @@
           <tweet-item :tweet="tweet.quoted_status"></tweet-item>
         </v-ons-col>
       </v-ons-row>
+      <v-ons-row>
+        <v-ons-col v-if="tweet.retweeted_user">
+          <div class="retweet">retweeted by {{ tweet.retweeted_user }}</div>
+        </v-ons-col>
+      </v-ons-row>
     </v-ons-col>
   </v-ons-row>
 </template>
@@ -69,6 +74,7 @@
         })
       },
       getMedia: function (media) {
+        console.log(media)
         const mediaList = []
         for (var mi = 0; mi < media.length; mi++) {
           const type = media[mi].type
@@ -107,10 +113,10 @@
     font-weight: 500;
   }
 
-  .id {
+  .id, .retweet {
     font-size: 11px;
     color: gray;
-    font-weight: 1000;
+    font-weight: 500;
   }
 
   .protected, .verified {
