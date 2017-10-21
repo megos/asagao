@@ -12,6 +12,7 @@
 
 <script>
   import Vue from 'vue'
+  import TweetItem from './TweetItem'
 
   export default {
     name: 'timeline',
@@ -20,15 +21,17 @@
     },
     methods: {
       renderItem (i) {
+        const tw = this.$store.state.twitter.timeline[i]
         return new Vue({
+          components: { TweetItem },
           template: `
-            <v-ons-list-item :key="index">
-              {{ index }}
-            </v-ons-list-item>
+            <tweet-item :idx="index" :tweet="tweet">
+            </tweet-item>
           `,
           data () {
             return {
-              index: i
+              index: i,
+              tweet: tw
             }
           }
         })
