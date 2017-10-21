@@ -22,9 +22,9 @@
           <div v-html="link(tweet.full_text)" class="message"></div>
         </v-ons-col>
       </v-ons-row>
-      <v-ons-row v-if="tweet.extended_entities && tweet.extended_entities.media">
+      <v-ons-row v-if="mediaList.length > 0">
         <!-- TODO: Performance improvement -->
-        <v-ons-col width="60px" v-for="(media, idx) in getMedia(tweet.extended_entities.media)" v-bind:key="idx">
+        <v-ons-col width="60px" v-for="(media, idx) in mediaList" v-bind:key="idx">
           <a v-bind:href="media.url" target="_blank">
             <img v-bind:src="media.url_thumb" width="50px" class="image">
           </a>
@@ -54,6 +54,19 @@
     name: 'tweet-item',
     components: { TweetItem },
     props: [ 'tweet' ],
+    data () {
+      return {
+        mediaList: []
+      }
+    },
+    mounted: function () {
+      if (this.$props.tweet.entities.urls) {
+        this.getUrlMedia(this.$props.tweet.entities.urls)
+      }
+      if (this.$props.tweet.extended_entities && this.$props.tweet.extended_entities.media) {
+        this.getMedia(this.$props.tweet.extended_entities.media)
+      }
+    },
     methods: {
       getRelativeCreatedAt: function (createdAt) {
         if (moment().diff(createdAt, 'days') > 7) {
@@ -71,12 +84,33 @@
           hashtag: 'twitter'
         })
       },
+      getUrlMedia: function (urls) {
+        urls.forEach((item) => {
+          // instagram
+          const shortcode = item.display_url.match(/^instagram\.com\/p\/(.*)\//)
+          if (shortcode) {
+            this.mediaList.push({
+              url_thumb: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=t',
+              url_image: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l'
+            })
+          }
+
+          // twipple
+          const imageId = item.display_url.match(/^p\.twipple\.jp\/(.*)/)
+          if (imageId) {
+            this.mediaList.push({
+              url_thumb: 'http://p.twipple.jp/show/thumb/' + imageId[1],
+              url_image: 'http://p.twipple.jp/show/large/' + imageId[1]
+            })
+          }
+        })
+      },
       getMedia: function (media) {
-        const mediaList = []
+        // Search extended entities media
         media.forEach((item) => {
           const type = item.type
           if (type === 'photo') {
-            mediaList.push({
+            this.mediaList.push({
               url_thumb: item.media_url + ':thumb',
               url: item.media_url
             })
@@ -88,14 +122,13 @@
             })
             if (mp4.length > 0) {
               // Get highest bitrate item
-              mediaList.push({
+              this.mediaList.push({
                 url_thumb: item.media_url,
                 url: mp4[0].url
               })
             }
           }
         })
-        return mediaList
       }
     }
   }
