@@ -7,8 +7,8 @@
       <v-ons-row>
         <v-ons-col>        
           <div class="from">
-            <span class="name">{{tweet.user.name}}</span>
-            <span class="id">@{{tweet.user.screen_name}}</span>
+            <span class="name">{{ tweet.user.name }}</span>
+            <span class="id">@{{ tweet.user.screen_name }}</span>
             <span v-if="tweet.user.protected" class="protected"><ons-icon icon="fa-lock"></ons-icon></span>
             <span v-if="tweet.user.verified" class="verified"><ons-icon icon="fa-check-circle"></ons-icon></span>
           </div>
