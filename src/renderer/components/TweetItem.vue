@@ -64,7 +64,7 @@
         text = text.replace(/[\n\r]/g, '<br>')
         text = sanitizeHtml(text)
         return autolinker.link(text, {
-          twitter: true,
+          mention: 'twitter',
           hashtag: 'twitter'
         })
       },
