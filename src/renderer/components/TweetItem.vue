@@ -72,7 +72,6 @@
         })
       },
       getMedia: function (media) {
-        console.log(media)
         const mediaList = []
         for (var mi = 0; mi < media.length; mi++) {
           const type = media[mi].type
