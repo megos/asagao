@@ -20,7 +20,7 @@
         </v-ons-row>
         <v-ons-row>
           <v-ons-col>
-            <div class="message">{{ tweet.full_text }}</div>
+            <div v-html="link(tweet.full_text)" class="message"></div>
           </v-ons-col>
         </v-ons-row>
       </v-ons-col>
@@ -30,6 +30,9 @@
 
 <script>
   import moment from 'moment'
+  import autolinker from 'autolinker'
+  import sanitizeHtml from 'sanitize-html'
+
   export default {
     props: [ 'idx', 'tweet' ],
     methods: {
@@ -39,6 +42,13 @@
         } else {
           return moment(createdAt).fromNow()
         }
+      },
+      link: function (text) {
+        text = sanitizeHtml(text)
+        return autolinker.link(text, {
+          twitter: true,
+          hashtag: 'twitter'
+        })
       }
     }
   }
