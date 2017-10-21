@@ -23,6 +23,16 @@
             <div v-html="link(tweet.full_text)" class="message"></div>
           </v-ons-col>
         </v-ons-row>
+        <v-ons-row v-if="tweet.extended_entities && tweet.extended_entities.media">
+          <v-ons-col>
+            <!-- TODO: Performance improvement -->
+            <p v-for="(media, idx) in getMedia(tweet.extended_entities.media)" v-bind:key="idx">
+              <a v-bind:href="media.url_image" target="_blank">
+                <img v-bind:src="media.url_thumb" width="50px" class="image">
+              </a>
+            </p>
+          </v-ons-col>
+        </v-ons-row>
       </v-ons-col>
     </v-ons-row>
   </v-ons-list-item>
@@ -51,6 +61,31 @@
           twitter: true,
           hashtag: 'twitter'
         })
+      },
+      getMedia: function (media) {
+        const mediaList = []
+        for (var mi = 0; mi < media.length; mi++) {
+          const type = media[mi].type
+          if (type === 'photo') {
+            mediaList.push({
+              url_thumb: media[mi].media_url + ':thumb',
+              url_image: media[mi].media_url
+            })
+          } else if (type === 'video' || type === 'animated_gif') {
+            const variants = media[mi].video_info.variants
+            for (var vi = 0; vi < variants.length; vi++) {
+              // TODO: bitrate
+              if (variants[vi].content_type === 'video/mp4') {
+                mediaList.push({
+                  url_thumb: media[mi].media_url,
+                  url_video: variants[vi].url
+                })
+                break
+              }
+            }
+          }
+        }
+        return mediaList
       }
     }
   }
