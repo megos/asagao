@@ -2,6 +2,7 @@
   <div>
     <v-ons-list>
       <v-ons-lazy-repeat
+        v-if="this.$store.state.twitter.timeline.length > 0"
         :render-item="renderItem"
         :length="this.$store.state.twitter.timeline.length"
       >
