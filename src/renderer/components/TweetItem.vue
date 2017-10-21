@@ -132,6 +132,6 @@
 
   .quoted {
     border: solid 1px;
-    border-color: gray;
+    border-color: LightGrey;
   }
 </style>
