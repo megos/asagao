@@ -73,27 +73,28 @@
       },
       getMedia: function (media) {
         const mediaList = []
-        for (var mi = 0; mi < media.length; mi++) {
-          const type = media[mi].type
+        media.forEach((item) => {
+          const type = item.type
           if (type === 'photo') {
             mediaList.push({
-              url_thumb: media[mi].media_url + ':thumb',
-              url: media[mi].media_url
+              url_thumb: item.media_url + ':thumb',
+              url: item.media_url
             })
           } else if (type === 'video' || type === 'animated_gif') {
-            const variants = media[mi].video_info.variants
-            for (var vi = 0; vi < variants.length; vi++) {
-              // TODO: bitrate
-              if (variants[vi].content_type === 'video/mp4') {
-                mediaList.push({
-                  url_thumb: media[mi].media_url,
-                  url: variants[vi].url
-                })
-                break
-              }
+            const mp4 = item.video_info.variants.filter((item) => {
+              return (item.content_type === 'video/mp4')
+            }).sort((a, b) => {
+              return (a.bitrate > b.bitrate) ? -1 : 1
+            })
+            if (mp4.length > 0) {
+              // Get highest bitrate item
+              mediaList.push({
+                url_thumb: item.media_url,
+                url: mp4[0].url
+              })
             }
           }
-        }
+        })
         return mediaList
       }
     }
