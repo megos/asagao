@@ -15,7 +15,7 @@
             </div>
           </v-ons-col>
           <v-ons-col>
-            <div class="date">{{tweet.created_at}}</div>
+            <div class="date">{{ getRelativeCreatedAt(tweet.created_at) }}</div>
           </v-ons-col>
         </v-ons-row>
         <v-ons-row>
@@ -29,8 +29,18 @@
 </template>
 
 <script>
+  import moment from 'moment'
   export default {
-    props: [ 'idx', 'tweet' ]
+    props: [ 'idx', 'tweet' ],
+    methods: {
+      getRelativeCreatedAt: function (createdAt) {
+        if (moment().diff(createdAt, 'days') > 7) {
+          return moment(createdAt).format('YYYY/MM/DD')
+        } else {
+          return moment(createdAt).fromNow()
+        }
+      }
+    }
   }
 </script>
 
