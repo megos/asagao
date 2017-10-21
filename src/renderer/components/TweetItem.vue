@@ -44,6 +44,8 @@
         }
       },
       link: function (text) {
+        // Line feed to br tag
+        text = text.replace(/[\n\r]/g, '<br>')
         text = sanitizeHtml(text)
         return autolinker.link(text, {
           twitter: true,
