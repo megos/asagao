@@ -1,6 +1,30 @@
 <template>
   <v-ons-list-item :key="idx" v-if="tweet">
-    {{ tweet.full_text }}
+    <v-ons-row>
+      <v-ons-col width="50px">
+        <img v-bind:src="tweet.user.profile_image_url" class="image">
+      </v-ons-col>
+      <v-ons-col>
+        <v-ons-row>
+          <v-ons-col>        
+            <div class="from">
+              <span class="name">{{tweet.user.name}}</span>
+              <span class="id">@{{tweet.user.screen_name}}</span>
+              <span v-if="tweet.user.protected" class="protected"><ons-icon icon="fa-lock"></ons-icon></span>
+              <span v-if="tweet.user.verified" class="verified"><ons-icon icon="fa-check-circle"></ons-icon></span>
+            </div>
+          </v-ons-col>
+          <v-ons-col>
+            <div class="date">{{tweet.created_at}}</div>
+          </v-ons-col>
+        </v-ons-row>
+        <v-ons-row>
+          <v-ons-col>
+            <div class="message">{{ tweet.full_text }}</div>
+          </v-ons-col>
+        </v-ons-row>
+      </v-ons-col>
+    </v-ons-row>
   </v-ons-list-item>
 </template>
 
@@ -9,3 +33,37 @@
     props: [ 'idx', 'tweet' ]
   }
 </script>
+
+<style scoped>
+  .image {
+    border-radius: 5px;
+  }
+
+  .name {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .id {
+    font-size: 11px;
+    color: gray;
+    font-weight: 1000;
+  }
+
+  .protected, .verified {
+    font-size: 11px;
+    color: gray;
+  }
+
+  .date {
+    float: right;
+    font-size: 12px;
+    opacity: 0.35;
+  }
+
+  .message {
+    font-size: 12px;
+    opacity: 0.9;
+    line-height: 1.3;
+  }
+</style>
