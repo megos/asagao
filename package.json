@@ -60,6 +60,7 @@
     "config": "^1.27.0",
     "electron-json-storage-sync": "^1.1.0",
     "electron-oauth-twitter": "^1.1.0",
+    "moment": "^2.19.1",
     "onsenui": "^2.6.1",
     "twitter": "^1.7.1",
     "vue": "^2.3.3",
