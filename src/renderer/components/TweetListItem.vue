@@ -33,6 +33,11 @@
             </p>
           </v-ons-col>
         </v-ons-row>
+        <v-ons-row v-if="tweet.quoted_status" class="quoted">
+          <v-ons-col>
+            <tweet-list-item :idx="0" :tweet="tweet.quoted_status"></tweet-list-item>
+          </v-ons-col>
+        </v-ons-row>
       </v-ons-col>
     </v-ons-row>
   </v-ons-list-item>
@@ -42,8 +47,11 @@
   import moment from 'moment'
   import autolinker from 'autolinker'
   import sanitizeHtml from 'sanitize-html'
+  import TweetListItem from './TweetListItem'
 
   export default {
+    name: 'tweet-list-item',
+    components: { TweetListItem },
     props: [ 'idx', 'tweet' ],
     methods: {
       getRelativeCreatedAt: function (createdAt) {
@@ -122,5 +130,10 @@
     font-size: 12px;
     opacity: 0.9;
     line-height: 1.3;
+  }
+
+  .quoted {
+    border: solid 1px;
+    border-color: gray;
   }
 </style>
