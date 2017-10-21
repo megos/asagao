@@ -23,13 +23,11 @@
         </v-ons-col>
       </v-ons-row>
       <v-ons-row v-if="tweet.extended_entities && tweet.extended_entities.media">
-        <v-ons-col>
-          <!-- TODO: Performance improvement -->
-          <p v-for="(media, idx) in getMedia(tweet.extended_entities.media)" v-bind:key="idx">
-            <a v-bind:href="media.url_image" target="_blank">
-              <img v-bind:src="media.url_thumb" width="50px" class="image">
-            </a>
-          </p>
+        <!-- TODO: Performance improvement -->
+        <v-ons-col width="60px" v-for="(media, idx) in getMedia(tweet.extended_entities.media)" v-bind:key="idx">
+          <a v-bind:href="media.url" target="_blank">
+            <img v-bind:src="media.url_thumb" width="50px" class="image">
+          </a>
         </v-ons-col>
       </v-ons-row>
       <v-ons-row v-if="tweet.quoted_status" class="quoted">
@@ -81,7 +79,7 @@
           if (type === 'photo') {
             mediaList.push({
               url_thumb: media[mi].media_url + ':thumb',
-              url_image: media[mi].media_url
+              url: media[mi].media_url
             })
           } else if (type === 'video' || type === 'animated_gif') {
             const variants = media[mi].video_info.variants
@@ -90,7 +88,7 @@
               if (variants[vi].content_type === 'video/mp4') {
                 mediaList.push({
                   url_thumb: media[mi].media_url,
-                  url_video: variants[vi].url
+                  url: variants[vi].url
                 })
                 break
               }
