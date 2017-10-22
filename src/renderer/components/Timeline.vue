@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-ons-page>
     <v-ons-list>
       <v-ons-lazy-repeat
         v-if="this.$store.state.twitter.timeline.length > 0"
@@ -8,7 +8,7 @@
       >
       </v-ons-lazy-repeat>
     </v-ons-list>
-  </div>
+  </v-ons-page>
 </template>
 
 <script>
