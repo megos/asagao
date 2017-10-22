@@ -91,7 +91,7 @@
           if (shortcode) {
             this.mediaList.push({
               url_thumb: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=t',
-              url_image: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l'
+              url: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l'
             })
           }
 
@@ -100,7 +100,7 @@
           if (imageId) {
             this.mediaList.push({
               url_thumb: 'http://p.twipple.jp/show/thumb/' + imageId[1],
-              url_image: 'http://p.twipple.jp/show/large/' + imageId[1]
+              url: 'http://p.twipple.jp/show/large/' + imageId[1]
             })
           }
         })
