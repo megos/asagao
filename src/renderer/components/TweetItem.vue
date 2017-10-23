@@ -5,7 +5,7 @@
     </v-ons-col>
     <v-ons-col>
       <v-ons-row>
-        <v-ons-col>        
+        <v-ons-col width="70%">
           <div class="from">
             <span class="name">{{ tweet.user.name }}</span>
             <span class="id">@{{ tweet.user.screen_name }}</span>
@@ -13,7 +13,7 @@
             <span v-if="tweet.user.verified" class="verified"><ons-icon icon="fa-check-circle"></ons-icon></span>
           </div>
         </v-ons-col>
-        <v-ons-col>
+        <v-ons-col width="30%">
           <div class="date">{{ getRelativeCreatedAt(tweet.created_at) }}</div>
         </v-ons-col>
       </v-ons-row>
