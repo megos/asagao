@@ -20,24 +20,17 @@
     props: [ 'mode' ],
     computed: {
       tweets: function () {
-        if (this.mode === 'timeline') {
+        if (this.mode === 'Timeline') {
           return this.$store.state.twitter.timeline
-        } else if (this.mode === 'mentions') {
+        } else if (this.mode === 'Mentions') {
           return this.$store.state.twitter.mentions
-        } else if (this.mode === 'favorites') {
+        } else if (this.mode === 'Favorites') {
           return this.$store.state.twitter.favorites
         }
       }
     },
     mounted: function () {
-      console.log(this.mode)
-      if (this.mode === 'timeline') {
-        this.$store.dispatch('fetchTimeline')
-      } else if (this.mode === 'mentions') {
-        this.$store.dispatch('fetchMentions')
-      } else if (this.mode === 'favorites') {
-        this.$store.dispatch('fetchFavorites')
-      }
+      this.$store.dispatch('fetch' + this.mode)
     },
     methods: {
       renderItem (i) {

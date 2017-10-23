@@ -15,6 +15,8 @@
 </template>
 
 <script>
+  import Timeline from '@/components/TimeLine'
+
   export default {
     name: 'asagao',
     data () {
@@ -24,24 +26,24 @@
           {
             icon: 'ion-home',
             label: 'Timeline',
-            page: this.$router.options.routes[0].component,
-            props: {mode: 'timeline'},
+            page: Timeline,
+            props: {mode: 'Timeline'},
             key: 'Timeline'
+          },
+          {
+            icon: 'ion-chatbubbles',
+            label: 'Mentions',
+            page: Timeline,
+            props: {mode: 'Mentions'},
+            key: 'Mentions'
+          },
+          {
+            icon: 'ion-heart',
+            label: 'Favorites',
+            page: Timeline,
+            props: {mode: 'Favorites'},
+            key: 'Favorites'
           }
-          // {
-          //   icon: 'ios-chatbubbles',
-          //   label: 'Mentions',
-          //   page: this.$router.options.routes[0].component,
-          //   props: {mode: 'mentions'},
-          //   key: 'Mentions'
-          // },
-          // {
-          //   icon: 'ion-heart',
-          //   label: 'Favorites',
-          //   page: this.$router.options.routes[0].component,
-          //   props: {mode: 'favorites'},
-          //   key: 'Favorites'
-          // }
         ]
       }
     }
