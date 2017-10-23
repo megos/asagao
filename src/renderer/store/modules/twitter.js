@@ -20,7 +20,8 @@ const params = {
 
 const state = {
   timeline: [],
-  mentions: []
+  mentions: [],
+  favorites: []
 }
 
 const mutations = {
@@ -29,22 +30,29 @@ const mutations = {
   },
   FETCH_MENTIONS (state, tweets) {
     state.mentions = tweets
+  },
+  FETCH_FAVORITES (state, tweets) {
+    state.favorites = tweets
   }
 }
 
 const actions = {
   fetchTimeline ({ commit }) {
-    // do something async
     fetchTweets('statuses/home_timeline')
       .then((tweets) => {
         commit('FETCH_TIMELINE', tweets)
       })
   },
   fetchMentions ({ commit }) {
-    // do something async
     fetchTweets('statuses/mentions_timeline')
       .then((tweets) => {
         commit('FETCH_MENTIONS', tweets)
+      })
+  },
+  fetchFavorites ({ commit }) {
+    fetchTweets('favorites/list')
+      .then((tweets) => {
+        commit('FETCH_FAVORITES', tweets)
       })
   }
 }
