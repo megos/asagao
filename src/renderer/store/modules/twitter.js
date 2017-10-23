@@ -31,14 +31,23 @@ const mutations = {
 const actions = {
   fetchTimeline ({ commit }) {
     // do something async
-    client.get('statuses/home_timeline', params, (err, tweets, res) => {
-      if (!err) {
+    fetchTweets('statuses/home_timeline')
+      .then((tweets) => {
         commit('FETCH_TIMELINE', tweets)
+      })
+  }
+}
+
+function fetchTweets (endpoint) {
+  return new Promise((resolve, reject) => {
+    client.get(endpoint, params, (err, tweets, res) => {
+      if (!err) {
+        resolve(tweets)
       } else {
-        throw err
+        reject(err)
       }
     })
-  }
+  })
 }
 
 export default {
