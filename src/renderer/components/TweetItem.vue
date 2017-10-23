@@ -1,7 +1,7 @@
 <template>
   <v-ons-row>
     <v-ons-col width="50px">
-      <img v-bind:src="tweet.user.profile_image_url" class="image">
+      <img :src="tweet.user.profile_image_url" class="image">
     </v-ons-col>
     <v-ons-col>
       <v-ons-row>
@@ -24,9 +24,9 @@
       </v-ons-row>
       <v-ons-row v-if="mediaList.length > 0">
         <!-- TODO: Performance improvement -->
-        <v-ons-col width="60px" v-for="(media, idx) in mediaList" v-bind:key="idx">
-          <a v-bind:href="media.url" target="_blank">
-            <img v-bind:src="media.url_thumb" width="50px" class="image">
+        <v-ons-col width="60px" v-for="(media, idx) in mediaList" :key="idx">
+          <a :href="media.url" target="_blank">
+            <img :src="media.url_thumb" width="50px" class="image">
           </a>
         </v-ons-col>
       </v-ons-row>
