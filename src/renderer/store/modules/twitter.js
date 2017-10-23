@@ -19,12 +19,16 @@ const params = {
 }
 
 const state = {
-  timeline: []
+  timeline: [],
+  mentions: []
 }
 
 const mutations = {
   FETCH_TIMELINE (state, tweets) {
     state.timeline = tweets
+  },
+  FETCH_MENTIONS (state, tweets) {
+    state.mentions = tweets
   }
 }
 
@@ -34,6 +38,13 @@ const actions = {
     fetchTweets('statuses/home_timeline')
       .then((tweets) => {
         commit('FETCH_TIMELINE', tweets)
+      })
+  },
+  fetchMentions ({ commit }) {
+    // do something async
+    fetchTweets('statuses/mentions_timeline')
+      .then((tweets) => {
+        commit('FETCH_MENTIONS', tweets)
       })
   }
 }
