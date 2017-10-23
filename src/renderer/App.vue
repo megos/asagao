@@ -25,8 +25,23 @@
             icon: 'ion-home',
             label: 'Timeline',
             page: this.$router.options.routes[0].component,
+            props: {mode: 'timeline'},
             key: 'Timeline'
           }
+          // {
+          //   icon: 'ios-chatbubbles',
+          //   label: 'Mentions',
+          //   page: this.$router.options.routes[0].component,
+          //   props: {mode: 'mentions'},
+          //   key: 'Mentions'
+          // },
+          // {
+          //   icon: 'ion-heart',
+          //   label: 'Favorites',
+          //   page: this.$router.options.routes[0].component,
+          //   props: {mode: 'favorites'},
+          //   key: 'Favorites'
+          // }
         ]
       }
     }

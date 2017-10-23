@@ -17,13 +17,27 @@
 
   export default {
     name: 'timeline',
+    props: [ 'mode' ],
     computed: {
       tweets: function () {
-        return this.$store.state.twitter.timeline
+        if (this.mode === 'timeline') {
+          return this.$store.state.twitter.timeline
+        } else if (this.mode === 'mentions') {
+          return this.$store.state.twitter.mentions
+        } else if (this.mode === 'favorites') {
+          return this.$store.state.twitter.favorites
+        }
       }
     },
     mounted: function () {
-      this.$store.dispatch('fetchTimeline')
+      console.log(this.mode)
+      if (this.mode === 'timeline') {
+        this.$store.dispatch('fetchTimeline')
+      } else if (this.mode === 'mentions') {
+        this.$store.dispatch('fetchMentions')
+      } else if (this.mode === 'favorites') {
+        this.$store.dispatch('fetchFavorites')
+      }
     },
     methods: {
       renderItem (i) {
