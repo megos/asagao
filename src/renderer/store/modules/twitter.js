@@ -25,13 +25,13 @@ const state = {
 }
 
 const mutations = {
-  FETCH_TIMELINE (state, tweets) {
+  ADD_TIMELINE (state, tweets) {
     state.timeline = tweets
   },
-  FETCH_MENTIONS (state, tweets) {
+  ADD_MENTIONS (state, tweets) {
     state.mentions = tweets
   },
-  FETCH_FAVORITES (state, tweets) {
+  ADD_FAVORITES (state, tweets) {
     state.favorites = tweets
   }
 }
@@ -40,19 +40,19 @@ const actions = {
   fetchTimeline ({ commit }) {
     fetchTweets('statuses/home_timeline')
       .then((tweets) => {
-        commit('FETCH_TIMELINE', tweets)
+        commit('ADD_TIMELINE', tweets)
       })
   },
   fetchMentions ({ commit }) {
     fetchTweets('statuses/mentions_timeline')
       .then((tweets) => {
-        commit('FETCH_MENTIONS', tweets)
+        commit('ADD_MENTIONS', tweets)
       })
   },
   fetchFavorites ({ commit }) {
     fetchTweets('favorites/list')
       .then((tweets) => {
-        commit('FETCH_FAVORITES', tweets)
+        commit('ADD_FAVORITES', tweets)
       })
   }
 }
