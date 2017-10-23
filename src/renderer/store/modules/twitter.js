@@ -6,6 +6,7 @@ const OAUTH_TOKEN_KEY = 'oauthToken'
 
 const oauthInfo = storage.get(OAUTH_TOKEN_KEY)
 
+// TODO: oauthInfo get failure
 const client = new Twitter({
   consumer_key: config.get('consumerKey'),
   consumer_secret: config.get('consumerSecret'),
