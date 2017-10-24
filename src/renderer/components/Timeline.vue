@@ -30,7 +30,9 @@
       }
     },
     mounted: function () {
-      this.$store.dispatch('fetch' + this.mode)
+      if (this.mode === 'Timeline') {
+        this.$store.dispatch('fetchTimeline')
+      }
     },
     methods: {
       renderItem (i) {

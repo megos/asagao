@@ -8,6 +8,7 @@
       <v-ons-tabbar
         :tabs="tabs"
         :index.sync="activeIndex"
+        v-on:prechange="preChange"
       >
       </v-ons-tabbar>
     </v-ons-page>
@@ -45,6 +46,18 @@
             key: 'Favorites'
           }
         ]
+      }
+    },
+    methods: {
+      preChange (event) {
+        const mode = this.tabs[event.activeIndex].props.mode
+        if (mode === 'Timeline' && this.$store.state.twitter.timeline.length === 0) {
+          this.$store.dispatch('fetchTimeline')
+        } else if (mode === 'Mentions' && this.$store.state.twitter.mentions.length === 0) {
+          this.$store.dispatch('fetchMentions')
+        } else if (mode === 'Favorites' && this.$store.state.twitter.favorites.length === 0) {
+          this.$store.dispatch('fetchFavorites')
+        }
       }
     }
   }
