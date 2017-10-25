@@ -2,8 +2,8 @@
 
 import { app, BrowserWindow } from 'electron'
 import OAuthTwitter from 'electron-oauth-twitter'
-import config from 'config'
 import storage from 'electron-json-storage-sync'
+import { credentials } from '../constants'
 
 const OAUTH_TOKEN_KEY = 'oauthToken'
 
@@ -30,8 +30,8 @@ function createWindow () {
     openWindow()
   } else {
     const twitterAuthWindow = new OAuthTwitter({
-      key: config.get('consumerKey'),
-      secret: config.get('consumerSecret')
+      key: credentials.CONSUMER_KEY,
+      secret: credentials.CONSUMER_SECRET
     })
 
     twitterAuthWindow.startRequest()

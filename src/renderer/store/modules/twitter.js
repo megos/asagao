@@ -1,6 +1,6 @@
 import Twitter from 'twitter'
-import config from 'config'
 import storage from 'electron-json-storage-sync'
+import { credentials } from '../../../constants'
 
 const OAUTH_TOKEN_KEY = 'oauthToken'
 
@@ -8,8 +8,8 @@ const oauthInfo = storage.get(OAUTH_TOKEN_KEY)
 
 // TODO: oauthInfo get failure
 const client = new Twitter({
-  consumer_key: config.get('consumerKey'),
-  consumer_secret: config.get('consumerSecret'),
+  consumer_key: credentials.CONSUMER_KEY,
+  consumer_secret: credentials.CONSUMER_SECRET,
   access_token_key: oauthInfo.data.oauth_access_token,
   access_token_secret: oauthInfo.data.oauth_access_token_secret
 })
