@@ -3,9 +3,7 @@
 import { app, BrowserWindow } from 'electron'
 import OAuthTwitter from 'electron-oauth-twitter'
 import storage from 'electron-json-storage-sync'
-import { credentials } from '../constants'
-
-const OAUTH_TOKEN_KEY = 'oauthToken'
+import { credentials, keys } from '../constants'
 
 /**
  * Set `__static` path to static files in production
@@ -24,7 +22,7 @@ function createWindow () {
   /**
    * Initial window options
    */
-  const oauthInfo = storage.get(OAUTH_TOKEN_KEY)
+  const oauthInfo = storage.get(keys.OAUTH_TOKEN)
 
   if (oauthInfo.status && oauthInfo.data.oauth_access_token && oauthInfo.data.oauth_access_token_secret) {
     openWindow()
@@ -36,7 +34,7 @@ function createWindow () {
 
     twitterAuthWindow.startRequest()
       .then((res) => {
-        const result = storage.set(OAUTH_TOKEN_KEY, res)
+        const result = storage.set(keys.OAUTH_TOKEN, res)
         if (result.status) {
           openWindow()
         } else {

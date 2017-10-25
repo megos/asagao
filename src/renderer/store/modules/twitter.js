@@ -1,10 +1,8 @@
 import Twitter from 'twitter'
 import storage from 'electron-json-storage-sync'
-import { credentials } from '../../../constants'
+import { credentials, keys } from '../../../constants'
 
-const OAUTH_TOKEN_KEY = 'oauthToken'
-
-const oauthInfo = storage.get(OAUTH_TOKEN_KEY)
+const oauthInfo = storage.get(keys.OAUTH_TOKEN)
 
 // TODO: oauthInfo get failure
 const client = new Twitter({
