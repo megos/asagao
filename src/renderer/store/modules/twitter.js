@@ -12,7 +12,7 @@ const client = new Twitter({
   access_token_secret: oauthInfo.data.oauth_access_token_secret
 })
 
-const params = {
+const getDefaultParams = {
   include_entities: true,
   tweet_mode: 'extended'
 }
@@ -25,7 +25,7 @@ const state = {
 
 const mutations = {
   ADD_TIMELINE (state, tweets) {
-    state.timeline = tweets
+    state.timeline = tweets.concat(state.timeline)
   },
   ADD_MENTIONS (state, tweets) {
     state.mentions = tweets
@@ -37,26 +37,30 @@ const mutations = {
 
 const actions = {
   fetchTimeline ({ commit }) {
-    fetchTweets('statuses/home_timeline')
+    let params = getDefaultParams
+    if (state.timeline.length > 0) {
+      params.since_id = state.timeline[0].id_str
+    }
+    fetchTweets('statuses/home_timeline', params)
       .then((tweets) => {
         commit('ADD_TIMELINE', tweets)
       })
   },
   fetchMentions ({ commit }) {
-    fetchTweets('statuses/mentions_timeline')
+    fetchTweets('statuses/mentions_timeline', getDefaultParams)
       .then((tweets) => {
         commit('ADD_MENTIONS', tweets)
       })
   },
   fetchFavorites ({ commit }) {
-    fetchTweets('favorites/list')
+    fetchTweets('favorites/list', getDefaultParams)
       .then((tweets) => {
         commit('ADD_FAVORITES', tweets)
       })
   }
 }
 
-function fetchTweets (endpoint) {
+function fetchTweets (endpoint, params) {
   return new Promise((resolve, reject) => {
     client.get(endpoint, params, (err, tweets, res) => {
       if (!err) {
