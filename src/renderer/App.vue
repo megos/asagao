@@ -8,7 +8,7 @@
       <v-ons-tabbar
         :tabs="tabs"
         :index.sync="activeIndex"
-        v-on:prechange="preChange"
+        @prechange="preChange"
       >
       </v-ons-tabbar>
     </v-ons-page>
