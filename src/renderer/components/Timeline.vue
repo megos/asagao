@@ -44,7 +44,7 @@
           `,
           data () {
             return {
-              index: i,
+              index: tw.id_str,
               tweet: tw,
               retweet: retw
             }
