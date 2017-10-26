@@ -20,6 +20,9 @@
 
   export default {
     name: 'asagao',
+    mounted: function () {
+      this.$store.dispatch('fetchTimeline')
+    },
     data () {
       return {
         activeIndex: 0,

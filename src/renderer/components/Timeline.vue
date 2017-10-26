@@ -29,11 +29,6 @@
         }
       }
     },
-    mounted: function () {
-      if (this.mode === 'Timeline') {
-        this.$store.dispatch('fetchTimeline')
-      }
-    },
     methods: {
       renderItem (i) {
         const tw = this.tweets[i]
