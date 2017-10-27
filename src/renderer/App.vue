@@ -10,6 +10,7 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
   import { CronJob } from 'cron'
 
   export default {
@@ -19,15 +20,15 @@
     },
     methods: {
       startJob () {
-        const self = this
         const job = new CronJob({
           cronTime: '0 */1 * * * *',
-          onTick: () => self.$store.dispatch('fetchTimeline'),
+          onTick: () => this.fetchTimeline(),
           start: false,
           runOnInit: true
         })
         job.start()
-      }
+      },
+      ...mapActions([ 'fetchTimeline' ])
     }
   }
 </script>
