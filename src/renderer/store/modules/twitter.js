@@ -1,5 +1,7 @@
 import Twitter from 'twitter'
 import storage from 'electron-json-storage-sync'
+import sanitizeHtml from 'sanitize-html'
+import autolinker from 'autolinker'
 import { credentials, keys } from '../../../constants'
 
 const oauthInfo = storage.get(keys.OAUTH_TOKEN)
@@ -44,6 +46,7 @@ const actions = {
     fetchTweets('statuses/home_timeline', params)
       .then((tweets) => {
         tweets.reverse().forEach((tweet) => {
+          tweet.full_text_html = link(tweet.full_text)
           commit('ADD_TIMELINE', tweet)
         })
       })
@@ -71,6 +74,16 @@ function fetchTweets (endpoint, params) {
         reject(err)
       }
     })
+  })
+}
+
+function link (text) {
+  // Line feed to br tag
+  text = text.replace(/[\n\r]/g, '<br>')
+  text = sanitizeHtml(text)
+  return autolinker.link(text, {
+    mention: 'twitter',
+    hashtag: 'twitter'
   })
 }
 

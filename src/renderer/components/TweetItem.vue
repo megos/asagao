@@ -19,7 +19,7 @@
       </v-ons-row>
       <v-ons-row>
         <v-ons-col>
-          <div v-html="link(tweet.full_text)" class="message"></div>
+          <div v-html="tweet.full_text_html" class="message"></div>
         </v-ons-col>
       </v-ons-row>
       <v-ons-row v-if="mediaList.length > 0">
@@ -46,8 +46,6 @@
 
 <script>
   import moment from 'moment'
-  import autolinker from 'autolinker'
-  import sanitizeHtml from 'sanitize-html'
   import TweetItem from './TweetItem'
 
   export default {
@@ -74,15 +72,6 @@
         } else {
           return moment(createdAt).fromNow()
         }
-      },
-      link: function (text) {
-        // Line feed to br tag
-        text = text.replace(/[\n\r]/g, '<br>')
-        text = sanitizeHtml(text)
-        return autolinker.link(text, {
-          mention: 'twitter',
-          hashtag: 'twitter'
-        })
       },
       getUrlMedia: function (urls) {
         urls.forEach((item) => {
