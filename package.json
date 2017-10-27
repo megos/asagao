@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "autolinker": "^1.4.4",
+    "cron": "^1.3.0",
     "electron-json-storage-sync": "^1.1.0",
     "electron-oauth-twitter": "^1.1.0",
     "moment": "^2.19.1",
