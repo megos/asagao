@@ -38,21 +38,16 @@
     methods: {
       renderItem (i) {
         const tw = this.tweets[i]
-        let retw = tw.retweeted_status
-        if (retw) {
-          retw.retweeted_user = tw.user.name
-        }
         return new Vue({
           components: { TweetListItem },
           template: `
-            <tweet-list-item :idx="index" :tweet="retweet ? retweet : tweet">
+            <tweet-list-item :idx="index" :tweet="tweet">
             </tweet-list-item>
           `,
           data () {
             return {
               index: tw.id_str,
-              tweet: tw,
-              retweet: retw
+              tweet: tw
             }
           }
         })

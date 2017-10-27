@@ -46,8 +46,7 @@ const actions = {
     fetchTweets('statuses/home_timeline', params)
       .then((tweets) => {
         tweets.reverse().forEach((tweet) => {
-          tweet.full_text_html = link(tweet.full_text)
-          commit('ADD_TIMELINE', tweet)
+          commit('ADD_TIMELINE', parseTweet(tweet))
         })
       })
   },
@@ -77,6 +76,26 @@ function fetchTweets (endpoint, params) {
   })
 }
 
+function parseTweet (tweet) {
+  let retw = tweet.retweeted_status
+  if (retw) {
+    retw.retweeted_user = tweet.user.name
+    tweet = retw
+  }
+  tweet.full_text_html = link(tweet.full_text)
+  tweet.media_list = []
+  if (tweet.entities.urls) {
+    Array.prototype.push.apply(tweet.media_list, getUrlMedia(tweet.entities.urls))
+  }
+  if (tweet.extended_entities && tweet.extended_entities.media) {
+    Array.prototype.push.apply(tweet.media_list, getMedia(tweet.extended_entities.media))
+  }
+  if (tweet.quoted_status) {
+    tweet.quoted_status = parseTweet(tweet.quoted_status)
+  }
+  return tweet
+}
+
 function link (text) {
   // Line feed to br tag
   text = text.replace(/[\n\r]/g, '<br>')
@@ -85,6 +104,58 @@ function link (text) {
     mention: 'twitter',
     hashtag: 'twitter'
   })
+}
+
+function getUrlMedia (urls) {
+  let mediaList = []
+  urls.forEach((item) => {
+    // instagram
+    const shortcode = item.display_url.match(/^instagram\.com\/p\/(.*)\//)
+    if (shortcode) {
+      mediaList.push({
+        url_thumb: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=t',
+        url: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l'
+      })
+    }
+
+    // twipple
+    const imageId = item.display_url.match(/^p\.twipple\.jp\/(.*)/)
+    if (imageId) {
+      mediaList.push({
+        url_thumb: 'http://p.twipple.jp/show/thumb/' + imageId[1],
+        url: 'http://p.twipple.jp/show/large/' + imageId[1]
+      })
+    }
+  })
+  return mediaList
+}
+
+function getMedia (media) {
+  let mediaList = []
+  // Search extended entities media
+  media.forEach((item) => {
+    const type = item.type
+    if (type === 'photo') {
+      mediaList.push({
+        url_thumb: item.media_url + ':thumb',
+        url: item.media_url
+      })
+    } else if (type === 'video' || type === 'animated_gif') {
+      const mp4 = item.video_info.variants.filter((item) => {
+        return (item.content_type === 'video/mp4')
+      }).sort((a, b) => {
+        return (a.bitrate > b.bitrate) ? -1 : 1
+      })
+      if (mp4.length > 0) {
+        // Get highest bitrate item
+        mediaList.push({
+          url_thumb: item.media_url,
+          url: mp4[0].url
+        })
+      }
+    }
+  })
+  return mediaList
 }
 
 export default {

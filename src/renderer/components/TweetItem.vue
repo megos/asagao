@@ -22,9 +22,9 @@
           <div v-html="tweet.full_text_html" class="message"></div>
         </v-ons-col>
       </v-ons-row>
-      <v-ons-row v-if="mediaList.length > 0">
+      <v-ons-row v-if="tweet.media_list.length > 0">
         <!-- TODO: Performance improvement -->
-        <v-ons-col width="60px" v-for="(media, idx) in mediaList" :key="idx">
+        <v-ons-col width="60px" v-for="(media, idx) in tweet.media_list" :key="idx">
           <a :href="media.url" target="_blank">
             <img :src="media.url_thumb" width="50px" class="image">
           </a>
@@ -52,19 +52,6 @@
     name: 'tweet-item',
     components: { TweetItem },
     props: [ 'tweet' ],
-    data () {
-      return {
-        mediaList: []
-      }
-    },
-    mounted: function () {
-      if (this.$props.tweet.entities.urls) {
-        this.getUrlMedia(this.$props.tweet.entities.urls)
-      }
-      if (this.$props.tweet.extended_entities && this.$props.tweet.extended_entities.media) {
-        this.getMedia(this.$props.tweet.extended_entities.media)
-      }
-    },
     methods: {
       getRelativeCreatedAt: function (createdAt) {
         if (moment().diff(createdAt, 'days') > 7) {
@@ -72,52 +59,6 @@
         } else {
           return moment(createdAt).fromNow()
         }
-      },
-      getUrlMedia: function (urls) {
-        urls.forEach((item) => {
-          // instagram
-          const shortcode = item.display_url.match(/^instagram\.com\/p\/(.*)\//)
-          if (shortcode) {
-            this.mediaList.push({
-              url_thumb: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=t',
-              url: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l'
-            })
-          }
-
-          // twipple
-          const imageId = item.display_url.match(/^p\.twipple\.jp\/(.*)/)
-          if (imageId) {
-            this.mediaList.push({
-              url_thumb: 'http://p.twipple.jp/show/thumb/' + imageId[1],
-              url: 'http://p.twipple.jp/show/large/' + imageId[1]
-            })
-          }
-        })
-      },
-      getMedia: function (media) {
-        // Search extended entities media
-        media.forEach((item) => {
-          const type = item.type
-          if (type === 'photo') {
-            this.mediaList.push({
-              url_thumb: item.media_url + ':thumb',
-              url: item.media_url
-            })
-          } else if (type === 'video' || type === 'animated_gif') {
-            const mp4 = item.video_info.variants.filter((item) => {
-              return (item.content_type === 'video/mp4')
-            }).sort((a, b) => {
-              return (a.bitrate > b.bitrate) ? -1 : 1
-            })
-            if (mp4.length > 0) {
-              // Get highest bitrate item
-              this.mediaList.push({
-                url_thumb: item.media_url,
-                url: mp4[0].url
-              })
-            }
-          }
-        })
       }
     }
   }
