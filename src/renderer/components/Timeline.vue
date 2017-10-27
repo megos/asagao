@@ -13,6 +13,7 @@
 
 <script>
   import Vue from 'vue'
+  import { mapState } from 'vuex'
   import TweetListItem from './TweetListItem'
 
   export default {
@@ -21,13 +22,18 @@
     computed: {
       tweets: function () {
         if (this.mode === 'Timeline') {
-          return this.$store.state.twitter.timeline
+          return this.timeline
         } else if (this.mode === 'Mentions') {
-          return this.$store.state.twitter.mentions
+          return this.mentions
         } else if (this.mode === 'Favorites') {
-          return this.$store.state.twitter.favorites
+          return this.favorites
         }
-      }
+      },
+      ...mapState({
+        timeline: state => state.twitter.timeline,
+        mentions: state => state.twitter.mentions,
+        favorites: state => state.twitter.favorites
+      })
     },
     methods: {
       renderItem (i) {
