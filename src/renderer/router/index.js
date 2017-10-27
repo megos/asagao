@@ -8,7 +8,8 @@ export default new Router({
     {
       path: '/',
       name: 'timeline',
-      component: require('@/components/TimeLine').default
+      component: require('@/components/TimeLine').default,
+      props: { mode: 'Timeline' }
     },
     {
       path: '*',
