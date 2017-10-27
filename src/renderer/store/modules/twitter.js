@@ -24,8 +24,8 @@ const state = {
 }
 
 const mutations = {
-  ADD_TIMELINE (state, tweets) {
-    state.timeline = tweets.concat(state.timeline)
+  ADD_TIMELINE (state, tweet) {
+    state.timeline.unshift(tweet)
   },
   ADD_MENTIONS (state, tweets) {
     state.mentions = tweets
@@ -43,7 +43,9 @@ const actions = {
     }
     fetchTweets('statuses/home_timeline', params)
       .then((tweets) => {
-        commit('ADD_TIMELINE', tweets)
+        tweets.reverse().forEach((tweet) => {
+          commit('ADD_TIMELINE', tweet)
+        })
       })
   },
   fetchMentions ({ commit }) {
