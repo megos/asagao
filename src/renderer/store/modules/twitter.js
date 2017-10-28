@@ -16,7 +16,8 @@ const client = new Twitter({
 
 const getDefaultParams = {
   include_entities: true,
-  tweet_mode: 'extended'
+  tweet_mode: 'extended',
+  count: 200
 }
 
 const state = {
