@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import { twitterClient } from '../modules/twitter'
+  import { TwitterClient } from '../modules/twitter'
 
   export default {
     name: 'tweet-input',
@@ -29,7 +29,7 @@
     },
     methods: {
       postTweet: function () {
-        twitterClient.postTweet(this.tweet)
+        TwitterClient.postTweet(this.tweet)
       }
     }
   }
