@@ -51,7 +51,9 @@
             key: 'Favorites'
           }
         ],
-        timelineCronJob: null
+        timelineCronJob: null,
+        mentionsCronJob: null,
+        favoritesCronJob: null
       }
     },
     methods: {
@@ -66,14 +68,36 @@
           runOnInit: true
         })
       },
+      startMentionsCronJob () {
+        if (this.mentionsCronJob && this.mentionsCronJob.running) {
+          this.mentionsCronJob.stop()
+        }
+        this.mentionsCronJob = new CronJob({
+          cronTime: '20 */10 * * * *',
+          onTick: () => this.fetchMentions(),
+          start: true,
+          runOnInit: true
+        })
+      },
+      startFavoritesCronJob () {
+        if (this.favoritesCronJob && this.favoritesCronJob.running) {
+          this.favoritesCronJob.stop()
+        }
+        this.favoritesCronJob = new CronJob({
+          cronTime: '40 0 */1 * * *',
+          onTick: () => this.fetchFavorites(),
+          start: true,
+          runOnInit: true
+        })
+      },
       preChange (event) {
         const mode = this.tabs[event.activeIndex].props.mode
         if (mode === 'Timeline' && !this.timelineCronJob) {
           this.startTimelineCronJob()
-        } else if (mode === 'Mentions' && this.$store.state.twitter.mentions.length === 0) {
-          this.fetchMentions()
-        } else if (mode === 'Favorites' && this.$store.state.twitter.favorites.length === 0) {
-          this.fetchFavorites()
+        } else if (mode === 'Mentions' && !this.mentionsCronJob) {
+          this.startMentionsCronJob()
+        } else if (mode === 'Favorites' && !this.favoritesCronJob) {
+          this.startFavoritesCronJob()
         }
       },
       ...mapActions([
