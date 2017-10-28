@@ -7,7 +7,7 @@
       <!-- <router-view></router-view> -->
       <v-ons-tabbar
         :tabs="tabs"
-        :index.sync="activeIndex"
+        :index="activeIndex"
         @prechange="preChange"
       >
       </v-ons-tabbar>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
   import { CronJob } from 'cron'
   import Timeline from '@/components/TimeLine'
   import TweetInput from '@/components/TweetInput'
@@ -26,9 +26,11 @@
     created () {
       this.startTimelineCronJob()
     },
+    computed: mapState({
+      activeIndex: state => state.app.activeIndex
+    }),
     data () {
       return {
-        activeIndex: 1,
         tabs: [
           {
             icon: 'ion-home',
@@ -98,7 +100,8 @@
         })
       },
       preChange (event) {
-        const mode = this.tabs[event.activeIndex].props ? this.tabs[event.activeIndex].props.mode : ''
+        this.changeActiveIndex(event.index)
+        const mode = this.tabs[event.index].props ? this.tabs[event.index].props.mode : ''
         if (mode === 'Timeline' && !this.timelineCronJob) {
           this.startTimelineCronJob()
         } else if (mode === 'Mentions' && !this.mentionsCronJob) {
@@ -110,7 +113,8 @@
       ...mapActions([
         'fetchTimeline',
         'fetchMentions',
-        'fetchFavorites'
+        'fetchFavorites',
+        'changeActiveIndex'
       ])
     }
   }
