@@ -1,24 +1,20 @@
 <template>
   <v-ons-page>
     <v-ons-list>
-      <v-ons-lazy-repeat
-        v-if="tweets.length > 0"
-        :render-item="renderItem"
-        :length="tweets.length"
-      >
-      </v-ons-lazy-repeat>
+      <tweet-list-item v-for="(tweet, idx) in tweets" :key="idx" :tweet="tweet">
+      </tweet-list-item>
     </v-ons-list>
   </v-ons-page>
 </template>
 
 <script>
-  import Vue from 'vue'
   import { mapState } from 'vuex'
   import TweetListItem from './TweetListItem'
 
   export default {
     name: 'timeline',
     props: [ 'mode' ],
+    components: { TweetListItem },
     computed: {
       tweets: function () {
         if (this.mode === 'Timeline') {
@@ -34,24 +30,6 @@
         mentions: state => state.twitter.mentions,
         favorites: state => state.twitter.favorites
       })
-    },
-    methods: {
-      renderItem (i) {
-        const tw = this.tweets[i]
-        return new Vue({
-          components: { TweetListItem },
-          template: `
-            <tweet-list-item :idx="index" :tweet="tweet">
-            </tweet-list-item>
-          `,
-          data () {
-            return {
-              index: tw.id_str,
-              tweet: tw
-            }
-          }
-        })
-      }
     }
   }
 </script>
