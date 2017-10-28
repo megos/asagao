@@ -51,6 +51,7 @@ function openWindow () {
   mainWindow = new BrowserWindow({
     height: 700,
     width: 400,
+    titleBarStyle: 'hidden',
     useContentSize: true
   })
 

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-ons-page>
-      <v-ons-toolbar>
+      <v-ons-toolbar class="toolbar">
         <div class="center">Timeline</div>
       </v-ons-toolbar>
       <router-view></router-view>
@@ -34,5 +34,7 @@
 </script>
 
 <style>
-  /* CSS */
+  .toolbar {
+    -webkit-app-region: drag
+  }
 </style>
