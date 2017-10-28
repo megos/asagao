@@ -7,15 +7,15 @@
             <textarea
               v-model="tweet"
               row="3"
-              maxlength="140"
               placeholder="What's happening?"
+              :maxlength="maxLength"
             />
           </v-ons-col>
         </v-ons-row>
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="right">
-          <v-ons-button @click="postTweet">Tweet</v-ons-button>
+          <v-ons-button @click="postTweet" :disabled="tweet.length === 0">Tweet</v-ons-button>
         </div>
       </v-ons-list-item>
     </v-ons-list>
@@ -30,7 +30,8 @@
     name: 'tweet-input',
     data () {
       return {
-        tweet: ''
+        tweet: '',
+        maxLength: 140
       }
     },
     methods: {
