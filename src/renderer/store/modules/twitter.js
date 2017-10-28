@@ -86,7 +86,6 @@ function parseTweet (tweet) {
     retw.retweeted_user = tweet.user.name
     tweet = retw
   }
-  tweet.full_text_html = link(tweet.full_text)
   tweet.media_list = []
   if (tweet.entities.urls) {
     Array.prototype.push.apply(tweet.media_list, getUrlMedia(tweet.entities.urls))
@@ -97,7 +96,21 @@ function parseTweet (tweet) {
   if (tweet.quoted_status) {
     tweet.quoted_status = parseTweet(tweet.quoted_status)
   }
-  return tweet
+  return {
+    id_str: tweet.id_str,
+    full_text_html: link(tweet.full_text),
+    created_at: tweet.created_at,
+    quoted_status: tweet.quoted_status,
+    retweeted_user: tweet.retweeted_user,
+    media_list: tweet.media_list,
+    user: {
+      profile_image_url: tweet.user.profile_image_url,
+      name: tweet.user.name,
+      screen_name: tweet.user.screen_name,
+      protected: tweet.user.protected,
+      verified: tweet.user.verified
+    }
+  }
 }
 
 function link (text) {
