@@ -19,6 +19,7 @@
   import { mapActions } from 'vuex'
   import { CronJob } from 'cron'
   import Timeline from '@/components/TimeLine'
+  import TweetInput from '@/components/TweetInput'
 
   export default {
     name: 'asagao',
@@ -27,8 +28,14 @@
     },
     data () {
       return {
-        activeIndex: 0,
+        activeIndex: 1,
         tabs: [
+          {
+            icon: 'ion-home',
+            label: 'New Tweet',
+            page: TweetInput,
+            key: 'Tweet'
+          },
           {
             icon: 'ion-home',
             label: 'Timeline',
@@ -91,7 +98,7 @@
         })
       },
       preChange (event) {
-        const mode = this.tabs[event.activeIndex].props.mode
+        const mode = this.tabs[event.activeIndex].props ? this.tabs[event.activeIndex].props.mode : ''
         if (mode === 'Timeline' && !this.timelineCronJob) {
           this.startTimelineCronJob()
         } else if (mode === 'Mentions' && !this.mentionsCronJob) {
