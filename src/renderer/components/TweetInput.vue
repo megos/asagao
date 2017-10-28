@@ -39,6 +39,7 @@
         TwitterClient.postTweet(this.tweet)
           .then((res) => {
             this.tweet = ''
+            // Move to timeline
             this.changeActiveIndex(1)
           })
           .catch((err) => {
