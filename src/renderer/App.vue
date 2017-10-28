@@ -23,7 +23,7 @@
   export default {
     name: 'asagao',
     created () {
-      this.startJob()
+      this.startTimelineCronJob()
     },
     data () {
       return {
@@ -50,23 +50,26 @@
             props: {mode: 'Favorites'},
             key: 'Favorites'
           }
-        ]
+        ],
+        timelineCronJob: null
       }
     },
     methods: {
-      startJob () {
-        const job = new CronJob({
+      startTimelineCronJob () {
+        if (this.timelineCronJob && this.timelineCronJob.running) {
+          this.timelineCronJob.stop()
+        }
+        this.timelineCronJob = new CronJob({
           cronTime: '0 */1 * * * *',
           onTick: () => this.fetchTimeline(),
-          start: false,
+          start: true,
           runOnInit: true
         })
-        job.start()
       },
       preChange (event) {
         const mode = this.tabs[event.activeIndex].props.mode
-        if (mode === 'Timeline' && this.$store.state.twitter.timeline.length === 0) {
-          this.fetchTimeline()
+        if (mode === 'Timeline' && !this.timelineCronJob) {
+          this.startTimelineCronJob()
         } else if (mode === 'Mentions' && this.$store.state.twitter.mentions.length === 0) {
           this.fetchMentions()
         } else if (mode === 'Favorites' && this.$store.state.twitter.favorites.length === 0) {
