@@ -1,5 +1,7 @@
 import Twitter from 'twitter'
 import storage from 'electron-json-storage-sync'
+import sanitizeHtml from 'sanitize-html'
+import autolinker from 'autolinker'
 import { credentials, keys } from '../../constants'
 
 const oauthInfo = storage.get(keys.OAUTH_TOKEN)
@@ -13,6 +15,11 @@ const client = new Twitter({
 })
 
 export const twitterClient = {
+
+  /**
+   * Post new tweet
+   * @param {string} status 
+   */
   postTweet (status) {
     const params = {
       status: status
@@ -25,6 +32,19 @@ export const twitterClient = {
           reject(err)
         }
       })
+    })
+  },
+
+  /**
+   * Line feed to br tag and sanitize html
+   * @param {string} text 
+   */
+  toHtml (text) {
+    text = text.replace(/[\n\r]/g, '<br>')
+    text = sanitizeHtml(text)
+    return autolinker.link(text, {
+      mention: 'twitter',
+      hashtag: 'twitter'
     })
   }
 }

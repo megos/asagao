@@ -1,8 +1,7 @@
 import Twitter from 'twitter'
 import storage from 'electron-json-storage-sync'
-import sanitizeHtml from 'sanitize-html'
-import autolinker from 'autolinker'
 import { credentials, keys } from '../../../constants'
+import { twitterClient } from '../../modules/twitter'
 
 const oauthInfo = storage.get(keys.OAUTH_TOKEN)
 
@@ -103,7 +102,7 @@ function parseTweet (tweet) {
   }
   return {
     id_str: tweet.id_str,
-    full_text_html: link(tweet.full_text),
+    full_text_html: twitterClient.toHtml(tweet.full_text),
     created_at: tweet.created_at,
     quoted_status: tweet.quoted_status,
     retweeted_user: tweet.retweeted_user,
@@ -116,16 +115,6 @@ function parseTweet (tweet) {
       verified: tweet.user.verified
     }
   }
-}
-
-function link (text) {
-  // Line feed to br tag
-  text = text.replace(/[\n\r]/g, '<br>')
-  text = sanitizeHtml(text)
-  return autolinker.link(text, {
-    mention: 'twitter',
-    hashtag: 'twitter'
-  })
 }
 
 function getUrlMedia (urls) {
