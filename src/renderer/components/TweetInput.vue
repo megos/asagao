@@ -41,6 +41,10 @@
             this.tweet = ''
             this.changeActiveIndex(1)
           })
+          .catch((err) => {
+            console.err(err)
+            this.$ons.notification.alert('Tweet failed...')
+          })
       },
       ...mapActions([
         'changeActiveIndex'
