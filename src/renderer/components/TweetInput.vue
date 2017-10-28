@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
   import { TwitterClient } from '../modules/twitter'
 
   export default {
@@ -35,7 +36,14 @@
     methods: {
       postTweet: function () {
         TwitterClient.postTweet(this.tweet)
-      }
+          .then((res) => {
+            this.tweet = ''
+            this.changeActiveIndex(1)
+          })
+      },
+      ...mapActions([
+        'changeActiveIndex'
+      ])
     }
   }
 </script>
