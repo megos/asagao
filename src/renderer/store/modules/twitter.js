@@ -30,10 +30,10 @@ const mutations = {
     state.timeline = tweets.concat(state.timeline)
   },
   ADD_MENTIONS (state, tweets) {
-    state.mentions = tweets
+    state.mentions = tweets.concat(state.mentions)
   },
   ADD_FAVORITES (state, tweets) {
-    state.favorites = tweets
+    state.favorites = tweets.concat(state.favorites)
   }
 }
 
@@ -45,25 +45,25 @@ const actions = {
     }
     fetchTweets('statuses/home_timeline', params)
       .then((tweets) => {
-        let extendedTweets = []
-        tweets.forEach((tweet) => {
-          extendedTweets.push(parseTweet(tweet))
-        })
-        if (extendedTweets.length > 0) {
-          commit('ADD_TIMELINE', extendedTweets)
+        if (tweets.length > 0) {
+          commit('ADD_TIMELINE', tweets)
         }
       })
   },
   fetchMentions ({ commit }) {
     fetchTweets('statuses/mentions_timeline', getDefaultParams)
       .then((tweets) => {
-        commit('ADD_MENTIONS', tweets)
+        if (tweets.length > 0) {
+          commit('ADD_MENTIONS', tweets)
+        }
       })
   },
   fetchFavorites ({ commit }) {
     fetchTweets('favorites/list', getDefaultParams)
       .then((tweets) => {
-        commit('ADD_FAVORITES', tweets)
+        if (tweets.length > 0) {
+          commit('ADD_FAVORITES', tweets)
+        }
       })
   }
 }
@@ -72,7 +72,11 @@ function fetchTweets (endpoint, params) {
   return new Promise((resolve, reject) => {
     client.get(endpoint, params, (err, tweets, res) => {
       if (!err) {
-        resolve(tweets)
+        let extendedTweets = []
+        tweets.forEach((tweet) => {
+          extendedTweets.push(parseTweet(tweet))
+        })
+        resolve(extendedTweets)
       } else {
         reject(err)
       }
