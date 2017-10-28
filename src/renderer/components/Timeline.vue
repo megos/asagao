@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <v-ons-list>
-      <tweet-list-item v-for="(tweet, idx) in tweets" :key="idx" :tweet="tweet">
+      <tweet-list-item v-for="tweet in tweets" :key="tweet.id_str" :tweet="tweet">
       </tweet-list-item>
     </v-ons-list>
   </v-ons-page>
