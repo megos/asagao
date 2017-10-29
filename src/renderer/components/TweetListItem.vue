@@ -2,7 +2,7 @@
   <v-ons-list-item
     tappable
     :key="idx"
-    @click="openTweetItemDialog"
+    @click="clickItem"
   >
     <tweet-item :tweet="tweet"></tweet-item>
   </v-ons-list-item>
@@ -16,8 +16,15 @@
     name: 'tweet-list-item',
     components: { TweetItem },
     props: [ 'idx', 'tweet' ],
-    methods: mapActions([
-      'openTweetItemDialog'
-    ])
+    methods: {
+      clickItem: function (event) {
+        if (!(event.target.localName === 'a' || event.target.localName === 'img')) {
+          this.openTweetItemDialog()
+        }
+      },
+      ...mapActions([
+        'openTweetItemDialog'
+      ])
+    }
   }
 </script>
