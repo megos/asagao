@@ -12,6 +12,12 @@
       >
       </v-ons-tabbar>
     </v-ons-page>
+
+    <v-ons-dialog cancelable
+      :visible="dialogVisible"
+      @prehide="closeTweetItemDialog"
+    >
+    </v-ons-dialog>
   </div>
 </template>
 
@@ -27,7 +33,8 @@
       this.startTimelineCronJob()
     },
     computed: mapState({
-      activeIndex: state => state.app.activeIndex
+      activeIndex: state => state.app.activeIndex,
+      dialogVisible: state => state.app.tweetItemDialogVisible
     }),
     data () {
       return {
@@ -110,7 +117,8 @@
         'fetchTimeline',
         'fetchMentions',
         'fetchFavorites',
-        'changeActiveIndex'
+        'changeActiveIndex',
+        'closeTweetItemDialog'
       ])
     }
   }
