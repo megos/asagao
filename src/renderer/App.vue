@@ -33,31 +33,27 @@
       return {
         tabs: [
           {
-            icon: 'ion-home',
-            label: 'New Tweet',
+            icon: 'ion-edit',
             page: TweetInput,
-            key: 'Tweet'
+            style: { maxWidth: '50px' }
           },
           {
             icon: 'ion-home',
             label: 'Timeline',
             page: Timeline,
-            props: {mode: 'Timeline'},
-            key: 'Timeline'
+            props: {mode: 'Timeline'}
           },
           {
-            icon: 'ion-chatbubbles',
+            icon: 'ion-at',
             label: 'Mentions',
             page: Timeline,
-            props: {mode: 'Mentions'},
-            key: 'Mentions'
+            props: {mode: 'Mentions'}
           },
           {
             icon: 'ion-heart',
             label: 'Favorites',
             page: Timeline,
-            props: {mode: 'Favorites'},
-            key: 'Favorites'
+            props: {mode: 'Favorites'}
           }
         ],
         timelineCronJob: null,
