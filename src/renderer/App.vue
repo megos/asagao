@@ -44,19 +44,19 @@
             icon: 'ion-home',
             label: 'Timeline',
             page: Timeline,
-            props: {mode: 'Timeline'}
+            props: { mode: 'Timeline' }
           },
           {
             icon: 'ion-at',
             label: 'Mentions',
             page: Timeline,
-            props: {mode: 'Mentions'}
+            props: { mode: 'Mentions' }
           },
           {
             icon: 'ion-heart',
             label: 'Favorites',
             page: Timeline,
-            props: {mode: 'Favorites'}
+            props: { mode: 'Favorites' }
           }
         ],
         timelineCronJob: null,
