@@ -11,13 +11,8 @@
         @prechange="preChange"
       >
       </v-ons-tabbar>
+      <item-dialog></item-dialog>
     </v-ons-page>
-
-    <v-ons-dialog cancelable
-      :visible="dialogVisible"
-      @prehide="closeTweetItemDialog"
-    >
-    </v-ons-dialog>
   </div>
 </template>
 
@@ -26,15 +21,16 @@
   import { CronJob } from 'cron'
   import Timeline from '@/components/TimeLine'
   import TweetInput from '@/components/TweetInput'
+  import ItemDialog from '@/components/ItemDialog'
 
   export default {
     name: 'asagao',
+    components: { ItemDialog },
     created () {
       this.startTimelineCronJob()
     },
     computed: mapState({
-      activeIndex: state => state.app.activeIndex,
-      dialogVisible: state => state.app.tweetItemDialogVisible
+      activeIndex: state => state.app.activeIndex
     }),
     data () {
       return {
@@ -117,8 +113,7 @@
         'fetchTimeline',
         'fetchMentions',
         'fetchFavorites',
-        'changeActiveIndex',
-        'closeTweetItemDialog'
+        'changeActiveIndex'
       ])
     }
   }
