@@ -19,7 +19,7 @@
     methods: {
       clickItem: function (event) {
         if (!(event.target.localName === 'a' || event.target.localName === 'img')) {
-          this.openTweetItemDialog()
+          this.openTweetItemDialog(this.tweet.favorited)
         }
       },
       ...mapActions([

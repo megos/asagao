@@ -1,6 +1,7 @@
 const state = {
   activeIndex: 1,
-  tweetItemDialogVisible: false
+  tweetItemDialogVisible: false,
+  favorited: false
 }
 
 const mutations = {
@@ -12,6 +13,9 @@ const mutations = {
   },
   CLOSE_TWEET_ITEM_DIALOG (state) {
     state.tweetItemDialogVisible = false
+  },
+  CHANGE_FAVORITED (state, favorited) {
+    state.favorited = favorited
   }
 }
 
@@ -19,8 +23,9 @@ const actions = {
   changeActiveIndex ({ commit }, index) {
     commit('CHANGE_ACTIVE_INDEX', index)
   },
-  openTweetItemDialog ({ commit }) {
+  openTweetItemDialog ({ commit }, favorited) {
     commit('OPEN_TWEET_ITEM_DIALOG')
+    commit('CHANGE_FAVORITED', favorited)
   },
   closeTweetItemDialog ({ commit }) {
     commit('CLOSE_TWEET_ITEM_DIALOG')

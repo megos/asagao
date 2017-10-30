@@ -14,7 +14,7 @@
         tappable
       >
         <v-ons-icon icon="ion-heart" class="icon"></v-ons-icon>
-        Add favorite
+        {{ favotitePrefix }} favorite
       </v-ons-list-item>
     </v-ons-list>
   </v-ons-dialog>
@@ -25,14 +25,18 @@
 
   export default {
     name: 'item-dialog',
-    computed: mapState({
-      dialogVisible: state => state.app.tweetItemDialogVisible
-    }),
-    methods: {
-      ...mapActions([
-        'closeTweetItemDialog'
-      ])
-    }
+    computed: {
+      favotitePrefix: function () {
+        return this.favotited ? 'Add' : 'Remove'
+      },
+      ...mapState({
+        dialogVisible: state => state.app.tweetItemDialogVisible,
+        favotited: state => state.app.favotited
+      })
+    },
+    methods: mapActions([
+      'closeTweetItemDialog'
+    ])
   }
 </script>
 
