@@ -7,8 +7,14 @@
       <v-ons-list-item
         tappable
       >
-        <v-ons-icon icon="fa-reply" class="icon"></v-ons-icon>
+        <v-ons-icon icon="ion-reply" class="icon"></v-ons-icon>
         Reply
+      </v-ons-list-item>
+      <v-ons-list-item
+        tappable
+      >
+        <v-ons-icon icon="ion-heart" class="icon"></v-ons-icon>
+        Add favorite
       </v-ons-list-item>
     </v-ons-list>
   </v-ons-dialog>

@@ -82,6 +82,7 @@ export const TwitterClient = {
       created_at: tweet.created_at,
       quoted_status: tweet.quoted_status,
       retweeted_user: tweet.retweeted_user,
+      favorited: tweet.favorited,
       media_list: tweet.media_list,
       user: {
         profile_image_url: tweet.user.profile_image_url,
