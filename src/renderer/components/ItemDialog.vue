@@ -27,7 +27,7 @@
     name: 'item-dialog',
     computed: {
       favoritePrefix: function () {
-        return this.favorited ? 'Add' : 'Remove'
+        return this.favorited ? 'Remove' : 'Add'
       },
       ...mapState({
         dialogVisible: state => state.app.tweetItemDialogVisible,
