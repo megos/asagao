@@ -72,9 +72,9 @@
         this.timelineCronJob = new CronJob({
           cronTime: '0 */1 * * * *',
           onTick: () => this.fetchTimeline(),
-          start: true,
           runOnInit: true
         })
+        this.timelineCronJob.start()
       },
       startMentionsCronJob () {
         if (this.mentionsCronJob && this.mentionsCronJob.running) {
@@ -83,9 +83,9 @@
         this.mentionsCronJob = new CronJob({
           cronTime: '20 */10 * * * *',
           onTick: () => this.fetchMentions(),
-          start: true,
           runOnInit: true
         })
+        this.mentionsCronJob.start()
       },
       startFavoritesCronJob () {
         if (this.favoritesCronJob && this.favoritesCronJob.running) {
@@ -94,9 +94,9 @@
         this.favoritesCronJob = new CronJob({
           cronTime: '40 0 */1 * * *',
           onTick: () => this.fetchFavorites(),
-          start: true,
           runOnInit: true
         })
+        this.favoritesCronJob.start()
       },
       preChange (event) {
         this.changeActiveIndex(event.index)
