@@ -14,7 +14,7 @@ const mutations = {
   CLOSE_TWEET_ITEM_DIALOG (state) {
     state.tweetItemDialogVisible = false
   },
-  CHANGE_FAVORITED (state, favorited) {
+  SET_FAVORITED (state, favorited) {
     state.favorited = favorited
   }
 }
@@ -25,7 +25,7 @@ const actions = {
   },
   openTweetItemDialog ({ commit }, favorited) {
     commit('OPEN_TWEET_ITEM_DIALOG')
-    commit('CHANGE_FAVORITED', favorited)
+    commit('SET_FAVORITED', favorited)
   },
   closeTweetItemDialog ({ commit }) {
     commit('CLOSE_TWEET_ITEM_DIALOG')
