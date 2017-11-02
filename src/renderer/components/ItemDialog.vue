@@ -6,6 +6,7 @@
     <v-ons-list>
       <v-ons-list-item
         tappable
+        @click="changeActiveIndex(0)"
       >
         <v-ons-icon icon="ion-reply" class="icon"></v-ons-icon>
         Reply
@@ -35,6 +36,7 @@
       })
     },
     methods: mapActions([
+      'changeActiveIndex',
       'closeTweetItemDialog'
     ])
   }
