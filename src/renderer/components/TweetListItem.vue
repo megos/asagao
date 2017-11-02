@@ -21,6 +21,7 @@
         if (!(event.target.localName === 'a' || event.target.localName === 'img')) {
           this.openTweetItemDialog({
             idStr: this.tweet.id_str,
+            screenName: this.tweet.user.screen_name,
             favorited: this.tweet.favorited
           })
         }
