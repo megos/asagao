@@ -2,9 +2,11 @@ import Twitter from 'twitter'
 import storage from 'electron-json-storage-sync'
 import sanitizeHtml from 'sanitize-html'
 import autolinker from 'autolinker'
+import log4js from 'log4js'
 import { credentials, keys } from '../../constants'
 
 const oauthInfo = storage.get(keys.OAUTH_TOKEN)
+const logger = log4js.getLogger()
 
 // TODO: oauthInfo get failure
 const client = new Twitter({
@@ -23,14 +25,17 @@ export const TwitterClient = {
    */
   fetchTweets (endpoint, params) {
     return new Promise((resolve, reject) => {
+      logger.info('Fetch start ' + endpoint)
       client.get(endpoint, params, (err, tweets, res) => {
         if (!err) {
           let extendedTweets = []
           tweets.forEach((tweet) => {
             extendedTweets.push(this.parseTweet(tweet))
           })
+          logger.info('Fetch tweets from ' + endpoint + ' count: ' + tweets.length)
           resolve(extendedTweets)
         } else {
+          logger.error(err)
           reject(err)
         }
       })

@@ -76,6 +76,7 @@
           runOnInit: true
         })
         this.timelineCronJob.start()
+        this.$logger.info('Timeline cron start')
       },
       startMentionsCronJob () {
         if (this.mentionsCronJob && this.mentionsCronJob.running) {
@@ -87,6 +88,7 @@
           runOnInit: true
         })
         this.mentionsCronJob.start()
+        this.$logger.info('Mentions cron start')
       },
       startFavoritesCronJob () {
         if (this.favoritesCronJob && this.favoritesCronJob.running) {
@@ -98,6 +100,7 @@
           runOnInit: true
         })
         this.favoritesCronJob.start()
+        this.$logger.info('Favorites cron start')
       },
       preChange (event) {
         this.changeActiveIndex(event.index)

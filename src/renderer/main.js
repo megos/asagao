@@ -14,6 +14,7 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
 
 Vue.logger = Vue.prototype.$logger = log4js.getLogger()
+Vue.logger.level = 'info'
 
 Vue.use(VueOnsen)
 

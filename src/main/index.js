@@ -59,6 +59,9 @@ function openWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+  mainWindow.on('new-window', (event, url) => {
+    mainWindow.webContents.downloadURL(url)
+  })
 }
 
 app.on('ready', createWindow)
