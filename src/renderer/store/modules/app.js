@@ -39,6 +39,8 @@ const actions = {
   },
   closeTweetItemDialog ({ commit }) {
     commit('CLOSE_TWEET_ITEM_DIALOG')
+  },
+  removeSelectedItem ({ commit }) {
     commit('SET_SCREEN_NAME', '')
     commit('SET_ID_STR', '')
   }

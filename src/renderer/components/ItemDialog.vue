@@ -1,12 +1,12 @@
 <template>
   <v-ons-dialog cancelable
     :visible="dialogVisible"
-    @prehide="closeTweetItemDialog"
+    @prehide="closeDialog"
   >
     <v-ons-list>
       <v-ons-list-item
         tappable
-        @click="changeActiveIndex(0)"
+        @click="moveTweetInput"
       >
         <v-ons-icon icon="ion-reply" class="icon"></v-ons-icon>
         Reply
@@ -35,10 +35,22 @@
         favorited: state => state.app.favorited
       })
     },
-    methods: mapActions([
-      'changeActiveIndex',
-      'closeTweetItemDialog'
-    ])
+    methods: {
+      closeDialog: function (event) {
+        console.log(event)
+        this.closeTweetItemDialog()
+        this.removeSelectedItem()
+      },
+      moveTweetInput: function () {
+        this.changeActiveIndex(0)
+        this.closeTweetItemDialog()
+      },
+      ...mapActions([
+        'changeActiveIndex',
+        'closeTweetItemDialog',
+        'removeSelectedItem'
+      ])
+    }
   }
 </script>
 
