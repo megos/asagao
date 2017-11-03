@@ -18,8 +18,8 @@ export const TwitterClient = {
 
   /**
    * Fetch tweets
-   * @param {string} endpoint 
-   * @param {Object} params 
+   * @param {string} endpoint
+   * @param {Object} params
    */
   fetchTweets (endpoint, params) {
     return new Promise((resolve, reject) => {
@@ -39,7 +39,7 @@ export const TwitterClient = {
 
   /**
    * Post new tweet
-   * @param {string} status 
+   * @param {string} status
    */
   postTweet (status) {
     const params = {
@@ -58,7 +58,7 @@ export const TwitterClient = {
 
   /**
    * Tweet object covert to this client object
-   * @param {Object} tweet 
+   * @param {Object} tweet
    */
   parseTweet (tweet) {
     let retw = tweet.retweeted_status
@@ -96,7 +96,7 @@ export const TwitterClient = {
 
   /**
    * Line feed to br tag and sanitize html
-   * @param {string} text 
+   * @param {string} text
    */
   toHtml (text) {
     text = text.replace(/[\n\r]/g, '<br>')
@@ -109,7 +109,7 @@ export const TwitterClient = {
 
   /**
    * Get image or video urls
-   * @param {Object} urls 
+   * @param {Object} urls
    */
   getUrlMedia (urls) {
     let mediaList = []
@@ -137,7 +137,7 @@ export const TwitterClient = {
 
   /**
    * Search extended entities media
-   * @param {Object} media 
+   * @param {Object} media
    */
   getMedia (media) {
     let mediaList = []
