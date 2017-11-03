@@ -27,6 +27,7 @@
     name: 'asagao',
     components: { ItemDialog },
     created () {
+      this.$logger.info('App start')
       this.startTimelineCronJob()
     },
     computed: mapState({
