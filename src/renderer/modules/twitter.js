@@ -47,13 +47,21 @@ export const TwitterClient = {
    * @param {string} status
    */
   postTweet (status) {
-    const params = {
+    return this.post('statuses/update', {
       status: status
-    }
+    })
+  },
+
+  /**
+   * post
+   * @param {string} url
+   * @param {Object} params
+   */
+  post (url, params) {
     return new Promise((resolve, reject) => {
-      client.post('statuses/update', params, (err, tweets, res) => {
+      client.post(url, params, (err, tweet, res) => {
         if (!err) {
-          resolve(tweets)
+          resolve(tweet)
         } else {
           reject(err)
         }
