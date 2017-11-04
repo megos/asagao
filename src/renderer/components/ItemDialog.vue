@@ -37,7 +37,6 @@
     },
     methods: {
       closeDialog: function (event) {
-        console.log(event)
         this.closeTweetItemDialog()
         this.removeSelectedItem()
       },
