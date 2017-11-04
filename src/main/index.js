@@ -4,6 +4,7 @@ import { app, BrowserWindow } from 'electron'
 import OAuthTwitter from 'electron-oauth-twitter'
 import storage from 'electron-json-storage-sync'
 import { credentials, keys } from '../constants'
+import ContextMenu from 'electron-context-menu'
 
 /**
  * Set `__static` path to static files in production
@@ -78,6 +79,8 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+ContextMenu()
 
 /**
  * Auto Updater
