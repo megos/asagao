@@ -42,7 +42,6 @@
             this.changeActiveIndex(1)
           })
           .catch((err) => {
-            this.$logger.error(err)
             this.$ons.notification.alert('Tweet failed...')
           })
       },

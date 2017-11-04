@@ -109,6 +109,7 @@ export const TwitterClient = {
         if (!err) {
           resolve(tweet)
         } else {
+          logger.error(err)
           reject(err)
         }
       })
