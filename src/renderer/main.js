@@ -10,9 +10,12 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import { TwitterClient } from './modules/twitter'
+
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
 
+Vue.twitter = Vue.prototype.$twitter = TwitterClient
 Vue.logger = Vue.prototype.$logger = log4js.getLogger()
 Vue.logger.level = 'info'
 

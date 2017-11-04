@@ -53,6 +53,26 @@ export const TwitterClient = {
   },
 
   /**
+   * Add favorite
+   * @param {string} id
+   */
+  createFavorite (id) {
+    return this.post('favorites/create', {
+      id: id
+    })
+  },
+
+  /**
+   * Remove favorite
+   * @param {string} id
+   */
+  destroyFavorite (id) {
+    return this.post('favorites/destroy', {
+      id: id
+    })
+  },
+
+  /**
    * post
    * @param {string} url
    * @param {Object} params

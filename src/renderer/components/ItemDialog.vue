@@ -13,6 +13,7 @@
       </v-ons-list-item>
       <v-ons-list-item
         tappable
+        @click="favorited ? $twitter.destroyFavorite(idStr) : $twitter.createFavorite(idStr)"
       >
         <v-ons-icon icon="ion-heart" class="icon"></v-ons-icon>
         {{ favoritePrefix }} favorite
@@ -32,7 +33,8 @@
       },
       ...mapState({
         dialogVisible: state => state.app.tweetItemDialogVisible,
-        favorited: state => state.app.favorited
+        favorited: state => state.app.favorited,
+        idStr: state => state.app.idStr
       })
     },
     methods: {
