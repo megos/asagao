@@ -224,5 +224,13 @@ export const TwitterClient = {
       }
     })
     return mediaList
+  },
+
+  /**
+   * Find tweet item for Array.prototype.find
+   * @param {Object} tweet
+   */
+  findItem (tweet) {
+    return tweet.id_str === this
   }
 }

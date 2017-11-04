@@ -41,7 +41,7 @@
             // Move to timeline
             this.changeActiveIndex(1)
           })
-          .catch((err) => {
+          .catch(() => {
             this.$ons.notification.alert('Tweet failed...')
           })
       },

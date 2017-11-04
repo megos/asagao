@@ -14,7 +14,7 @@
       <v-ons-list-item
         v-if="me.screen_name === screenName"
         tappable
-        @click="deleteTweet"
+        @click="deleteOwnTweet"
       >
         <v-ons-icon icon="ion-ios-trash" class="icon"></v-ons-icon>
         Delete tweet
@@ -56,16 +56,17 @@
         this.changeActiveIndex(0)
         this.closeTweetItemDialog()
       },
-      deleteTweet: function () {
+      deleteOwnTweet: function () {
         this.$ons.notification.confirm({
           message: 'Are you sure?',
           callback: (answer) => {
             if (answer) {
               this.$twitter.deleteTweet(this.idStr)
                 .then((res) => {
+                  this.deleteTweet(this.idStr)
                   this.closeTweetItemDialog()
                 })
-                .catch((err) => {
+                .catch(() => {
                   this.$ons.notification.alert('Delete failed...')
                 })
             } else {
@@ -77,7 +78,8 @@
       ...mapActions([
         'changeActiveIndex',
         'closeTweetItemDialog',
-        'removeSelectedItem'
+        'removeSelectedItem',
+        'deleteTweet'
       ])
     }
   }

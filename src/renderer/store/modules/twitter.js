@@ -20,6 +20,9 @@ const mutations = {
   ADD_TIMELINE (state, tweets) {
     state.timeline = tweets.concat(state.timeline)
   },
+  DELETE_TWEET (state, idx) {
+    state.timeline.splice(idx, 1)
+  },
   ADD_MENTIONS (state, tweets) {
     state.mentions = tweets.concat(state.mentions)
   },
@@ -46,6 +49,9 @@ const actions = {
           commit('ADD_TIMELINE', tweets)
         }
       })
+  },
+  deleteTweet ({ commit }, idStr) {
+    commit('DELETE_TWEET', state.timeline.findIndex(TwitterClient.findItem, idStr))
   },
   fetchMentions ({ commit }) {
     let params = defaultGetParams
