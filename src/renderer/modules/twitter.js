@@ -53,6 +53,16 @@ export const TwitterClient = {
   },
 
   /**
+   * Delete tweet
+   * @param {string} id
+   */
+  deleteTweet (id) {
+    return this.post('statuses/destroy', {
+      id: id
+    })
+  },
+
+  /**
    * Add favorite
    * @param {string} id
    */
