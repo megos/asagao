@@ -24,7 +24,6 @@
 
 <script>
   import { mapActions } from 'vuex'
-  import { TwitterClient } from '../modules/twitter'
 
   export default {
     name: 'tweet-input',
@@ -36,14 +35,14 @@
     },
     methods: {
       postTweet: function () {
-        TwitterClient.postTweet(this.tweet)
+        this.$twitter.postTweet(this.tweet)
           .then((res) => {
             this.tweet = ''
             // Move to timeline
             this.changeActiveIndex(1)
           })
           .catch((err) => {
-            console.err(err)
+            this.$logger.error(err)
             this.$ons.notification.alert('Tweet failed...')
           })
       },
