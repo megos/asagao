@@ -7,12 +7,16 @@ const defaultGetParams = {
 }
 
 const state = {
+  me: {},
   timeline: [],
   mentions: [],
   favorites: []
 }
 
 const mutations = {
+  ADD_ME (state, me) {
+    state.me = me
+  },
   ADD_TIMELINE (state, tweets) {
     state.timeline = tweets.concat(state.timeline)
   },
@@ -25,6 +29,12 @@ const mutations = {
 }
 
 const actions = {
+  fetchAccount ({ commit }) {
+    TwitterClient.fetchAccount()
+      .then((user) => {
+        commit('ADD_ME', user)
+      })
+  },
   fetchTimeline ({ commit }) {
     let params = defaultGetParams
     if (state.timeline.length > 0) {

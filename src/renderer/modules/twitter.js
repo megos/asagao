@@ -19,6 +19,22 @@ const client = new Twitter({
 export const TwitterClient = {
 
   /**
+   * Fetch account
+   */
+  fetchAccount () {
+    return new Promise((resolve, reject) => {
+      client.get('account/verify_credentials', (err, user, res) => {
+        if (!err) {
+          resolve(user)
+        } else {
+          logger.error(err)
+          reject(err)
+        }
+      })
+    })
+  },
+
+  /**
    * Fetch tweets
    * @param {string} endpoint
    * @param {Object} params

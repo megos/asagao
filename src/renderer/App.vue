@@ -28,6 +28,7 @@
     components: { ItemDialog },
     created () {
       this.$logger.info('App start')
+      this.fetchAccount()
       this.startTimelineCronJob()
     },
     computed: mapState({
@@ -114,6 +115,7 @@
         }
       },
       ...mapActions([
+        'fetchAccount',
         'fetchTimeline',
         'fetchMentions',
         'fetchFavorites',
