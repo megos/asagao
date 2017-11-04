@@ -12,6 +12,14 @@
         Reply
       </v-ons-list-item>
       <v-ons-list-item
+        v-if="me.screen_name === screenName"
+        tappable
+        @click="moveTweetInput"
+      >
+        <v-ons-icon icon="ion-ios-trash" class="icon"></v-ons-icon>
+        Delete tweet
+      </v-ons-list-item>
+      <v-ons-list-item
         tappable
         @click="favorited ? $twitter.destroyFavorite(idStr) : $twitter.createFavorite(idStr)"
       >
@@ -34,7 +42,9 @@
       ...mapState({
         dialogVisible: state => state.app.tweetItemDialogVisible,
         favorited: state => state.app.favorited,
-        idStr: state => state.app.idStr
+        idStr: state => state.app.idStr,
+        screenName: state => state.app.screenName,
+        me: state => state.twitter.me
       })
     },
     methods: {
