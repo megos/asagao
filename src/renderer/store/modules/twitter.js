@@ -38,7 +38,11 @@ const actions = {
       })
   },
   fetchMentions ({ commit }) {
-    TwitterClient.fetchTweets('statuses/mentions_timeline', defaultGetParams)
+    let params = defaultGetParams
+    if (state.mentions.length > 0) {
+      params.since_id = state.mentions[0].id_str
+    }
+    TwitterClient.fetchTweets('statuses/mentions_timeline', params)
       .then((tweets) => {
         if (tweets.length > 0) {
           commit('ADD_MENTIONS', tweets)
@@ -46,7 +50,11 @@ const actions = {
       })
   },
   fetchFavorites ({ commit }) {
-    TwitterClient.fetchTweets('favorites/list', defaultGetParams)
+    let params = defaultGetParams
+    if (state.favorites.length > 0) {
+      params.since_id = state.favorites[0].id_str
+    }
+    TwitterClient.fetchTweets('favorites/list', params)
       .then((tweets) => {
         if (tweets.length > 0) {
           commit('ADD_FAVORITES', tweets)
