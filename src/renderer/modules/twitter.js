@@ -123,6 +123,7 @@ export const TwitterClient = {
   parseTweet (tweet) {
     let retw = tweet.retweeted_status
     if (retw) {
+      retw.id_str = tweet.id_str
       retw.retweeted_user = tweet.user.name
       tweet = retw
     }
