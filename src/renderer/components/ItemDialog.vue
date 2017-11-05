@@ -21,7 +21,7 @@
       </v-ons-list-item>
       <v-ons-list-item
         tappable
-        @click="favorited ? $twitter.destroyFavorite(idStr) : $twitter.createFavorite(idStr)"
+        @click="actionFavorite"
       >
         <v-ons-icon icon="ion-heart" class="icon"></v-ons-icon>
         {{ favoritePrefix }} favorite
@@ -74,6 +74,17 @@
             }
           }
         })
+      },
+      actionFavorite: function () {
+        const result = this.favorited ? this.$twitter.destroyFavorite(this.idStr) : this.$twitter.createFavorite(this.idStr)
+        result
+          .then(() => {
+            this.$ons.notification.toast(this.favoritePrefix + ' favorite', {timeout: 2000})
+            this.closeTweetItemDialog()
+          })
+          .catch(() => {
+            this.$ons.notification.alert(this.favoritePrefix + ' favorite failed...')
+          })
       },
       ...mapActions([
         'changeActiveIndex',
