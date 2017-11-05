@@ -38,6 +38,7 @@
         this.$twitter.postTweet(this.tweet)
           .then((res) => {
             this.tweet = ''
+            this.$ons.notification.toast('Tweeted!', {timeout: 2000})
             // Move to timeline
             this.changeActiveIndex(1)
           })
