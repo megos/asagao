@@ -78,8 +78,12 @@
       actionFavorite: function () {
         const result = this.favorited ? this.$twitter.destroyFavorite(this.idStr) : this.$twitter.createFavorite(this.idStr)
         result
-          .then(() => {
+          .then((tweet) => {
             this.$ons.notification.toast(this.favoritePrefix + ' favorite', {timeout: 2000})
+            this.updateFavorite({
+              idStr: this.idStr,
+              favorited: tweet.favorited
+            })
             this.closeTweetItemDialog()
           })
           .catch(() => {
@@ -90,7 +94,8 @@
         'changeActiveIndex',
         'closeTweetItemDialog',
         'removeSelectedItem',
-        'deleteTweet'
+        'deleteTweet',
+        'updateFavorite'
       ])
     }
   }

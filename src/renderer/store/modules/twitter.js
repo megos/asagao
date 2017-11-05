@@ -29,6 +29,9 @@ const mutations = {
   },
   ADD_FAVORITES (state, tweets) {
     state.favorites = tweets.concat(state.favorites)
+  },
+  UPDATE_FAVORITE (state, {idx, favorited}) {
+    state.timeline[idx].favorited = favorited
   }
 }
 
@@ -77,7 +80,14 @@ const actions = {
           commit('ADD_FAVORITES', tweets)
         }
       })
+  },
+  updateFavorite ({ commit }, {idStr, favorited}) {
+    commit('UPDATE_FAVORITE', {
+      idx: state.timeline.findIndex(TwitterClient.findItem, idStr),
+      favorited: favorited
+    })
   }
+
 }
 
 export default {
