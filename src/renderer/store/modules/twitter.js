@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { TwitterClient } from '../../modules/twitter'
 
 const defaultGetParams = {
@@ -39,7 +40,7 @@ const actions = {
       })
   },
   fetchTimeline ({ commit }) {
-    let params = defaultGetParams
+    const params = _.cloneDeep(defaultGetParams)
     if (state.timeline.length > 0) {
       params.since_id = state.timeline[0].id_str
     }
@@ -54,7 +55,7 @@ const actions = {
     commit('DELETE_TWEET', state.timeline.findIndex(TwitterClient.findItem, idStr))
   },
   fetchMentions ({ commit }) {
-    let params = defaultGetParams
+    const params = _.cloneDeep(defaultGetParams)
     if (state.mentions.length > 0) {
       params.since_id = state.mentions[0].id_str
     }
@@ -66,7 +67,7 @@ const actions = {
       })
   },
   fetchFavorites ({ commit }) {
-    let params = defaultGetParams
+    const params = _.cloneDeep(defaultGetParams)
     if (state.favorites.length > 0) {
       params.since_id = state.favorites[0].id_str
     }
