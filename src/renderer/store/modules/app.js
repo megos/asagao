@@ -41,8 +41,10 @@ const actions = {
     commit('CLOSE_TWEET_ITEM_DIALOG')
   },
   removeSelectedItem ({ commit }) {
-    commit('SET_SCREEN_NAME', '')
-    commit('SET_ID_STR', '')
+    if (state.activeIndex !== 0) {
+      commit('SET_SCREEN_NAME', '')
+      commit('SET_ID_STR', '')
+    }
   }
 }
 
