@@ -1,7 +1,7 @@
 <template>
   <v-ons-dialog cancelable
     :visible="dialogVisible"
-    @prehide="closeDialog"
+    @posthide="closeDialog"
   >
     <v-ons-list>
       <v-ons-list-item
