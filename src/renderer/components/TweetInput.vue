@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
 
   export default {
     name: 'tweet-input',
@@ -33,6 +33,19 @@
         maxLength: 140
       }
     },
+    watch: {
+      screenName: function (value) {
+        if (this.screenName !== '' && this.tweet === '') {
+          this.tweet = `@${this.screenName} `
+        } else if (this.screenName === '') {
+          this.tweet = ''
+        }
+      }
+    },
+    computed: mapState({
+      idStr: state => state.app.idStr,
+      screenName: state => state.app.screenName
+    }),
     methods: {
       postTweet: function () {
         this.$twitter.postTweet(this.tweet)
