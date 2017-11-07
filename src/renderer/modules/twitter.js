@@ -60,12 +60,17 @@ export const TwitterClient = {
 
   /**
    * Post new tweet
-   * @param {string} status
+   * @param {string} status tweet
+   * @param {string} replyScreenName
+   * @param {string} inReplyToStatusId
    */
-  postTweet (status) {
-    return this.post('statuses/update', {
-      status: status
-    })
+  postTweet (status, replyScreenName, inReplyToStatusId) {
+    const params = {}
+    params.status = status
+    if (inReplyToStatusId !== '' && (status.indexOf(`@${replyScreenName}`) !== -1)) {
+      params.in_reply_to_status_id = inReplyToStatusId
+    }
+    return this.post('statuses/update', params)
   },
 
   /**

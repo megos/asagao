@@ -51,6 +51,7 @@
         this.$twitter.postTweet(this.tweet)
           .then((res) => {
             this.tweet = ''
+            this.removeSelectedItem()
             this.$ons.notification.toast('Tweeted!', {timeout: 2000})
             // Move to timeline
             this.changeActiveIndex(1)
@@ -60,7 +61,8 @@
           })
       },
       ...mapActions([
-        'changeActiveIndex'
+        'changeActiveIndex',
+        'removeSelectedItem'
       ])
     }
   }
