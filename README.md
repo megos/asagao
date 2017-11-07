@@ -1,6 +1,19 @@
 # asagao
 
-> An electron-vue project
+> An electron twitter client build on electron-vue and Onsen UI
+
+#### Features
+- Timeline
+ - Home
+ - Mentions
+ - Favorites
+- Tweet
+- Media
+ - Twitter official (pictures and videos)
+ - Instagram
+ - Twipple
+- Other
+ - Add/Remove favorite
 
 #### Build Setup
 
