@@ -48,7 +48,7 @@
     }),
     methods: {
       postTweet: function () {
-        this.$twitter.postTweet(this.tweet)
+        this.$twitter.postTweet(this.tweet, this.screenName, this.idStr)
           .then((res) => {
             this.tweet = ''
             this.removeSelectedItem()
