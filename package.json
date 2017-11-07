@@ -2,7 +2,7 @@
   "name": "asagao",
   "version": "0.1.0",
   "author": "megos <gmegos.27@gmail.com>",
-  "description": "An electron-vue project",
+  "description": "An electron twitter client build on electron-vue and Onsen UI",
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
