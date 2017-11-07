@@ -4,16 +4,16 @@
 
 #### Features
 - Timeline
- - Home
- - Mentions
- - Favorites
+  - Home
+  - Mentions
+  - Favorites
 - Tweet
 - Media
- - Twitter official (pictures and videos)
- - Instagram
- - Twipple
+  - Twitter official (pictures and videos)
+  - Instagram
+  - Twipple
 - Other
- - Add/Remove favorite
+  - Add/Remove favorite
 
 #### Build Setup
 
