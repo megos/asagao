@@ -3,6 +3,15 @@
     <v-ons-page>
       <v-ons-toolbar class="toolbar">
         <div class="center">{{ tabs[activeIndex].label }}</div>
+        <div class="right">
+          <v-ons-toolbar-button v-if="activeIndex !== 0">
+            <ons-icon
+              icon="ion-ios-reload"
+              @click="load"
+            >
+            </ons-icon>
+          </v-ons-toolbar-button>
+        </div>
       </v-ons-toolbar>
       <!-- <router-view></router-view> -->
       <v-ons-tabbar
@@ -29,7 +38,7 @@
     created () {
       this.$logger.info('App start')
       this.fetchAccount()
-      this.startTimelineCronJob()
+      this.load()
     },
     computed: mapState({
       activeIndex: state => state.app.activeIndex
@@ -61,57 +70,47 @@
             props: { mode: 'Favorites' }
           }
         ],
-        timelineCronJob: null,
-        mentionsCronJob: null,
-        favoritesCronJob: null
+        jobs: {
+          Timeline: {
+            instance: null,
+            cronTime: '0 */1 * * * *',
+            onTick: this.fetchTimeline
+          },
+          Mentions: {
+            instance: null,
+            cronTime: '20 */10 * * * *',
+            onTick: this.fetchMentions
+          },
+          Favorites: {
+            instance: null,
+            cronTime: '40 0 */1 * * *',
+            onTick: this.fetchFavorites
+          }
+        }
       }
     },
     methods: {
-      startTimelineCronJob () {
-        if (this.timelineCronJob && this.timelineCronJob.running) {
-          this.timelineCronJob.stop()
+      startCronJob (mode) {
+        const job = this.jobs[mode]
+        if (job.instance && job.instance.running) {
+          job.instance.stop()
         }
-        this.timelineCronJob = new CronJob({
-          cronTime: '0 */1 * * * *',
-          onTick: () => this.fetchTimeline(),
+        job.instance = new CronJob({
+          cronTime: job.cronTime,
+          onTick: () => job.onTick(),
+          start: true,
           runOnInit: true
         })
-        this.timelineCronJob.start()
-        this.$logger.info('Timeline cron start')
+        this.$logger.info(`${mode} cron start`)
       },
-      startMentionsCronJob () {
-        if (this.mentionsCronJob && this.mentionsCronJob.running) {
-          this.mentionsCronJob.stop()
-        }
-        this.mentionsCronJob = new CronJob({
-          cronTime: '20 */10 * * * *',
-          onTick: () => this.fetchMentions(),
-          runOnInit: true
-        })
-        this.mentionsCronJob.start()
-        this.$logger.info('Mentions cron start')
-      },
-      startFavoritesCronJob () {
-        if (this.favoritesCronJob && this.favoritesCronJob.running) {
-          this.favoritesCronJob.stop()
-        }
-        this.favoritesCronJob = new CronJob({
-          cronTime: '40 0 */1 * * *',
-          onTick: () => this.fetchFavorites(),
-          runOnInit: true
-        })
-        this.favoritesCronJob.start()
-        this.$logger.info('Favorites cron start')
+      load () {
+        this.startCronJob([this.tabs[this.activeIndex].props.mode])
       },
       preChange (event) {
         this.changeActiveIndex(event.index)
         const mode = this.tabs[event.index].props ? this.tabs[event.index].props.mode : ''
-        if (mode === 'Timeline' && !this.timelineCronJob) {
-          this.startTimelineCronJob()
-        } else if (mode === 'Mentions' && !this.mentionsCronJob) {
-          this.startMentionsCronJob()
-        } else if (mode === 'Favorites' && !this.favoritesCronJob) {
-          this.startFavoritesCronJob()
+        if (mode !== '' && !this.jobs[mode].instance) {
+          this.startCronJob(mode)
         }
       },
       ...mapActions([
