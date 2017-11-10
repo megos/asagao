@@ -3,6 +3,14 @@
     <v-ons-page>
       <v-ons-toolbar class="toolbar">
         <div class="center">{{ tabs[activeIndex].label }}</div>
+        <div class="right">
+          <v-ons-toolbar-button>
+            <ons-icon
+              icon="ion-ios-reload"
+            >
+            </ons-icon>
+          </v-ons-toolbar-button>
+        </div>
       </v-ons-toolbar>
       <!-- <router-view></router-view> -->
       <v-ons-tabbar
