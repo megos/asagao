@@ -4,7 +4,7 @@
       <v-ons-toolbar class="toolbar">
         <div class="center">{{ tabs[activeIndex].label }}</div>
         <div class="right">
-          <v-ons-toolbar-button>
+          <v-ons-toolbar-button v-if="activeIndex !== 0">
             <ons-icon
               icon="ion-ios-reload"
             >
