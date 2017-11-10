@@ -69,57 +69,60 @@
             props: { mode: 'Favorites' }
           }
         ],
-        timelineCronJob: null,
-        mentionsCronJob: null,
-        favoritesCronJob: null
+        jobs: {
+          Timeline: null,
+          Mentions: null,
+          Favorites: null
+        },
+        startJobs: {
+          Timeline: this.startTimelineCronJob,
+          Mentions: this.startMentionsCronJob,
+          Favorites: this.startFavoritesCronJob
+        }
       }
     },
     methods: {
       startTimelineCronJob () {
-        if (this.timelineCronJob && this.timelineCronJob.running) {
-          this.timelineCronJob.stop()
+        if (this.jobs.Timeline && this.jobs.Timeline.running) {
+          this.jobs.Timeline.stop()
         }
-        this.timelineCronJob = new CronJob({
+        this.jobs.Timeline = new CronJob({
           cronTime: '0 */1 * * * *',
           onTick: () => this.fetchTimeline(),
           runOnInit: true
         })
-        this.timelineCronJob.start()
+        this.jobs.Timeline.start()
         this.$logger.info('Timeline cron start')
       },
       startMentionsCronJob () {
-        if (this.mentionsCronJob && this.mentionsCronJob.running) {
-          this.mentionsCronJob.stop()
+        if (this.jobs.Mentions && this.jobs.Mentions.running) {
+          this.jobs.Mentions.stop()
         }
-        this.mentionsCronJob = new CronJob({
+        this.jobs.Mentions = new CronJob({
           cronTime: '20 */10 * * * *',
           onTick: () => this.fetchMentions(),
           runOnInit: true
         })
-        this.mentionsCronJob.start()
+        this.jobs.Mentions.start()
         this.$logger.info('Mentions cron start')
       },
       startFavoritesCronJob () {
-        if (this.favoritesCronJob && this.favoritesCronJob.running) {
-          this.favoritesCronJob.stop()
+        if (this.jobs.Favorites && this.jobs.Favorites.running) {
+          this.jobs.Favorites.stop()
         }
-        this.favoritesCronJob = new CronJob({
+        this.jobs.Favorites = new CronJob({
           cronTime: '40 0 */1 * * *',
           onTick: () => this.fetchFavorites(),
           runOnInit: true
         })
-        this.favoritesCronJob.start()
+        this.jobs.Favorites.start()
         this.$logger.info('Favorites cron start')
       },
       preChange (event) {
         this.changeActiveIndex(event.index)
         const mode = this.tabs[event.index].props ? this.tabs[event.index].props.mode : ''
-        if (mode === 'Timeline' && !this.timelineCronJob) {
-          this.startTimelineCronJob()
-        } else if (mode === 'Mentions' && !this.mentionsCronJob) {
-          this.startMentionsCronJob()
-        } else if (mode === 'Favorites' && !this.favoritesCronJob) {
-          this.startFavoritesCronJob()
+        if (mode !== '' && !this.jobs[mode]) {
+          this.startJobs[mode]()
         }
       },
       ...mapActions([
