@@ -7,6 +7,7 @@
           <v-ons-toolbar-button v-if="activeIndex !== 0">
             <ons-icon
               icon="ion-ios-reload"
+              @click="reload"
             >
             </ons-icon>
           </v-ons-toolbar-button>
@@ -117,6 +118,9 @@
         })
         this.jobs.Favorites.start()
         this.$logger.info('Favorites cron start')
+      },
+      reload () {
+        this.startJobs[this.tabs[this.activeIndex].props.mode]()
       },
       preChange (event) {
         this.changeActiveIndex(event.index)
