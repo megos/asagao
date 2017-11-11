@@ -2,6 +2,10 @@
 
 > An electron twitter client build on electron-vue and Onsen UI
 
+[![Build Status](https://travis-ci.org/megos/asagao.svg?branch=master)](https://travis-ci.org/megos/asagao)
+
+![image](http://cdn-ak.f.st-hatena.com/images/fotolife/t/tmegos/20171111/20171111221615.png)
+
 #### Features
 - Timeline
   - Home
