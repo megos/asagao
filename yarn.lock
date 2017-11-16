@@ -133,9 +133,13 @@ acorn@^4.0.3:
   version "4.0.13"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.13.tgz#105495ae5361d697bd195c825192e1ad7f253787"
 
-acorn@^5.0.0, acorn@^5.1.1:
+acorn@^5.0.0:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.1.2.tgz#911cb53e036807cf0fa778dc5d370fbd864246d7"
+
+acorn@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.2.1.tgz#317ac7821826c22c702d66189ab8359675f135d7"
 
 addressparser@1.0.1:
   version "1.0.1"
@@ -163,7 +167,7 @@ ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-ajv@^5.0.0, ajv@^5.1.0, ajv@^5.1.5, ajv@^5.2.0, ajv@^5.2.3:
+ajv@^5.0.0, ajv@^5.1.0, ajv@^5.1.5, ajv@^5.2.3, ajv@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.3.0.tgz#4414ff74a50879c208ee5fdc826e32c303549eda"
   dependencies:
@@ -2141,11 +2145,7 @@ copy-webpack-plugin@^4.2.0:
     minimatch "^3.0.4"
     node-dir "^0.1.10"
 
-core-js@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
-
-core-js@^2.2.0, core-js@^2.4.0, core-js@^2.5.0:
+core-js@^2.2.0, core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.1.tgz#ae6874dc66937789b80754ff5428df66819ca50b"
 
@@ -2729,7 +2729,7 @@ ejs@^2.5.7, ejs@~2.5.6:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.7.tgz#cc872c168880ae3c7189762fd5ffc00896c9518a"
 
-electron-builder@^19.45.4:
+electron-builder@^19.45.5:
   version "19.45.5"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-19.45.5.tgz#67a949d71cd2e947efd333fc9a933bd36c552cc6"
   dependencies:
@@ -3168,12 +3168,11 @@ eslint-module-utils@^2.1.1:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-html@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-3.2.2.tgz#ef7093621d3a93de3206fd1f92f347ea9a1a4dfa"
+eslint-plugin-html@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-4.0.0.tgz#bd50533bc75e0112a55f174dbe9f7b3d2650e323"
   dependencies:
     htmlparser2 "^3.8.2"
-    semver "^5.4.1"
 
 eslint-plugin-import@^2.8.0:
   version "2.8.0"
@@ -3214,11 +3213,11 @@ eslint-scope@^3.7.1:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint@^4.10.0:
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.10.0.tgz#f25d0d7955c81968c2309aa5c9a229e045176bb7"
+eslint@^4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.11.0.tgz#39a8c82bc0a3783adf5a39fa27fdd9d36fac9a34"
   dependencies:
-    ajv "^5.2.0"
+    ajv "^5.3.0"
     babel-code-frame "^6.22.0"
     chalk "^2.1.0"
     concat-stream "^1.6.0"
@@ -3226,7 +3225,7 @@ eslint@^4.10.0:
     debug "^3.0.1"
     doctrine "^2.0.0"
     eslint-scope "^3.7.1"
-    espree "^3.5.1"
+    espree "^3.5.2"
     esquery "^1.0.0"
     estraverse "^4.2.0"
     esutils "^2.0.2"
@@ -3239,7 +3238,7 @@ eslint@^4.10.0:
     inquirer "^3.0.6"
     is-resolvable "^1.0.0"
     js-yaml "^3.9.1"
-    json-stable-stringify "^1.0.1"
+    json-stable-stringify-without-jsonify "^1.0.1"
     levn "^0.3.0"
     lodash "^4.17.4"
     minimatch "^3.0.2"
@@ -3256,11 +3255,11 @@ eslint@^4.10.0:
     table "^4.0.1"
     text-table "~0.2.0"
 
-espree@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.1.tgz#0c988b8ab46db53100a1954ae4ba995ddd27d87e"
+espree@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.2.tgz#756ada8b979e9dcfcdb30aad8d1a9304a905e1ca"
   dependencies:
-    acorn "^5.1.1"
+    acorn "^5.2.1"
     acorn-jsx "^3.0.0"
 
 esprima@2.7.x, esprima@^2.6.0, esprima@^2.7.1:
@@ -4764,6 +4763,10 @@ json-schema@0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.2.3.tgz#b480c892e59a2f05954ce727bd3f2a4e882f9e13"
 
+json-stable-stringify-without-jsonify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
+
 json-stable-stringify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json-stable-stringify/-/json-stable-stringify-1.0.1.tgz#9a759d39c5f2ff503fd5300646ed445f88c4f9af"
@@ -4825,9 +4828,9 @@ karma-coverage@^1.1.1:
     minimatch "^3.0.0"
     source-map "^0.5.1"
 
-karma-electron@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/karma-electron/-/karma-electron-5.2.1.tgz#7656d9b5574c1444e800968bf02fb341f23e9ab1"
+karma-electron@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/karma-electron/-/karma-electron-5.2.2.tgz#bdab1b2ce142fba7d12156d0add6061816b38258"
   dependencies:
     commander "~2.9.0"
     convert-source-map "~1.2.0"
@@ -4853,15 +4856,15 @@ karma-spec-reporter@^0.0.31:
   dependencies:
     colors "^1.1.2"
 
-karma-webpack@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/karma-webpack/-/karma-webpack-2.0.5.tgz#4f56887e32cf4f9583391c2388415de06af06efd"
+karma-webpack@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/karma-webpack/-/karma-webpack-2.0.6.tgz#967918e59750ebe0f40829263435fde7ac81bdb4"
   dependencies:
     async "~0.9.0"
     loader-utils "^0.2.5"
     lodash "^3.8.0"
-    source-map "^0.1.41"
-    webpack-dev-middleware "^1.0.11"
+    source-map "^0.5.6"
+    webpack-dev-middleware "^1.12.0"
 
 karma@^1.7.1:
   version "1.7.1"
@@ -5215,9 +5218,9 @@ log4js@^0.6.31:
     readable-stream "~1.0.2"
     semver "~4.3.3"
 
-log4js@^2.3.11:
-  version "2.3.11"
-  resolved "https://registry.yarnpkg.com/log4js/-/log4js-2.3.11.tgz#b61b7ef3d6e2c9ce5e1d0f5081a379d48e2d7600"
+log4js@^2.3.12:
+  version "2.3.12"
+  resolved "https://registry.yarnpkg.com/log4js/-/log4js-2.3.12.tgz#bc039b27a54e851629d8813c5da6531bca538866"
   dependencies:
     date-format "^1.1.0"
     debug "^2.6.8"
@@ -5496,9 +5499,13 @@ moment-timezone@^0.5.x:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@^2.19.1:
+"moment@>= 2.9.0":
   version "2.19.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.1.tgz#56da1a2d1cbf01d38b7e1afc31c10bcfa1929167"
+
+moment@^2.19.2:
+  version "2.19.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.2.tgz#8a7f774c95a64550b4c7ebd496683908f9419dbe"
 
 ms@0.7.1:
   version "0.7.1"
@@ -5845,12 +5852,12 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-onsenui@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/onsenui/-/onsenui-2.7.0.tgz#272b296d0e8d1501cbab0382a994036101551b9f"
+onsenui@^2.8.1:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/onsenui/-/onsenui-2.8.1.tgz#818eddbba5897c840e2f9998d00b62e24c448925"
   dependencies:
     "@onsenui/custom-elements" "1.0.0"
-    core-js "2.4.1"
+    core-js "^2.5.1"
 
 opn@^5.1.0:
   version "5.1.0"
@@ -7452,7 +7459,7 @@ source-map@0.5.x, source-map@^0.5.1, source-map@^0.5.3, source-map@^0.5.6, sourc
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
-source-map@^0.1.38, source-map@^0.1.41:
+source-map@^0.1.38:
   version "0.1.43"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.1.43.tgz#c24bc146ca517c1471f5dacbe2571b2b7f9e3346"
   dependencies:
@@ -8234,9 +8241,9 @@ vue-loader@^13.5.0:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
-vue-onsenui@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/vue-onsenui/-/vue-onsenui-2.3.0.tgz#f6c1f2d340e2638d402d00a5c0560a8ce4f925fc"
+vue-onsenui@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/vue-onsenui/-/vue-onsenui-2.4.0.tgz#b88914f8bac1a45afc5e7d5160951480690fd369"
 
 vue-router@^3.0.1:
   version "3.0.1"
@@ -8317,7 +8324,7 @@ webdriverio@^4.8.0:
     wdio-dot-reporter "~0.0.8"
     wgxpath "~1.0.0"
 
-webpack-dev-middleware@^1.0.11, webpack-dev-middleware@^1.11.0:
+webpack-dev-middleware@^1.11.0, webpack-dev-middleware@^1.12.0:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-1.12.0.tgz#d34efefb2edda7e1d3b5dbe07289513219651709"
   dependencies:
