@@ -144,7 +144,7 @@ export const TwitterClient = {
     }
     return {
       id_str: tweet.id_str,
-      full_text_html: this.toHtml(tweet.full_text),
+      full_text_html: this.toHtml(tweet.full_text || tweet.text),
       created_at: tweet.created_at,
       quoted_status: tweet.quoted_status,
       retweeted_user: tweet.retweeted_user,

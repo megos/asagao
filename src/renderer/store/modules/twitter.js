@@ -54,6 +54,9 @@ const actions = {
         }
       })
   },
+  addTimeline ({ commit }, tweet) {
+    commit('ADD_TIMELINE', [TwitterClient.parseTweet(tweet)])
+  },
   deleteTweet ({ commit }, idStr) {
     commit('DELETE_TWEET', state.timeline.findIndex(TwitterClient.findItem, idStr))
   },

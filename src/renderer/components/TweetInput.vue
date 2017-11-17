@@ -50,6 +50,7 @@
       postTweet: function () {
         this.$twitter.postTweet(this.tweet, this.screenName, this.idStr)
           .then((res) => {
+            this.addTimeline(res)
             this.tweet = ''
             this.removeSelectedItem()
             this.$ons.notification.toast('Tweeted!', {timeout: 2000})
@@ -61,6 +62,7 @@
           })
       },
       ...mapActions([
+        'addTimeline',
         'changeActiveIndex',
         'removeSelectedItem'
       ])
