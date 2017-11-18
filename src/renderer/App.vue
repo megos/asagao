@@ -48,6 +48,7 @@
         tabs: [
           {
             icon: 'ion-edit',
+            label: 'New Tweet',
             page: TweetInput,
             style: { maxWidth: '50px' }
           },

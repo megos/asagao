@@ -9,6 +9,7 @@ const defaultGetParams = {
 
 const state = {
   me: {},
+  tweetedIdStr: [],
   timeline: [],
   mentions: [],
   favorites: []
@@ -23,6 +24,15 @@ const mutations = {
   },
   DELETE_TWEET (state, idx) {
     state.timeline.splice(idx, 1)
+  },
+  ADD_TWEETED_ID_STR (state, idStr) {
+    state.tweetedIdStr.push(idStr)
+  },
+  REMOVE_TWEETS (state) {
+    state.tweetedIdStr.forEach((idStr) => {
+      state.timeline.splice(state.timeline.findIndex(TwitterClient.findItem, idStr), 1)
+    })
+    state.tweetedIdStr = []
   },
   ADD_MENTIONS (state, tweets) {
     state.mentions = tweets.concat(state.mentions)
@@ -43,6 +53,7 @@ const actions = {
       })
   },
   fetchTimeline ({ commit }) {
+    commit('REMOVE_TWEETS')
     const params = _.cloneDeep(defaultGetParams)
     if (state.timeline.length > 0) {
       params.since_id = state.timeline[0].id_str
@@ -53,6 +64,13 @@ const actions = {
           commit('ADD_TIMELINE', tweets)
         }
       })
+  },
+  addTimeline ({ commit }, tweet) {
+    commit('ADD_TIMELINE', [TwitterClient.parseTweet(tweet)])
+    commit('ADD_TWEETED_ID_STR', tweet.id_str)
+  },
+  remoteTweets ({ commit }) {
+    commit('REMOVE_TWEETS')
   },
   deleteTweet ({ commit }, idStr) {
     commit('DELETE_TWEET', state.timeline.findIndex(TwitterClient.findItem, idStr))
