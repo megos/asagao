@@ -34,8 +34,7 @@
               index: tw.id_str,
               tweet: tw
             }
-          },
-          store: this.$store
+          }
         })
       }
     },
