@@ -132,11 +132,14 @@ export const TwitterClient = {
       retw.retweeted_user = tweet.user.name
       tweet = retw
     }
+    var html = this.toHtml(tweet.full_text || tweet.text)
     tweet.media_list = []
     if (tweet.entities.urls) {
+      html = this.convertURLs(html, tweet.entities.urls)
       Array.prototype.push.apply(tweet.media_list, this.getUrlMedia(tweet.entities.urls))
     }
     if (tweet.extended_entities && tweet.extended_entities.media) {
+      html = this.convertURLs(html, tweet.extended_entities.media)
       Array.prototype.push.apply(tweet.media_list, this.getMedia(tweet.extended_entities.media))
     }
     if (tweet.quoted_status) {
@@ -144,7 +147,7 @@ export const TwitterClient = {
     }
     return {
       id_str: tweet.id_str,
-      full_text_html: this.toHtml(tweet.full_text || tweet.text),
+      full_text_html: html,
       created_at: tweet.created_at,
       quoted_status: tweet.quoted_status,
       retweeted_user: tweet.retweeted_user,
@@ -171,6 +174,18 @@ export const TwitterClient = {
       mention: 'twitter',
       hashtag: 'twitter'
     })
+  },
+
+  /**
+   * Convert short URL to Real URL
+   * @param {string} text tweet
+   * @param {Object} urls
+   */
+  convertURLs (text, urls) {
+    for (let ui = 0; ui < urls.length; ui++) {
+      text = text.replace('>' + urls[ui].url.replace(/http(|s):\/\//, ''), '>' + urls[ui].display_url)
+    }
+    return text
   },
 
   /**
