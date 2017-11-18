@@ -82,6 +82,25 @@ export const TwitterClient = {
       id: id
     })
   },
+  /**
+   * Retweet
+   * @param {string} id
+   */
+  retweet (id) {
+    return this.post('statuses/retweet', {
+      id: id
+    })
+  },
+
+  /**
+   * UnRetweet
+   * @param {string} id
+   */
+  unRetweet (id) {
+    return this.post('statuses/unretweet', {
+      id: id
+    })
+  },
 
   /**
    * Add favorite
