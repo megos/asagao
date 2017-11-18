@@ -96,7 +96,7 @@ export const TwitterClient = {
    * UnRetweet
    * @param {string} id
    */
-  unRetweet (id) {
+  unretweet (id) {
     return this.post('statuses/unretweet', {
       id: id
     })

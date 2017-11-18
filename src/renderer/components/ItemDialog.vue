@@ -22,10 +22,10 @@
       <v-ons-list-item
         v-else
         tappable
-        @click="deleteOwnTweet"
+        @click="actionRetweet"
       >
         <v-ons-icon icon="fa-retweet" class="icon"></v-ons-icon>
-        Retweet
+        {{ retweetLabel }}
       </v-ons-list-item>
       <v-ons-list-item
         tappable
@@ -47,9 +47,13 @@
       favoritePrefix: function () {
         return this.favorited ? 'Remove' : 'Add'
       },
+      retweetLabel: function () {
+        return this.retweeted ? 'Unretweet' : 'Retweet'
+      },
       ...mapState({
         dialogVisible: state => state.app.tweetItemDialogVisible,
         favorited: state => state.app.favorited,
+        retweeted: state => state.app.retweeted,
         idStr: state => state.app.idStr,
         screenName: state => state.app.screenName,
         me: state => state.twitter.me
@@ -84,11 +88,10 @@
         })
       },
       actionFavorite: function () {
-        const result = this.favorited ? this.$twitter.destroyFavorite(this.idStr) : this.$twitter.createFavorite(this.idStr)
-        result
+        (this.favorited ? this.$twitter.destroyFavorite(this.idStr) : this.$twitter.createFavorite(this.idStr))
           .then((tweet) => {
             this.$ons.notification.toast(this.favoritePrefix + ' favorite', {timeout: 2000})
-            this.updateFavorite({
+            this.updateFavorited({
               idStr: this.idStr,
               favorited: tweet.favorited
             })
@@ -98,12 +101,27 @@
             this.$ons.notification.alert(this.favoritePrefix + ' favorite failed...')
           })
       },
+      actionRetweet: function () {
+        (this.retweeted ? this.$twitter.unretweet(this.idStr) : this.$twitter.retweet(this.idStr))
+          .then((tweet) => {
+            this.$ons.notification.toast(this.retweetLabel, {timeout: 2000})
+            this.updateRetweeted({
+              idStr: this.idStr,
+              retweeted: tweet.retweeted
+            })
+            this.closeTweetItemDialog()
+          })
+          .catch(() => {
+            this.$ons.notification.alert(this.retweetLabel + ' failed...')
+          })
+      },
       ...mapActions([
         'changeActiveIndex',
         'closeTweetItemDialog',
         'removeSelectedItem',
         'deleteTweet',
-        'updateFavorite'
+        'updateFavorited',
+        'updateRetweeted'
       ])
     }
   }
