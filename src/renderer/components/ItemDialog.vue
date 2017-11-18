@@ -8,7 +8,7 @@
         tappable
         @click="moveTweetInput"
       >
-        <v-ons-icon icon="ion-reply" class="icon"></v-ons-icon>
+        <v-ons-icon icon="fa-reply" class="icon"></v-ons-icon>
         Reply
       </v-ons-list-item>
       <v-ons-list-item
@@ -16,14 +16,22 @@
         tappable
         @click="deleteOwnTweet"
       >
-        <v-ons-icon icon="ion-ios-trash" class="icon"></v-ons-icon>
+        <v-ons-icon icon="fa-trash" class="icon"></v-ons-icon>
         Delete tweet
+      </v-ons-list-item>
+      <v-ons-list-item
+        v-else
+        tappable
+        @click="deleteOwnTweet"
+      >
+        <v-ons-icon icon="fa-retweet" class="icon"></v-ons-icon>
+        Retweet
       </v-ons-list-item>
       <v-ons-list-item
         tappable
         @click="actionFavorite"
       >
-        <v-ons-icon icon="ion-heart" class="icon"></v-ons-icon>
+        <v-ons-icon icon="fa-heart" class="icon"></v-ons-icon>
         {{ favoritePrefix }} favorite
       </v-ons-list-item>
     </v-ons-list>
