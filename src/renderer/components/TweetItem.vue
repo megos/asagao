@@ -69,6 +69,12 @@
     border-radius: 5px;
   }
 
+  .from {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   .name {
     font-size: 12px;
     font-weight: 500;
