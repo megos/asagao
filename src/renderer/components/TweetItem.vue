@@ -23,7 +23,6 @@
         </v-ons-col>
       </v-ons-row>
       <v-ons-row v-if="tweet.media_list.length > 0">
-        <!-- TODO: Performance improvement -->
         <v-ons-col width="60px" v-for="(media, idx) in tweet.media_list" :key="idx">
           <a :href="media.url" target="_blank">
             <img :src="media.url_thumb" width="50px" class="image">
@@ -48,6 +47,19 @@
   import moment from 'moment'
   import TweetItem from './TweetItem'
 
+  moment.updateLocale('en', {
+    relativeTime: {
+      s: 'now',
+      ss: '%ds',
+      m: '1m',
+      mm: '%dm',
+      h: '1h',
+      hh: '%dh',
+      d: '1d',
+      dd: '%dd'
+    }
+  })
+
   export default {
     name: 'tweet-item',
     components: { TweetItem },
@@ -57,7 +69,7 @@
         if (moment().diff(createdAt, 'days') > 7) {
           return moment(createdAt).format('YYYY/MM/DD')
         } else {
-          return moment(createdAt).fromNow()
+          return moment(createdAt).fromNow(true)
         }
       }
     }
