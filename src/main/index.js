@@ -61,7 +61,7 @@ function openWindow () {
     mainWindow = null
   })
   mainWindow.webContents.on('new-window', (event, url) => {
-    if (!url.match(/.*\.(jpg|png|mp4)/)) {
+    if (!url.match(/.*(jpg|png|mp4|size=l)$/)) {
       event.preventDefault()
       shell.openExternal(url)
     }

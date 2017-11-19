@@ -223,15 +223,6 @@ export const TwitterClient = {
           url: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l'
         })
       }
-
-      // twipple
-      const imageId = item.display_url.match(/^p\.twipple\.jp\/(.*)/)
-      if (imageId) {
-        mediaList.push({
-          url_thumb: 'http://p.twipple.jp/show/thumb/' + imageId[1],
-          url: 'http://p.twipple.jp/show/large/' + imageId[1]
-        })
-      }
     })
     return mediaList
   },

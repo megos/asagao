@@ -15,7 +15,6 @@
 - Media
   - Twitter official (pictures and videos)
   - Instagram
-  - Twipple
 - Other
   - Add/Remove favorite
 
