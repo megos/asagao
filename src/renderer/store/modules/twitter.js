@@ -40,8 +40,11 @@ const mutations = {
   ADD_FAVORITES (state, tweets) {
     state.favorites = tweets.concat(state.favorites)
   },
-  UPDATE_FAVORITE (state, {idx, favorited}) {
+  UPDATE_FAVORITED (state, {idx, favorited}) {
     state.timeline[idx].favorited = favorited
+  },
+  UPDATE_RETWEETED (state, {idx, retweeted}) {
+    state.timeline[idx].retweeted = retweeted
   }
 }
 
@@ -99,13 +102,18 @@ const actions = {
         }
       })
   },
-  updateFavorite ({ commit }, {idStr, favorited}) {
-    commit('UPDATE_FAVORITE', {
+  updateFavorited ({ commit }, {idStr, favorited}) {
+    commit('UPDATE_FAVORITED', {
       idx: state.timeline.findIndex(TwitterClient.findItem, idStr),
       favorited: favorited
     })
+  },
+  updateRetweeted ({ commit }, {idStr, retweeted}) {
+    commit('UPDATE_RETWEETED', {
+      idx: state.timeline.findIndex(TwitterClient.findItem, idStr),
+      retweeted: retweeted
+    })
   }
-
 }
 
 export default {

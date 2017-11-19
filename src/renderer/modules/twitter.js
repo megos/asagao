@@ -82,6 +82,25 @@ export const TwitterClient = {
       id: id
     })
   },
+  /**
+   * Retweet
+   * @param {string} id
+   */
+  retweet (id) {
+    return this.post('statuses/retweet', {
+      id: id
+    })
+  },
+
+  /**
+   * UnRetweet
+   * @param {string} id
+   */
+  unretweet (id) {
+    return this.post('statuses/unretweet', {
+      id: id
+    })
+  },
 
   /**
    * Add favorite
@@ -152,6 +171,7 @@ export const TwitterClient = {
       quoted_status: tweet.quoted_status,
       retweeted_user: tweet.retweeted_user,
       favorited: tweet.favorited,
+      retweeted: tweet.retweeted,
       media_list: tweet.media_list,
       user: {
         profile_image_url: tweet.user.profile_image_url,
