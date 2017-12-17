@@ -37,6 +37,7 @@
     components: { ItemDialog },
     created () {
       this.$logger.info('App start')
+      this.fetchLists()
       this.fetchAccount()
       this.load()
     },
@@ -116,6 +117,7 @@
       },
       ...mapActions([
         'fetchAccount',
+        'fetchLists',
         'fetchTimeline',
         'fetchMentions',
         'fetchFavorites',

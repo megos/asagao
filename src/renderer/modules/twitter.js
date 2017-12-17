@@ -37,7 +37,7 @@ export const TwitterClient = {
   /**
    * Fetch list
    */
-  fetchList () {
+  fetchLists () {
     return this.get('lists/list')
   },
 
