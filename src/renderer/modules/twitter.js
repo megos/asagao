@@ -38,16 +38,7 @@ export const TwitterClient = {
    * Fetch list
    */
   fetchList () {
-    return new Promise((resolve, reject) => {
-      client.get('lists/list', (err, list, res) => {
-        if (!err) {
-          resolve(list)
-        } else {
-          logger.error(err)
-          reject(err)
-        }
-      })
-    })
+    return this.get('lists/list')
   },
 
   /**
@@ -135,6 +126,24 @@ export const TwitterClient = {
   destroyFavorite (id) {
     return this.post('favorites/destroy', {
       id: id
+    })
+  },
+
+  /**
+   * get
+   * @param {string} url
+   * @param {Object} params
+   */
+  get (url, params) {
+    return new Promise((resolve, reject) => {
+      client.get(url, (err, items, res) => {
+        if (!err) {
+          resolve(items)
+        } else {
+          logger.error(err)
+          reject(err)
+        }
+      })
     })
   },
 
