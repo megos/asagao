@@ -105,6 +105,11 @@
             instance: null,
             cronTime: '40 0 */1 * * *',
             onTick: this.fetchFavorites
+          },
+          Lists: {
+            instance: null,
+            cronTime: '20 */10 * * * *',
+            onTick: this.fetchListsStatuses
           }
         }
       }
@@ -139,6 +144,7 @@
         'fetchTimeline',
         'fetchMentions',
         'fetchFavorites',
+        'fetchListsStatuses',
         'changeActiveIndex'
       ])
     }
