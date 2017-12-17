@@ -10,6 +10,7 @@ const defaultGetParams = {
 const state = {
   me: {},
   lists: [],
+  listId: '',
   tweetedIdStr: [],
   timeline: [],
   mentions: [],
@@ -113,6 +114,18 @@ const actions = {
       .then((tweets) => {
         if (tweets.length > 0) {
           commit('ADD_FAVORITES', tweets)
+        }
+      })
+  },
+  fetchListsStatuses ({ commit }) {
+    const params = _.cloneDeep(defaultGetParams)
+    if (state.listsStatuses.length > 0) {
+      params.list_id = state.listId
+    }
+    TwitterClient.fetchTweets('lists/statuses', params)
+      .then((tweets) => {
+        if (tweets.length > 0) {
+          commit('ADD_LISTS_STATUSES', tweets)
         }
       })
   },
