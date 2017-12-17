@@ -120,8 +120,9 @@ const actions = {
   fetchListsStatuses ({ commit }) {
     const params = _.cloneDeep(defaultGetParams)
     if (state.listsStatuses.length > 0) {
-      params.list_id = state.listId
+      params.since_id = state.listsStatuses[0].id_str
     }
+    params.list_id = state.listId
     TwitterClient.fetchTweets('lists/statuses', params)
       .then((tweets) => {
         if (tweets.length > 0) {
