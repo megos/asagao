@@ -35,6 +35,22 @@ export const TwitterClient = {
   },
 
   /**
+   * Fetch list
+   */
+  fetchList () {
+    return new Promise((resolve, reject) => {
+      client.get('lists/list', (err, list, res) => {
+        if (!err) {
+          resolve(list)
+        } else {
+          logger.error(err)
+          reject(err)
+        }
+      })
+    })
+  },
+
+  /**
    * Fetch tweets
    * @param {string} endpoint
    * @param {Object} params
