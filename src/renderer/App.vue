@@ -2,7 +2,17 @@
   <div id="app">
     <v-ons-page>
       <v-ons-toolbar class="toolbar">
-        <div class="center">{{ tabs[activeIndex].label }}</div>
+        <div class="center">
+          <div>
+            {{ tabs[activeIndex].label }}
+          </div>
+          <v-ons-select
+          >
+            <option v-for="item in listItem" :value="item.id_str" :key="item.id_str">
+              {{ item.full_name }}
+            </option>
+          </v-ons-select>
+        </div>
         <div class="right">
           <v-ons-toolbar-button v-if="activeIndex !== 0">
             <ons-icon
@@ -42,7 +52,8 @@
       this.load()
     },
     computed: mapState({
-      activeIndex: state => state.app.activeIndex
+      activeIndex: state => state.app.activeIndex,
+      listItem: state => state.twitter.lists
     }),
     data () {
       return {
