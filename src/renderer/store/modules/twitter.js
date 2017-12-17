@@ -13,7 +13,8 @@ const state = {
   tweetedIdStr: [],
   timeline: [],
   mentions: [],
-  favorites: []
+  favorites: [],
+  listsStatuses: []
 }
 
 const mutations = {
@@ -43,6 +44,9 @@ const mutations = {
   },
   ADD_FAVORITES (state, tweets) {
     state.favorites = tweets.concat(state.favorites)
+  },
+  ADD_LISTS_STATUSES (state, tweets) {
+    state.listsStatuses = tweets.concat(state.listsStatuses)
   },
   UPDATE_FAVORITED (state, {idx, favorited}) {
     state.timeline[idx].favorited = favorited
