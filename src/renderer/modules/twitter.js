@@ -136,14 +136,25 @@ export const TwitterClient = {
    */
   get (url, params) {
     return new Promise((resolve, reject) => {
-      client.get(url, (err, items, res) => {
-        if (!err) {
-          resolve(items)
-        } else {
-          logger.error(err)
-          reject(err)
-        }
-      })
+      if (params == null) {
+        client.get(url, (err, items, res) => {
+          if (!err) {
+            resolve(items)
+          } else {
+            logger.error(err)
+            reject(err)
+          }
+        })
+      } else {
+        client.get(url, params, (err, items, res) => {
+          if (!err) {
+            resolve(items)
+          } else {
+            logger.error(err)
+            reject(err)
+          }
+        })
+      }
     })
   },
 
