@@ -3,10 +3,11 @@
     <v-ons-page>
       <v-ons-toolbar class="toolbar">
         <div class="center">
-          <div>
+          <div v-if="tabs[activeIndex].label !== 'Lists'">
             {{ tabs[activeIndex].label }}
           </div>
           <v-ons-select
+            v-else
           >
             <option v-for="item in listItem" :value="item.id_str" :key="item.id_str">
               {{ item.full_name }}
@@ -81,6 +82,12 @@
             label: 'Favorites',
             page: Timeline,
             props: { mode: 'Favorites' }
+          },
+          {
+            icon: 'ion-ios-list-outline',
+            label: 'Lists',
+            page: Timeline,
+            props: { mode: 'Lists' }
           }
         ],
         jobs: {
