@@ -67,6 +67,10 @@ const actions = {
   fetchLists ({ commit }) {
     TwitterClient.fetchLists()
       .then((lists) => {
+        lists.unshift({
+          id_str: '',
+          full_text: ''
+        })
         commit('ADD_LISTS', lists)
       })
   },
