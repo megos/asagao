@@ -9,15 +9,24 @@ const defaultGetParams = {
 
 const state = {
   me: {},
+  lists: [],
+  listId: '',
   tweetedIdStr: [],
   timeline: [],
   mentions: [],
-  favorites: []
+  favorites: [],
+  listsStatuses: []
 }
 
 const mutations = {
   ADD_ME (state, me) {
     state.me = me
+  },
+  ADD_LISTS (state, lists) {
+    state.lists = lists
+  },
+  SET_LIST_ID (state, listId) {
+    state.listId = listId
   },
   ADD_TIMELINE (state, tweets) {
     state.timeline = tweets.concat(state.timeline)
@@ -40,6 +49,12 @@ const mutations = {
   ADD_FAVORITES (state, tweets) {
     state.favorites = tweets.concat(state.favorites)
   },
+  ADD_LISTS_STATUSES (state, tweets) {
+    state.listsStatuses = tweets.concat(state.listsStatuses)
+  },
+  DELETE_LISTS_STATUSES (state) {
+    state.listsStatuses = []
+  },
   UPDATE_FAVORITED (state, {idx, favorited}) {
     state.timeline[idx].favorited = favorited
   },
@@ -54,6 +69,20 @@ const actions = {
       .then((user) => {
         commit('ADD_ME', user)
       })
+  },
+  fetchLists ({ commit }) {
+    TwitterClient.fetchLists()
+      .then((lists) => {
+        lists.unshift({
+          id_str: '',
+          full_text: ''
+        })
+        commit('ADD_LISTS', lists)
+      })
+  },
+  setListId ({ commit }, listId) {
+    commit('DELETE_LISTS_STATUSES')
+    commit('SET_LIST_ID', listId)
   },
   fetchTimeline ({ commit }) {
     commit('REMOVE_TWEETS')
@@ -99,6 +128,19 @@ const actions = {
       .then((tweets) => {
         if (tweets.length > 0) {
           commit('ADD_FAVORITES', tweets)
+        }
+      })
+  },
+  fetchListsStatuses ({ commit }) {
+    const params = _.cloneDeep(defaultGetParams)
+    if (state.listsStatuses.length > 0) {
+      params.since_id = state.listsStatuses[0].id_str
+    }
+    params.list_id = state.listId
+    TwitterClient.fetchTweets('lists/statuses', params)
+      .then((tweets) => {
+        if (tweets.length > 0) {
+          commit('ADD_LISTS_STATUSES', tweets)
         }
       })
   },

@@ -27,12 +27,15 @@
           return this.mentions
         } else if (this.mode === 'Favorites') {
           return this.favorites
+        } else if (this.mode === 'Lists') {
+          return this.lists
         }
       },
       ...mapState({
         timeline: state => state.twitter.timeline,
         mentions: state => state.twitter.mentions,
-        favorites: state => state.twitter.favorites
+        favorites: state => state.twitter.favorites,
+        lists: state => state.twitter.listsStatuses
       })
     }
   }

@@ -2,7 +2,23 @@
   <div id="app">
     <v-ons-page>
       <v-ons-toolbar class="toolbar">
-        <div class="center">{{ tabs[activeIndex].label }}</div>
+        <div class="center">
+          <div v-if="tabs[activeIndex].label !== 'Lists'">
+            {{ tabs[activeIndex].label }}
+          </div>
+          <v-ons-select
+            v-else
+            v-model="selectedItem"
+            @change="changeListId"
+          >
+            <option
+              v-for="item in listItem"
+              :value="item.id_str"
+              :key="item.id_str">
+              {{ item.full_name }}
+            </option>
+          </v-ons-select>
+        </div>
         <div class="right">
           <v-ons-toolbar-button v-if="activeIndex !== 0">
             <ons-icon
@@ -37,14 +53,17 @@
     components: { ItemDialog },
     created () {
       this.$logger.info('App start')
+      this.fetchLists()
       this.fetchAccount()
       this.load()
     },
     computed: mapState({
-      activeIndex: state => state.app.activeIndex
+      activeIndex: state => state.app.activeIndex,
+      listItem: state => state.twitter.lists
     }),
     data () {
       return {
+        selectedItem: '',
         tabs: [
           {
             icon: 'ion-edit',
@@ -69,6 +88,12 @@
             label: 'Favorites',
             page: Timeline,
             props: { mode: 'Favorites' }
+          },
+          {
+            icon: 'ion-ios-list-outline',
+            label: 'Lists',
+            page: Timeline,
+            props: { mode: 'Lists' }
           }
         ],
         jobs: {
@@ -86,6 +111,11 @@
             instance: null,
             cronTime: '40 0 */1 * * *',
             onTick: this.fetchFavorites
+          },
+          Lists: {
+            instance: null,
+            cronTime: '20 */10 * * * *',
+            onTick: this.fetchListsStatuses
           }
         }
       }
@@ -110,16 +140,23 @@
       preChange (event) {
         this.changeActiveIndex(event.index)
         const mode = this.tabs[event.index].props ? this.tabs[event.index].props.mode : ''
-        if (mode !== '' && !this.jobs[mode].instance) {
+        if (mode !== '' && mode !== 'Lists' && !this.jobs[mode].instance) {
           this.startCronJob(mode)
         }
       },
+      changeListId () {
+        this.setListId(this.selectedItem)
+        this.startCronJob('Lists')
+      },
       ...mapActions([
         'fetchAccount',
+        'fetchLists',
         'fetchTimeline',
         'fetchMentions',
         'fetchFavorites',
-        'changeActiveIndex'
+        'fetchListsStatuses',
+        'changeActiveIndex',
+        'setListId'
       ])
     }
   }
