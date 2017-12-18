@@ -8,8 +8,13 @@
           </div>
           <v-ons-select
             v-else
+            v-model="selectedItem"
+            @change="changeListId"
           >
-            <option v-for="item in listItem" :value="item.id_str" :key="item.id_str">
+            <option
+              v-for="item in listItem"
+              :value="item.id_str"
+              :key="item.id_str">
               {{ item.full_name }}
             </option>
           </v-ons-select>
@@ -58,6 +63,7 @@
     }),
     data () {
       return {
+        selectedItem: '',
         tabs: [
           {
             icon: 'ion-edit',
@@ -134,9 +140,13 @@
       preChange (event) {
         this.changeActiveIndex(event.index)
         const mode = this.tabs[event.index].props ? this.tabs[event.index].props.mode : ''
-        if (mode !== '' && !this.jobs[mode].instance) {
+        if (mode !== '' && mode !== 'Lists' && !this.jobs[mode].instance) {
           this.startCronJob(mode)
         }
+      },
+      changeListId () {
+        this.setListId(this.selectedItem)
+        this.startCronJob('Lists')
       },
       ...mapActions([
         'fetchAccount',
@@ -145,7 +155,8 @@
         'fetchMentions',
         'fetchFavorites',
         'fetchListsStatuses',
-        'changeActiveIndex'
+        'changeActiveIndex',
+        'setListId'
       ])
     }
   }

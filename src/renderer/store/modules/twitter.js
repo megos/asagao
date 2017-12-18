@@ -25,6 +25,9 @@ const mutations = {
   ADD_LISTS (state, lists) {
     state.lists = lists
   },
+  SET_LIST_ID (state, listId) {
+    state.listId = listId
+  },
   ADD_TIMELINE (state, tweets) {
     state.timeline = tweets.concat(state.timeline)
   },
@@ -48,6 +51,9 @@ const mutations = {
   },
   ADD_LISTS_STATUSES (state, tweets) {
     state.listsStatuses = tweets.concat(state.listsStatuses)
+  },
+  DELETE_LISTS_STATUSES (state) {
+    state.listsStatuses = []
   },
   UPDATE_FAVORITED (state, {idx, favorited}) {
     state.timeline[idx].favorited = favorited
@@ -73,6 +79,10 @@ const actions = {
         })
         commit('ADD_LISTS', lists)
       })
+  },
+  setListId ({ commit }, listId) {
+    commit('DELETE_LISTS_STATUSES')
+    commit('SET_LIST_ID', listId)
   },
   fetchTimeline ({ commit }) {
     commit('REMOVE_TWEETS')
