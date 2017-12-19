@@ -38,7 +38,22 @@ export const TwitterClient = {
    * Fetch list
    */
   fetchLists () {
-    return this.get('lists/list')
+    return new Promise((resolve, reject) => {
+      this.get('lists/list')
+        .then((res) => {
+          let lists = [{
+            id_str: '',
+            full_text: ''
+          }]
+          res.forEach((item) => {
+            lists.push(this.parseListItem(item))
+          })
+          resolve(lists)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
   },
 
   /**
@@ -300,5 +315,16 @@ export const TwitterClient = {
    */
   findItem (tweet) {
     return tweet.id_str === this
+  },
+
+  /**
+   * list object covert to this client object
+   * @param {Object} item
+   */
+  parseListItem (item) {
+    return {
+      id_str: item.id_str,
+      full_name: item.full_name
+    }
   }
 }
