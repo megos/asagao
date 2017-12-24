@@ -122,17 +122,22 @@
     },
     methods: {
       startCronJob (mode) {
+        this.stopCronJob(mode)
         const job = this.jobs[mode]
-        if (job.instance && job.instance.running) {
-          job.instance.stop()
-        }
         job.instance = new CronJob({
           cronTime: job.cronTime,
           onTick: () => job.onTick(),
           start: true,
           runOnInit: true
         })
-        this.$logger.info(`${mode} cron start`)
+        this.$logger.info(`${mode} cron started`)
+      },
+      stopCronJob (mode) {
+        const job = this.jobs[mode]
+        if (job.instance && job.instance.running) {
+          job.instance.stop()
+          this.$logger.info(`${mode} cron stopped`)
+        }
       },
       load () {
         this.startCronJob([this.tabs[this.activeIndex].props.mode])
@@ -146,7 +151,11 @@
       },
       changeListId () {
         this.setListId(this.selectedItem)
-        this.startCronJob('Lists')
+        if (this.selectedItem === '') {
+          this.stopCronJob('Lists')
+        } else {
+          this.startCronJob('Lists')
+        }
       },
       ...mapActions([
         'fetchAccount',
