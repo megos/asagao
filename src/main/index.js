@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow } from 'electron'
 import OAuthTwitter from 'electron-oauth-twitter'
 import storage from 'electron-json-storage-sync'
 import { credentials, keys } from '../constants'
@@ -60,8 +60,11 @@ function openWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
-  mainWindow.on('new-window', (event, url) => {
-    mainWindow.webContents.downloadURL(url)
+  mainWindow.webContents.on('new-window', (event, url) => {
+    if (!url.match(/.*(jpg|png|mp4|size=l)$/)) {
+      event.preventDefault()
+      shell.openExternal(url)
+    }
   })
 }
 

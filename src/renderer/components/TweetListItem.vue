@@ -22,7 +22,8 @@
           this.openTweetItemDialog({
             idStr: this.tweet.id_str,
             screenName: this.tweet.user.screen_name,
-            favorited: this.tweet.favorited
+            favorited: this.tweet.favorited,
+            retweeted: this.tweet.retweeted
           })
         }
       },

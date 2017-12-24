@@ -35,6 +35,28 @@ export const TwitterClient = {
   },
 
   /**
+   * Fetch list
+   */
+  fetchLists () {
+    return new Promise((resolve, reject) => {
+      this.get('lists/list')
+        .then((res) => {
+          let lists = [{
+            id_str: '',
+            full_text: ''
+          }]
+          res.forEach((item) => {
+            lists.push(this.parseListItem(item))
+          })
+          resolve(lists)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
+
+  /**
    * Fetch tweets
    * @param {string} endpoint
    * @param {Object} params
@@ -82,6 +104,25 @@ export const TwitterClient = {
       id: id
     })
   },
+  /**
+   * Retweet
+   * @param {string} id
+   */
+  retweet (id) {
+    return this.post('statuses/retweet', {
+      id: id
+    })
+  },
+
+  /**
+   * UnRetweet
+   * @param {string} id
+   */
+  unretweet (id) {
+    return this.post('statuses/unretweet', {
+      id: id
+    })
+  },
 
   /**
    * Add favorite
@@ -100,6 +141,35 @@ export const TwitterClient = {
   destroyFavorite (id) {
     return this.post('favorites/destroy', {
       id: id
+    })
+  },
+
+  /**
+   * get
+   * @param {string} url
+   * @param {Object} params
+   */
+  get (url, params) {
+    return new Promise((resolve, reject) => {
+      if (params == null) {
+        client.get(url, (err, items, res) => {
+          if (!err) {
+            resolve(items)
+          } else {
+            logger.error(err)
+            reject(err)
+          }
+        })
+      } else {
+        client.get(url, params, (err, items, res) => {
+          if (!err) {
+            resolve(items)
+          } else {
+            logger.error(err)
+            reject(err)
+          }
+        })
+      }
     })
   },
 
@@ -132,11 +202,14 @@ export const TwitterClient = {
       retw.retweeted_user = tweet.user.name
       tweet = retw
     }
+    var html = this.toHtml(tweet.full_text || tweet.text)
     tweet.media_list = []
     if (tweet.entities.urls) {
+      html = this.convertURLs(html, tweet.entities.urls)
       Array.prototype.push.apply(tweet.media_list, this.getUrlMedia(tweet.entities.urls))
     }
     if (tweet.extended_entities && tweet.extended_entities.media) {
+      html = this.convertURLs(html, tweet.extended_entities.media)
       Array.prototype.push.apply(tweet.media_list, this.getMedia(tweet.extended_entities.media))
     }
     if (tweet.quoted_status) {
@@ -144,11 +217,12 @@ export const TwitterClient = {
     }
     return {
       id_str: tweet.id_str,
-      full_text_html: this.toHtml(tweet.full_text),
+      full_text_html: html,
       created_at: tweet.created_at,
       quoted_status: tweet.quoted_status,
       retweeted_user: tweet.retweeted_user,
       favorited: tweet.favorited,
+      retweeted: tweet.retweeted,
       media_list: tweet.media_list,
       user: {
         profile_image_url: tweet.user.profile_image_url,
@@ -174,6 +248,18 @@ export const TwitterClient = {
   },
 
   /**
+   * Convert short URL to Real URL
+   * @param {string} text tweet
+   * @param {Object} urls
+   */
+  convertURLs (text, urls) {
+    for (let ui = 0; ui < urls.length; ui++) {
+      text = text.replace('>' + urls[ui].url.replace(/http(|s):\/\//, ''), '>' + urls[ui].display_url)
+    }
+    return text
+  },
+
+  /**
    * Get image or video urls
    * @param {Object} urls
    */
@@ -186,15 +272,6 @@ export const TwitterClient = {
         mediaList.push({
           url_thumb: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=t',
           url: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l'
-        })
-      }
-
-      // twipple
-      const imageId = item.display_url.match(/^p\.twipple\.jp\/(.*)/)
-      if (imageId) {
-        mediaList.push({
-          url_thumb: 'http://p.twipple.jp/show/thumb/' + imageId[1],
-          url: 'http://p.twipple.jp/show/large/' + imageId[1]
         })
       }
     })
@@ -238,5 +315,16 @@ export const TwitterClient = {
    */
   findItem (tweet) {
     return tweet.id_str === this
+  },
+
+  /**
+   * list object covert to this client object
+   * @param {Object} item
+   */
+  parseListItem (item) {
+    return {
+      id_str: item.id_str,
+      full_name: item.full_name
+    }
   }
 }
