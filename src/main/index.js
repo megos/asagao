@@ -24,9 +24,9 @@ function createWindow () {
    * Initial window options
    */
   const oauthInfo = storage.get(keys.OAUTH_TOKEN)
-
+  openWindow()
   if (oauthInfo.status && oauthInfo.data.oauth_access_token && oauthInfo.data.oauth_access_token_secret) {
-    openWindow()
+    mainWindow.loadURL(winURL)
   } else {
     const twitterAuthWindow = new OAuthTwitter({
       key: credentials.CONSUMER_KEY,
@@ -37,7 +37,7 @@ function createWindow () {
       .then((res) => {
         const result = storage.set(keys.OAUTH_TOKEN, res)
         if (result.status) {
-          openWindow()
+          mainWindow.loadURL(winURL)
         } else {
           console.error('Token save failed!')
         }
@@ -56,7 +56,6 @@ function openWindow () {
     useContentSize: true
   })
 
-  mainWindow.loadURL(winURL)
   mainWindow.on('closed', () => {
     mainWindow = null
   })

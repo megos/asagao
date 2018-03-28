@@ -16,7 +16,6 @@
   import TweetListItem from './TweetListItem'
 
   export default {
-    name: 'timeline',
     props: [ 'mode' ],
     components: { TweetListItem },
     computed: {
