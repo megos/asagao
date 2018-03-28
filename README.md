@@ -2,7 +2,7 @@
 
 > An electron twitter client build on electron-vue and Onsen UI
 
-[![Build Status](https://travis-ci.org/megos/asagao.svg?branch=master)](https://travis-ci.org/megos/asagao) [![dependencies Status](https://david-dm.org/megos/asagao/status.svg)](https://david-dm.org/megos/asagao) [![devDependencies Status](https://david-dm.org/megos/asagao/dev-status.svg)](https://david-dm.org/megos/asagao?type=dev)
+[![Build Status](https://travis-ci.org/megos/asagao.svg?branch=master)](https://travis-ci.org/megos/asagao) [![Build status](https://ci.appveyor.com/api/projects/status/8f7qfv7ea8b5rryu?svg=true)](https://ci.appveyor.com/project/megos/asagao) [![dependencies Status](https://david-dm.org/megos/asagao/status.svg)](https://david-dm.org/megos/asagao) [![devDependencies Status](https://david-dm.org/megos/asagao/dev-status.svg)](https://david-dm.org/megos/asagao?type=dev)
 
 ![image](http://cdn-ak.f.st-hatena.com/images/fotolife/t/tmegos/20171111/20171111221615.png)
 
