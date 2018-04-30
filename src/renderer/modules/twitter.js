@@ -301,7 +301,8 @@ export const TwitterClient = {
           // Get highest bitrate item
           mediaList.push({
             url_thumb: item.media_url,
-            url: mp4[0].url
+            // Remove '?tag=3'
+            url: mp4[0].url.replace(/\?.*/, '')
           })
         }
       }
