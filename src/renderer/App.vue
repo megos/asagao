@@ -44,8 +44,8 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import { CronJob } from 'cron'
-  import Timeline from '@/components/Timeline'
-  import TweetInput from '@/components/TweetInput'
+  import Timeline from '@/pages/Timeline'
+  import TweetInput from '@/pages/TweetInput'
   import ItemDialog from '@/components/ItemDialog'
 
   export default {

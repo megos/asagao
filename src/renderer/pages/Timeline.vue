@@ -13,7 +13,7 @@
 
 <script>
   import { mapState } from 'vuex'
-  import TweetListItem from './TweetListItem'
+  import TweetListItem from '@/components/TweetListItem'
 
   export default {
     props: [ 'mode' ],
