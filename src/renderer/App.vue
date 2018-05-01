@@ -53,9 +53,12 @@
     components: { ItemDialog },
     created () {
       this.$logger.info('App start')
-      this.fetchLists()
-      this.fetchAccount()
-      this.load()
+      this.restore()
+        .then(() => {
+          this.fetchLists()
+          this.fetchAccount()
+          this.load()
+        })
     },
     computed: mapState({
       activeIndex: state => state.app.activeIndex,
@@ -158,6 +161,7 @@
         }
       },
       ...mapActions([
+        'restore',
         'fetchAccount',
         'fetchLists',
         'fetchTimeline',

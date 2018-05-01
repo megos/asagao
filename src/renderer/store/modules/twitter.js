@@ -1,5 +1,13 @@
 import _ from 'lodash'
 import { TwitterClient } from '../../modules/twitter'
+import Datastore from 'nedb'
+import electron from 'electron'
+
+const datastore = new Datastore({
+  filename: `${electron.remote.app.getPath('userData')}/storage/timeline.db`,
+  autoload: true
+})
+datastore.ensureIndex({ fieldName: 'id_str', unique: true })
 
 const defaultGetParams = {
   include_entities: true,
@@ -64,6 +72,16 @@ const mutations = {
 }
 
 const actions = {
+  restore ({ commit }) {
+    return new Promise((resolve, reject) => {
+      datastore.find({}).sort({ id_str: -1 }).exec((err, docs) => {
+        if (!err) {
+          commit('ADD_TIMELINE', docs)
+          resolve()
+        }
+      })
+    })
+  },
   fetchAccount ({ commit }) {
     TwitterClient.fetchAccount()
       .then((user) => {
@@ -89,6 +107,7 @@ const actions = {
     TwitterClient.fetchTweets('statuses/home_timeline', params)
       .then((tweets) => {
         if (tweets.length > 0) {
+          datastore.insert(tweets)
           commit('ADD_TIMELINE', tweets)
         }
       })
