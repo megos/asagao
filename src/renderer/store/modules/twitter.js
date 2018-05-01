@@ -5,9 +5,12 @@ import electron from 'electron'
 
 const datastore = new Datastore({
   filename: `${electron.remote.app.getPath('userData')}/storage/timeline.db`,
-  autoload: true
+  autoload: true,
+  timestampData: true
 })
 datastore.ensureIndex({ fieldName: 'id_str', unique: true })
+// Expire 1 day
+datastore.ensureIndex({ fieldName: 'createdAt', expireAfterSeconds: 60 * 60 * 24 })
 
 const defaultGetParams = {
   include_entities: true,
