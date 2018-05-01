@@ -5,7 +5,7 @@
     :key="idx"
     @click="clickItem"
   >
-    <div class="left">
+    <div class="left image">
       <img :src="tweet.user.profile_image_url" class="list-item__thumbnail">
     </div>
     <div class="center">
@@ -39,3 +39,9 @@
     }
   }
 </script>
+
+<style scoped>
+.image {
+  height: 60px;
+}
+</style>
