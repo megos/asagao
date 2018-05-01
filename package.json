@@ -64,6 +64,7 @@
     "lodash": "^4.17.10",
     "log4js": "^2.5.3",
     "moment": "^2.22.1",
+    "nedb": "^1.8.0",
     "onsenui": "^2.9.2",
     "sanitize-html": "^1.18.2",
     "twitter": "^1.7.1",
