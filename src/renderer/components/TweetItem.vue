@@ -1,8 +1,5 @@
 <template>
   <v-ons-row>
-    <v-ons-col width="50px">
-      <img :src="tweet.user.profile_image_url" class="image">
-    </v-ons-col>
     <v-ons-col>
       <v-ons-row>
         <v-ons-col width="70%">
@@ -23,9 +20,9 @@
         </v-ons-col>
       </v-ons-row>
       <v-ons-row v-if="tweet.media_list.length > 0">
-        <v-ons-col width="60px" v-for="(media, idx) in tweet.media_list" :key="idx">
+        <v-ons-col width="50px" v-for="(media, idx) in tweet.media_list" :key="idx">
           <a :href="media.url" target="_blank">
-            <img :src="media.url_thumb" width="50px" class="image">
+            <img :src="media.url_thumb" class="list-item__thumbnail">
           </a>
         </v-ons-col>
       </v-ons-row>
@@ -77,9 +74,6 @@
 </script>
 
 <style scoped>
-  .image {
-    border-radius: 5px;
-  }
 
   .from {
     overflow: hidden;
@@ -113,6 +107,7 @@
     font-size: 12px;
     opacity: 0.9;
     line-height: 1.3;
+    word-break: break-all;
   }
 
   .quoted {
