@@ -2,16 +2,12 @@
   <v-ons-row>
     <v-ons-col>
       <v-ons-row>
-        <v-ons-col width="70%">
-          <div class="from">
-            <span class="name">{{ tweet.user.name }}</span>
-            <span class="id">@{{ tweet.user.screen_name }}</span>
-            <span v-if="tweet.user.protected" class="protected"><ons-icon icon="fa-lock"></ons-icon></span>
-            <span v-if="tweet.user.verified" class="verified"><ons-icon icon="fa-check-circle"></ons-icon></span>
-          </div>
-        </v-ons-col>
-        <v-ons-col width="30%">
-          <div class="date">{{ getRelativeCreatedAt(tweet.created_at) }}</div>
+        <v-ons-col>
+          <span class="name">{{ tweet.user.name }}</span>
+          <span class="id">@{{ tweet.user.screen_name }}</span>
+          <span v-if="tweet.user.protected" class="protected"><ons-icon icon="fa-lock"></ons-icon></span>
+          <span v-if="tweet.user.verified" class="verified"><ons-icon icon="fa-check-circle"></ons-icon></span>
+          <span class="date">{{ getRelativeCreatedAt(tweet.created_at) }}</span>
         </v-ons-col>
       </v-ons-row>
       <v-ons-row>
@@ -74,12 +70,6 @@
 </script>
 
 <style scoped>
-
-  .from {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
 
   .name {
     font-size: 12px;
