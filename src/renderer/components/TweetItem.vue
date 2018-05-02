@@ -1,20 +1,13 @@
 <template>
   <v-ons-row>
-    <v-ons-col width="50px">
-      <img :src="tweet.user.profile_image_url" class="image">
-    </v-ons-col>
     <v-ons-col>
       <v-ons-row>
-        <v-ons-col width="70%">
-          <div class="from">
-            <span class="name">{{ tweet.user.name }}</span>
-            <span class="id">@{{ tweet.user.screen_name }}</span>
-            <span v-if="tweet.user.protected" class="protected"><ons-icon icon="fa-lock"></ons-icon></span>
-            <span v-if="tweet.user.verified" class="verified"><ons-icon icon="fa-check-circle"></ons-icon></span>
-          </div>
-        </v-ons-col>
-        <v-ons-col width="30%">
-          <div class="date">{{ getRelativeCreatedAt(tweet.created_at) }}</div>
+        <v-ons-col>
+          <span class="name">{{ tweet.user.name }}</span>
+          <span class="id">@{{ tweet.user.screen_name }}</span>
+          <span v-if="tweet.user.protected" class="protected"><ons-icon icon="fa-lock"></ons-icon></span>
+          <span v-if="tweet.user.verified" class="verified"><ons-icon icon="fa-check-circle"></ons-icon></span>
+          <span class="date">{{ getRelativeCreatedAt(tweet.created_at) }}</span>
         </v-ons-col>
       </v-ons-row>
       <v-ons-row>
@@ -23,9 +16,9 @@
         </v-ons-col>
       </v-ons-row>
       <v-ons-row v-if="tweet.media_list.length > 0">
-        <v-ons-col width="60px" v-for="(media, idx) in tweet.media_list" :key="idx">
+        <v-ons-col width="50px" v-for="(media, idx) in tweet.media_list" :key="idx">
           <a :href="media.url" target="_blank">
-            <img :src="media.url_thumb" width="50px" class="image">
+            <img :src="media.url_thumb" class="list-item__thumbnail">
           </a>
         </v-ons-col>
       </v-ons-row>
@@ -77,15 +70,6 @@
 </script>
 
 <style scoped>
-  .image {
-    border-radius: 5px;
-  }
-
-  .from {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
 
   .name {
     font-size: 12px;
@@ -113,10 +97,12 @@
     font-size: 12px;
     opacity: 0.9;
     line-height: 1.3;
+    word-break: break-all;
   }
 
   .quoted {
     border: solid 1px;
     border-color: LightGrey;
+    padding: 3px;
   }
 </style>
