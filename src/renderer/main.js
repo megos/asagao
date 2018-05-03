@@ -21,6 +21,11 @@ Vue.logger.level = 'info'
 
 Vue.use(VueOnsen)
 
+Vue.filter('toSSL', (value) => {
+  if (!value) return ''
+  return value.replace(/^http:/, 'https:')
+})
+
 /* eslint-disable no-new */
 new Vue({
   components: { App },
