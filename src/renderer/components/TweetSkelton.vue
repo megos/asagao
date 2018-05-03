@@ -31,23 +31,6 @@
     background-color: #e2e2e2;
   }
 
-  .skel::after {
-    display: block;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform: translateX(-100%);
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
-    animation: loading 1.5s infinite;
-  }
-
-  @keyframes loading {
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
   .content {
     margin: 2px;
     height: 10px;

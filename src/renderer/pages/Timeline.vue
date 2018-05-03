@@ -2,7 +2,7 @@
   <v-ons-page>
     <v-ons-list v-if="tweets.length === 0">
       <tweet-skelton
-        v-for="idx in 100"
+        v-for="idx in 10"
         :key="idx"
       >
       </tweet-skelton>
