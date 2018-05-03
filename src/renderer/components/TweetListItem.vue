@@ -5,7 +5,7 @@
     :key="idx"
     @click="clickItem"
   >
-    <div class="left image">
+    <div class="left">
       <img :src="tweet.user.profile_image_url" class="list-item__thumbnail">
     </div>
     <div class="center">
@@ -41,7 +41,12 @@
 </script>
 
 <style scoped>
-.image {
-  height: 60px;
-}
+  /* Overwrite Onsen UI */
+  .list-item__center {
+    padding: 6px 6px 6px 0;
+  }
+
+  .list-item__left, .list-item__center {
+    align-items: flex-start;
+  }
 </style>

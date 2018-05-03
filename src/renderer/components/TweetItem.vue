@@ -70,6 +70,11 @@
 </script>
 
 <style scoped>
+  /* See. https://medium.com/@brockreece/scoped-styles-with-v-html-c0f6d2dc5d8e */
+  .message >>> a {
+    text-decoration: none;
+    color: #0063ff;
+  }
 
   .name {
     font-size: 12px;
