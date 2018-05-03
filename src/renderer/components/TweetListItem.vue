@@ -6,7 +6,7 @@
     @click="clickItem"
   >
     <div class="left">
-      <img :src="tweet.user.profile_image_url" class="list-item__thumbnail">
+      <img :src="tweet.user.profile_image_url | toSSL" class="list-item__thumbnail">
     </div>
     <div class="center">
       <tweet-item :tweet="tweet"></tweet-item>

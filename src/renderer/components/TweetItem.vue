@@ -17,8 +17,8 @@
       </v-ons-row>
       <v-ons-row v-if="tweet.media_list.length > 0">
         <v-ons-col width="50px" v-for="(media, idx) in tweet.media_list" :key="idx">
-          <a :href="media.url" target="_blank">
-            <img :src="media.url_thumb" class="list-item__thumbnail">
+          <a :href="media.url | toSSL" target="_blank">
+            <img :src="media.url_thumb | toSSL" class="list-item__thumbnail">
           </a>
         </v-ons-col>
       </v-ons-row>
