@@ -1,20 +1,19 @@
 <template>
   <v-ons-page>
-    <v-ons-list v-if="tweets.length === 0">
-      <tweet-skelton
-        v-for="idx in 10"
-        :key="idx"
-      >
-      </tweet-skelton>
-    </v-ons-list>
-    <v-ons-list>
+    <v-ons-list v-if="tweets.length > 0">
       <tweet-list-item
-        v-if="tweets.length > 0"
         v-for="tweet in tweets"
         :key="tweet.id_str"
         :tweet="tweet"
       >
       </tweet-list-item>
+    </v-ons-list>
+    <v-ons-list v-else>
+      <tweet-skelton
+        v-for="idx in 10"
+        :key="idx"
+      >
+      </tweet-skelton>
     </v-ons-list>
   </v-ons-page>
 </template>
