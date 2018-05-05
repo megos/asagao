@@ -1,10 +1,11 @@
 <template>
   <v-ons-page>
     <v-ons-list>
-      <v-ons-list-item>
+      <v-ons-list-item modifier="longdivider">
         <b-form-textarea
           v-model="tweet"
-          :rows="3"
+          :rows="10"
+          :no-resize="true"
           placeholder="What's happening?"
           :maxlength="maxLength"
         />
@@ -65,13 +66,3 @@
     }
   }
 </script>
-
-<style scoped>
-  textarea {
-    resize: none;
-    border: none;
-    width: 100%;
-    height: 100%;
-    font-size: 12pt;
-  }
-</style>
