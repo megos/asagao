@@ -2,16 +2,12 @@
   <v-ons-page>
     <v-ons-list>
       <v-ons-list-item>
-        <v-ons-row>
-          <v-ons-col width="100%">
-            <textarea
-              v-model="tweet"
-              row="3"
-              placeholder="What's happening?"
-              :maxlength="maxLength"
-            />
-          </v-ons-col>
-        </v-ons-row>
+        <b-form-textarea
+          v-model="tweet"
+          :rows="3"
+          placeholder="What's happening?"
+          :maxlength="maxLength"
+        />
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="right">

@@ -4,6 +4,7 @@ import 'onsenui/css/onsen-css-components.css'
 import Vue from 'vue'
 import $ons from 'vue-onsenui/esm'
 import * as VOns from './vue-onsen-components'
+import { FormTextarea } from 'bootstrap-vue/es/components'
 
 import log4js from 'log4js'
 
@@ -22,6 +23,8 @@ Vue.logger.level = 'info'
 
 Vue.use($ons)
 Object.values(VOns).forEach(comp => Vue.component(comp.name, comp))
+
+Vue.use(FormTextarea)
 
 Vue.filter('toSSL', (value) => {
   if (!value) return ''
