@@ -26,7 +26,7 @@
     data () {
       return {
         tweet: '',
-        maxLength: 140
+        maxLength: 280
       }
     },
     watch: {
