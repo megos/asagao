@@ -274,6 +274,15 @@ export const TwitterClient = {
           url: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l'
         })
       }
+      // pixiv
+      const illustId = item.expanded_url.match(/.*pixiv\.net.*illust_id=([0-9]+).*/)
+      if (illustId) {
+        const pixivUrl = `https://embed.pixiv.net/decorate.php?illust_id=${illustId[1]}`
+        mediaList.push({
+          url_thumb: pixivUrl,
+          url: pixivUrl
+        })
+      }
     })
     return mediaList
   },
