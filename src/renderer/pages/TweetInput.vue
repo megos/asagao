@@ -1,17 +1,14 @@
 <template>
   <v-ons-page>
     <v-ons-list>
-      <v-ons-list-item>
-        <v-ons-row>
-          <v-ons-col width="100%">
-            <textarea
-              v-model="tweet"
-              row="3"
-              placeholder="What's happening?"
-              :maxlength="maxLength"
-            />
-          </v-ons-col>
-        </v-ons-row>
+      <v-ons-list-item modifier="longdivider">
+        <b-form-textarea
+          v-model="tweet"
+          :rows="10"
+          :no-resize="true"
+          placeholder="What's happening?"
+          :maxlength="maxLength"
+        />
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="right">
@@ -30,7 +27,7 @@
     data () {
       return {
         tweet: '',
-        maxLength: 140
+        maxLength: 280
       }
     },
     watch: {
@@ -69,13 +66,3 @@
     }
   }
 </script>
-
-<style scoped>
-  textarea {
-    resize: none;
-    border: none;
-    width: 100%;
-    height: 100%;
-    font-size: 12pt;
-  }
-</style>

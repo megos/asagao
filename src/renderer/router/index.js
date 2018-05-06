@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Timeline from '@/pages/Timeline'
 
 Vue.use(Router)
 
@@ -8,7 +9,7 @@ export default new Router({
     {
       path: '/',
       name: 'timeline',
-      component: require('@/components/Timeline').default,
+      component: Timeline,
       props: { mode: 'Timeline' }
     },
     {

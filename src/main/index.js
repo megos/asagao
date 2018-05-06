@@ -60,7 +60,8 @@ function openWindow () {
     mainWindow = null
   })
   mainWindow.webContents.on('new-window', (event, url) => {
-    if (!url.match(/.*(jpg|png|mp4|size=l)$/)) {
+    if (!(url.match(/.*(jpg|png|mp4|size=l)$/) ||
+        url.match(/.*pixiv\.net.*[0-9]+$/))) {
       event.preventDefault()
       shell.openExternal(url)
     }

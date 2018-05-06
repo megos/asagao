@@ -1,10 +1,16 @@
 <template>
   <v-ons-list-item
+    modifier="longdivider"
     tappable
     :key="idx"
     @click="clickItem"
   >
-    <tweet-item :tweet="tweet"></tweet-item>
+    <div class="left">
+      <img :src="tweet.user.profile_image_url | toSSL" class="list-item__thumbnail">
+    </div>
+    <div class="center">
+      <tweet-item :tweet="tweet"></tweet-item>
+    </div>
   </v-ons-list-item>
 </template>
 
@@ -33,3 +39,14 @@
     }
   }
 </script>
+
+<style scoped>
+  /* Overwrite Onsen UI */
+  .list-item__center {
+    padding: 6px 6px 6px 0;
+  }
+
+  .list-item__left, .list-item__center {
+    align-items: flex-start;
+  }
+</style>
