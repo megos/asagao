@@ -5,26 +5,41 @@
         <v-ons-col>
           <span class="name">{{ tweet.user.name }}</span>
           <span class="id">@{{ tweet.user.screen_name }}</span>
-          <span v-if="tweet.user.protected" class="protected"><ons-icon icon="fa-lock"></ons-icon></span>
-          <span v-if="tweet.user.verified" class="verified"><ons-icon icon="fa-check-circle"></ons-icon></span>
+          <span 
+            v-if="tweet.user.protected" 
+            class="protected"><ons-icon icon="fa-lock"/></span>
+          <span 
+            v-if="tweet.user.verified" 
+            class="verified"><ons-icon icon="fa-check-circle"/></span>
           <span class="date">{{ getRelativeCreatedAt(tweet.created_at) }}</span>
         </v-ons-col>
       </v-ons-row>
       <v-ons-row>
         <v-ons-col>
-          <div v-html="tweet.full_text_html" class="message"></div>
+          <div 
+            class="message" 
+            v-html="tweet.full_text_html"/>
         </v-ons-col>
       </v-ons-row>
       <v-ons-row v-if="tweet.media_list.length > 0">
-        <v-ons-col width="50px" v-for="(media, idx) in tweet.media_list" :key="idx">
-          <a :href="media.url | toSSL" target="_blank">
-            <img :src="media.url_thumb | toSSL" class="list-item__thumbnail">
+        <v-ons-col 
+          v-for="(media, idx) in tweet.media_list" 
+          :key="idx" 
+          width="50px">
+          <a 
+            :href="media.url | toSSL" 
+            target="_blank">
+            <img 
+              :src="media.url_thumb | toSSL" 
+              class="list-item__thumbnail">
           </a>
         </v-ons-col>
       </v-ons-row>
-      <v-ons-row v-if="tweet.quoted_status" class="quoted">
+      <v-ons-row 
+        v-if="tweet.quoted_status" 
+        class="quoted">
         <v-ons-col>
-          <tweet-item :tweet="tweet.quoted_status"></tweet-item>
+          <tweet-item :tweet="tweet.quoted_status"/>
         </v-ons-col>
       </v-ons-row>
       <v-ons-row>
@@ -54,7 +69,7 @@
   })
 
   export default {
-    name: 'tweet-item',
+    name: 'TweetItem',
     components: { TweetItem },
     props: [ 'tweet' ],
     methods: {

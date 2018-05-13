@@ -1,6 +1,7 @@
 <template>
-  <v-ons-dialog cancelable
+  <v-ons-dialog 
     :visible="dialogVisible"
+    cancelable
     @posthide="closeDialog"
   >
     <v-ons-list>
@@ -8,7 +9,9 @@
         tappable
         @click="moveTweetInput"
       >
-        <v-ons-icon icon="fa-reply" class="icon"></v-ons-icon>
+        <v-ons-icon 
+          icon="fa-reply" 
+          class="icon"/>
         Reply
       </v-ons-list-item>
       <v-ons-list-item
@@ -16,7 +19,9 @@
         tappable
         @click="deleteOwnTweet"
       >
-        <v-ons-icon icon="fa-trash" class="icon"></v-ons-icon>
+        <v-ons-icon 
+          icon="fa-trash" 
+          class="icon"/>
         Delete tweet
       </v-ons-list-item>
       <v-ons-list-item
@@ -24,14 +29,18 @@
         tappable
         @click="actionRetweet"
       >
-        <v-ons-icon icon="fa-retweet" class="icon"></v-ons-icon>
+        <v-ons-icon 
+          icon="fa-retweet" 
+          class="icon"/>
         {{ retweetLabel }}
       </v-ons-list-item>
       <v-ons-list-item
         tappable
         @click="actionFavorite"
       >
-        <v-ons-icon icon="fa-heart" class="icon"></v-ons-icon>
+        <v-ons-icon 
+          icon="fa-heart" 
+          class="icon"/>
         {{ favoritePrefix }} favorite
       </v-ons-list-item>
     </v-ons-list>
@@ -42,7 +51,7 @@
   import { mapState, mapActions } from 'vuex'
 
   export default {
-    name: 'item-dialog',
+    name: 'ItemDialog',
     computed: {
       favoritePrefix: function () {
         return this.favorited ? 'Remove' : 'Add'
