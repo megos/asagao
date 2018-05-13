@@ -24,8 +24,7 @@
             <ons-icon
               icon="ion-ios-reload"
               @click="load"
-            >
-            </ons-icon>
+            />
           </v-ons-toolbar-button>
         </div>
       </v-ons-toolbar>
@@ -34,9 +33,8 @@
         :tabs="tabs"
         :index="activeIndex"
         @prechange="preChange"
-      >
-      </v-ons-tabbar>
-      <item-dialog></item-dialog>
+      />
+      <item-dialog/>
     </v-ons-page>
   </div>
 </template>
@@ -49,21 +47,8 @@
   import ItemDialog from '@/components/ItemDialog'
 
   export default {
-    name: 'asagao',
+    name: 'Asagao',
     components: { ItemDialog },
-    created () {
-      this.$logger.info('App start')
-      this.restore()
-        .then(() => {
-          this.fetchLists()
-          this.fetchAccount()
-          this.load()
-        })
-    },
-    computed: mapState({
-      activeIndex: state => state.app.activeIndex,
-      listItem: state => state.twitter.lists
-    }),
     data () {
       return {
         selectedItem: '',
@@ -122,6 +107,19 @@
           }
         }
       }
+    },
+    computed: mapState({
+      activeIndex: state => state.app.activeIndex,
+      listItem: state => state.twitter.lists
+    }),
+    created () {
+      this.$logger.info('App start')
+      this.restore()
+        .then(() => {
+          this.fetchLists()
+          this.fetchAccount()
+          this.load()
+        })
     },
     methods: {
       startCronJob (mode) {

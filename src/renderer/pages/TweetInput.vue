@@ -6,13 +6,15 @@
           v-model="tweet"
           :rows="10"
           :no-resize="true"
-          placeholder="What's happening?"
           :maxlength="maxLength"
+          placeholder="What's happening?"
         />
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="right">
-          <v-ons-button @click="postTweet" :disabled="tweet.length === 0">Tweet</v-ons-button>
+          <v-ons-button 
+            :disabled="tweet.length === 0" 
+            @click="postTweet">Tweet</v-ons-button>
         </div>
       </v-ons-list-item>
     </v-ons-list>
@@ -23,13 +25,17 @@
   import { mapState, mapActions } from 'vuex'
 
   export default {
-    name: 'tweet-input',
+    name: 'TweetInput',
     data () {
       return {
         tweet: '',
         maxLength: 280
       }
     },
+    computed: mapState({
+      idStr: state => state.app.idStr,
+      screenName: state => state.app.screenName
+    }),
     watch: {
       screenName: function (value) {
         if (this.screenName !== '' && this.tweet === '') {
@@ -39,10 +45,6 @@
         }
       }
     },
-    computed: mapState({
-      idStr: state => state.app.idStr,
-      screenName: state => state.app.screenName
-    }),
     methods: {
       postTweet: function () {
         this.$twitter.postTweet(this.tweet, this.screenName, this.idStr)
