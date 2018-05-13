@@ -1,6 +1,5 @@
 <template>
   <v-ons-list-item
-    :key="idx"
     modifier="longdivider"
     tappable
     @click="clickItem"
@@ -23,7 +22,12 @@
   export default {
     name: 'TweetListItem',
     components: { TweetItem },
-    props: [ 'idx', 'tweet' ],
+    props: {
+      tweet: {
+        type: Object,
+        required: true
+      }
+    },
     methods: {
       clickItem: function (event) {
         if (!(event.target.localName === 'a' || event.target.localName === 'img')) {

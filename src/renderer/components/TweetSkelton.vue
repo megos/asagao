@@ -1,6 +1,5 @@
 <template>
   <v-ons-list-item
-    :key="idx"
     modifier="longdivider"
   >
     <div class="left">
@@ -21,8 +20,7 @@
 
 <script>
   export default {
-    name: 'TweetSkelton',
-    props: [ 'idx' ]
+    name: 'TweetSkelton'
   }
 </script>
 

@@ -32,6 +32,10 @@
         maxLength: 280
       }
     },
+    computed: mapState({
+      idStr: state => state.app.idStr,
+      screenName: state => state.app.screenName
+    }),
     watch: {
       screenName: function (value) {
         if (this.screenName !== '' && this.tweet === '') {
@@ -41,10 +45,6 @@
         }
       }
     },
-    computed: mapState({
-      idStr: state => state.app.idStr,
-      screenName: state => state.app.screenName
-    }),
     methods: {
       postTweet: function () {
         this.$twitter.postTweet(this.tweet, this.screenName, this.idStr)

@@ -23,7 +23,12 @@
 
   export default {
     components: { TweetListItem, TweetSkelton },
-    props: [ 'mode' ],
+    props: {
+      mode: {
+        type: String,
+        required: true
+      }
+    },
     computed: {
       tweets: function () {
         if (this.mode === 'Timeline') {

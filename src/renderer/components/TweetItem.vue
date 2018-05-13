@@ -71,7 +71,12 @@
   export default {
     name: 'TweetItem',
     components: { TweetItem },
-    props: [ 'tweet' ],
+    props: {
+      tweet: {
+        type: Object,
+        required: true
+      }
+    },
     methods: {
       getRelativeCreatedAt: function (createdAt) {
         if (moment().diff(createdAt, 'days') > 7) {
