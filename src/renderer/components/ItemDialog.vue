@@ -78,10 +78,9 @@
         this.closeTweetItemDialog()
       },
       deleteOwnTweet: function () {
-        this.$ons.notification.confirm({
-          message: 'Are you sure?',
-          callback: (answer) => {
-            if (answer) {
+        this.$ons.notification.confirm('Are you sure?')
+          .then((ret) => {
+            if (ret === 1) {
               this.$twitter.deleteTweet(this.idStr)
                 .then((res) => {
                   this.deleteTweet(this.idStr)
@@ -93,8 +92,7 @@
             } else {
               this.closeTweetItemDialog()
             }
-          }
-        })
+          })
       },
       actionFavorite: function () {
         (this.favorited ? this.$twitter.destroyFavorite(this.idStr) : this.$twitter.createFavorite(this.idStr))
