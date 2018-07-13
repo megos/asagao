@@ -2,14 +2,15 @@
   <v-ons-list-item
     modifier="longdivider"
     tappable
-    :key="idx"
     @click="clickItem"
   >
     <div class="left">
-      <img :src="tweet.user.profile_image_url | toSSL" class="list-item__thumbnail">
+      <img 
+        :src="tweet.user.profile_image_url | toSSL" 
+        class="list-item__thumbnail">
     </div>
     <div class="center">
-      <tweet-item :tweet="tweet"></tweet-item>
+      <tweet-item :tweet="tweet"/>
     </div>
   </v-ons-list-item>
 </template>
@@ -19,9 +20,14 @@
   import TweetItem from './TweetItem'
 
   export default {
-    name: 'tweet-list-item',
+    name: 'TweetListItem',
     components: { TweetItem },
-    props: [ 'idx', 'tweet' ],
+    props: {
+      tweet: {
+        type: Object,
+        required: true
+      }
+    },
     methods: {
       clickItem: function (event) {
         if (!(event.target.localName === 'a' || event.target.localName === 'img')) {
