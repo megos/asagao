@@ -1567,20 +1567,20 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
-bootstrap-vue@^2.0.0-rc.9:
-  version "2.0.0-rc.9"
-  resolved "https://registry.yarnpkg.com/bootstrap-vue/-/bootstrap-vue-2.0.0-rc.9.tgz#763a96a2707fdd9731d137572d03151db124573d"
+bootstrap-vue@^2.0.0-rc.11:
+  version "2.0.0-rc.11"
+  resolved "https://registry.yarnpkg.com/bootstrap-vue/-/bootstrap-vue-2.0.0-rc.11.tgz#47aaa6d2a8d390477de75e636d8ea652b1d03f59"
   dependencies:
-    bootstrap "^4.0.0"
+    bootstrap "^4.1.1"
     lodash.get "^4.4.2"
     lodash.startcase "^4.4.0"
     opencollective "^1.0.3"
     popper.js "^1.12.9"
     vue-functional-data-merge "^2.0.5"
 
-bootstrap@^4.0.0:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.1.tgz#3aec85000fa619085da8d2e4983dfd67cf2114cb"
+bootstrap@^4.1.1:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.2.tgz#aee2a93472e61c471fc79fb475531dcbc87de326"
 
 boxen@^1.2.1:
   version "1.3.0"
@@ -2186,6 +2186,10 @@ circular-json@^0.3.1:
 circular-json@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.5.1.tgz#b8942a09e535863dc21b04417a91971e1d9cd91f"
+
+circular-json@^0.5.4:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.5.5.tgz#64182ef359042d37cd8e767fc9de878b1e9447d3"
 
 clap@^1.0.9:
   version "1.2.3"
@@ -3322,12 +3326,12 @@ electron-chromedriver@~1.8.0:
     electron-download "^4.1.0"
     extract-zip "^1.6.5"
 
-electron-context-menu@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-0.9.1.tgz#ed4df20c080491c3c996abfcb363159946a38058"
+electron-context-menu@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-0.10.0.tgz#97fce2b805e03ac2b1dae11eb6a68b064b78d633"
   dependencies:
     electron-dl "^1.2.0"
-    electron-is-dev "^0.1.1"
+    electron-is-dev "^0.3.0"
 
 electron-debug@^1.5.0:
   version "1.5.0"
@@ -3399,17 +3403,13 @@ electron-is-accelerator@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/electron-is-accelerator/-/electron-is-accelerator-0.1.2.tgz#509e510c26a56b55e17f863a4b04e111846ab27b"
 
-electron-is-dev@^0.1.1:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.1.2.tgz#8a1043e32b3a1da1c3f553dce28ce764246167e3"
-
 electron-is-dev@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
 
-electron-json-storage-sync@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/electron-json-storage-sync/-/electron-json-storage-sync-1.1.0.tgz#081594d970d9572bd51625a5ab4b29d7a4d20bbc"
+electron-json-storage-sync@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/electron-json-storage-sync/-/electron-json-storage-sync-1.1.1.tgz#df751e8118076663d2df1cb2f1183845491a8d55"
   dependencies:
     mkdirp "^0.5.1"
     rimraf "^2.6.1"
@@ -6097,7 +6097,7 @@ log-update@^1.0.2:
     ansi-escapes "^1.0.0"
     cli-cursor "^1.0.2"
 
-log4js@^2.3.9, log4js@^2.5.3:
+log4js@^2.3.9:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/log4js/-/log4js-2.5.3.tgz#38bb7bde5e9c1c181bd75e8bc128c5cd0409caf1"
   dependencies:
@@ -6115,6 +6115,15 @@ log4js@^2.3.9, log4js@^2.5.3:
     nodemailer "^2.5.0"
     redis "^2.7.1"
     slack-node "~0.2.0"
+
+log4js@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/log4js/-/log4js-3.0.0.tgz#521f7e431a96fbb64f32d348dea112b23d619e9d"
+  dependencies:
+    circular-json "^0.5.4"
+    date-format "^1.2.0"
+    debug "^3.1.0"
+    streamroller "0.7.0"
 
 loggly@^1.1.0:
   version "1.1.1"
@@ -6450,9 +6459,9 @@ moment-timezone@^0.5.x:
   version "2.21.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.21.0.tgz#2a114b51d2a6ec9e6d83cf803f838a878d8a023a"
 
-moment@^2.22.1:
-  version "2.22.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.1.tgz#529a2e9bf973f259c9643d237fda84de3a26e8ad"
+moment@^2.22.2:
+  version "2.22.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -6845,9 +6854,9 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-onsenui@^2.9.2:
-  version "2.9.2"
-  resolved "https://registry.yarnpkg.com/onsenui/-/onsenui-2.9.2.tgz#f860eb528b1e60ee4d8d5e1ec59ebd3002928355"
+onsenui@^2.10.3:
+  version "2.10.3"
+  resolved "https://registry.yarnpkg.com/onsenui/-/onsenui-2.10.3.tgz#b5959268e0c7c5b5c4c6d7af7b6a12bfa2559995"
   dependencies:
     "@onsenui/custom-elements" "1.0.0"
     "@onsenui/fastclick" "1.1.1"
@@ -8834,7 +8843,7 @@ stream-splicer@^2.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.2"
 
-streamroller@^0.7.0:
+streamroller@0.7.0, streamroller@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/streamroller/-/streamroller-0.7.0.tgz#a1d1b7cf83d39afb0d63049a5acbf93493bdf64b"
   dependencies:
@@ -9599,9 +9608,9 @@ vue-loader@^14.1.1:
     vue-style-loader "^4.0.1"
     vue-template-es2015-compiler "^1.6.0"
 
-vue-onsenui@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/vue-onsenui/-/vue-onsenui-2.5.1.tgz#b84d16379d180c1d535ebfdf5d800d558d920762"
+vue-onsenui@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/vue-onsenui/-/vue-onsenui-2.6.1.tgz#4af008f989e3e68ffc9cc0870522b09b77d853ce"
   dependencies:
     babel-runtime "^6.26.0"
 
