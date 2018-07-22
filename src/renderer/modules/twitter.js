@@ -225,7 +225,7 @@ export const TwitterClient = {
       retweeted: tweet.retweeted,
       media_list: tweet.media_list,
       user: {
-        profile_image_url: tweet.user.profile_image_url,
+        profile_image_url: tweet.user.profile_image_url_https.replace(/_normal/, ''),
         name: tweet.user.name,
         screen_name: tweet.user.screen_name,
         protected: tweet.user.protected,
