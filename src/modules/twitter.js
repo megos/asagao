@@ -3,7 +3,7 @@ import storage from 'electron-json-storage-sync'
 import sanitizeHtml from 'sanitize-html'
 import autolinker from 'autolinker'
 import log4js from 'log4js'
-import { credentials, keys } from '../../constants'
+import { credentials, keys } from '../constants'
 
 const oauthInfo = storage.get(keys.OAUTH_TOKEN)
 const logger = log4js.getLogger()

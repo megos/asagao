@@ -17,7 +17,6 @@ import store from './store'
 
 import { TwitterClient } from './modules/twitter'
 
-if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
 
 Vue.twitter = Vue.prototype.$twitter = TwitterClient
@@ -34,10 +33,8 @@ Vue.filter('toSSL', (value) => {
   return value.replace(/^http:/, 'https:')
 })
 
-/* eslint-disable no-new */
 new Vue({
-  components: { App },
   router,
   store,
-  template: '<App/>'
+  render: h => h(App),
 }).$mount('#app')
