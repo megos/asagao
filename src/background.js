@@ -5,6 +5,11 @@ import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
+import OAuthTwitter from 'electron-oauth-twitter'
+import storage from 'electron-json-storage-sync'
+import { credentials, keys } from './constants'
+import ContextMenu from 'electron-context-menu'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -15,20 +20,62 @@ let win
 protocol.registerStandardSchemes(['app'], { secure: true })
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 })
+  // win = new BrowserWindow({ width: 800, height: 600 })
+  let winURL
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
-    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
+    winURL = process.env.WEBPACK_DEV_SERVER_URL
   } else {
     createProtocol('app')
     // Load the index.html when not in development
-    win.loadURL('app://./index.html')
+    winURL = 'app://./index.html'
   }
+
+  const oauthInfo = storage.get(keys.OAUTH_TOKEN)
+  openWindow()
+  if (oauthInfo.status && oauthInfo.data.oauth_access_token && oauthInfo.data.oauth_access_token_secret) {
+    win.loadURL(winURL)
+  } else {
+    const twitterAuthWindow = new OAuthTwitter({
+      key: credentials.CONSUMER_KEY,
+      secret: credentials.CONSUMER_SECRET
+    })
+
+    twitterAuthWindow.startRequest()
+      .then((res) => {
+        const result = storage.set(keys.OAUTH_TOKEN, res)
+        if (result.status) {
+          win.loadURL(winURL)
+        } else {
+          console.error('Token save failed!')
+        }
+      })
+      .catch((err) => {
+        console.error(err, err.stack)
+      })
+  }
+}
+
+function openWindow () {
+  win = new BrowserWindow({
+    height: 700,
+    width: 400,
+    titleBarStyle: 'hidden',
+    useContentSize: true
+  })
+  if (!process.env.IS_TEST) win.webContents.openDevTools()
 
   win.on('closed', () => {
     win = null
+  })
+
+  win.webContents.on('new-window', (event, url) => {
+    if (!(url.match(/.*(jpg|png|mp4|size=l)$/) ||
+        url.match(/.*pixiv\.net.*[0-9]+$/))) {
+      event.preventDefault()
+      window.shell.openExternal(url)
+    }
   })
 }
 
@@ -74,3 +121,5 @@ if (isDevelopment) {
     })
   }
 }
+
+ContextMenu()
