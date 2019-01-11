@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, shell, protocol, BrowserWindow } from 'electron'
 import {
   createProtocol,
   installVueDevtools
@@ -74,7 +74,7 @@ function openWindow () {
     if (!(url.match(/.*(jpg|png|mp4|size=l)$/) ||
         url.match(/.*pixiv\.net.*[0-9]+$/))) {
       event.preventDefault()
-      window.shell.openExternal(url)
+      shell.openExternal(url)
     }
   })
 }
