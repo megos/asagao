@@ -1490,10 +1490,12 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-autolinker@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/autolinker/-/autolinker-2.2.1.tgz#790ef9f3a346699bae98d6e1a0c00ae73db87dc5"
-  integrity sha512-X38t+F+NE5t4MefPXqzaMjzHmGk0NAgNwQLBS9tQ46kEvY/KaGd4jt5P3M+4SpMp3gwfRmOSEhbtMNJLgRmXbQ==
+autolinker@2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/autolinker/-/autolinker-2.2.2.tgz#6f75a9e9c2c7858a0490d7817fc412804045c06f"
+  integrity sha512-BMKcu6Zey3fqlYj/+DqnbVTLjYZz9jhFq87F8SaD4ebuPM+2nABQUfVYe7aoks5ltWkuYEE61Or63I8KSGZzOw==
+  dependencies:
+    tslib "^1.9.3"
 
 autoprefixer@^8.6.5:
   version "8.6.5"
@@ -9358,7 +9360,7 @@ tryer@^1.0.0:
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
 
-tslib@^1.9.0:
+tslib@^1.9.0, tslib@^1.9.3:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
