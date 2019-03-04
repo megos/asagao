@@ -19,7 +19,7 @@
     "electron-oauth-twitter": "1.2.0",
     "lodash": "4.17.11",
     "log4js": "3.0.6",
-    "moment": "2.23.0",
+    "moment": "2.24.0",
     "nedb": "1.8.0",
     "onsenui": "2.10.6",
     "sanitize-html": "1.20.0",
