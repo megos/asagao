@@ -11,7 +11,7 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
-    "autolinker": "2.2.2",
+    "autolinker": "3.0.3",
     "bootstrap-vue": "2.0.0-rc.13",
     "cron": "1.6.0",
     "electron-context-menu": "0.11.0",

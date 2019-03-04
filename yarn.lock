@@ -1514,10 +1514,10 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-autolinker@2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/autolinker/-/autolinker-2.2.2.tgz#6f75a9e9c2c7858a0490d7817fc412804045c06f"
-  integrity sha512-BMKcu6Zey3fqlYj/+DqnbVTLjYZz9jhFq87F8SaD4ebuPM+2nABQUfVYe7aoks5ltWkuYEE61Or63I8KSGZzOw==
+autolinker@3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/autolinker/-/autolinker-3.0.3.tgz#0a5227c76581a49cd72fc02d8601502c35426948"
+  integrity sha512-/ieTlOF7IYbjeGShX5eY0ALHb/jZJRxcavpEn3PelSiRPDn7yfGN/6IMKmiYq57mwB1aT7g1GG9ck8s9UrSwpQ==
   dependencies:
     tslib "^1.9.3"
 
