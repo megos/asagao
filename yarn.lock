@@ -10127,10 +10127,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-cli-plugin-electron-builder@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/vue-cli-plugin-electron-builder/-/vue-cli-plugin-electron-builder-1.1.1.tgz#b53e3edd5c442e8871840d3f8d329138a3514937"
-  integrity sha512-8E6wqx4lzBMLZ/ozCu7To27Ut5sq8jjKvOHgxZqP9/vQPMTWJnXg8ianTHROK8wBIw97293c5KkthS22xWKZdA==
+vue-cli-plugin-electron-builder@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vue-cli-plugin-electron-builder/-/vue-cli-plugin-electron-builder-1.1.2.tgz#7f80f7fc9e86dbb9fad87e5d1cce7777e413a8fb"
+  integrity sha512-1LZV3Q5fRvevMWIIH0eb+najtICD3td+EHkdagaULz6+yUUkNjvLMHJDF7yQJGgu4T3dYwELSEeOhhRxGFzJKA==
   dependencies:
     electron-builder "^20.29.0"
     execa "^1.0.0"
