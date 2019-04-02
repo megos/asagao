@@ -6768,10 +6768,10 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-onsenui@2.10.6:
-  version "2.10.6"
-  resolved "https://registry.yarnpkg.com/onsenui/-/onsenui-2.10.6.tgz#bc0996e158296b738b5ae871de005f2bbcc33738"
-  integrity sha512-6Lj8SqhJ6apQMRkVBlTLXzYE6R2B1JpwbTcXjK82v/NydrOi3yAcY7cMW+Fc5Ds+GVNyxg4MBkW2E4RmvlNE6g==
+onsenui@2.10.8:
+  version "2.10.8"
+  resolved "https://registry.yarnpkg.com/onsenui/-/onsenui-2.10.8.tgz#dde8202b9b3c926426a443b7bcd74cb2b9e69557"
+  integrity sha512-4qVrn8de4CfmX9qdXApYoW3wqdn5K1lEotXzS7S8+L7mEl/hAWZaIXWU/WaxU3rJPCb560uVUXqGGOgEMfF4fA==
   dependencies:
     "@onsenui/custom-elements" "1.0.0"
     "@onsenui/fastclick" "1.1.1"
