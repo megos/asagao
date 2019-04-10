@@ -14,7 +14,7 @@
     "autolinker": "3.0.5",
     "bootstrap-vue": "2.0.0-rc.18",
     "cron": "1.7.0",
-    "electron-context-menu": "0.11.0",
+    "electron-context-menu": "0.12.0",
     "electron-json-storage-sync": "1.1.1",
     "electron-oauth-twitter": "1.2.0",
     "jquery": "3.3.1",
