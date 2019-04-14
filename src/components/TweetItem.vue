@@ -62,7 +62,6 @@
 
 <script>
 import moment from 'moment'
-import TweetItem from './TweetItem'
 
 moment.updateLocale('en', {
   relativeTime: {
@@ -79,7 +78,6 @@ moment.updateLocale('en', {
 
 export default {
   name: 'TweetItem',
-  components: { TweetItem },
   props: {
     tweet: {
       type: Object,
