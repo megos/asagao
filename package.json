@@ -47,10 +47,8 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
+      "@megos/eslint-config-vue"
     ],
-    "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
     }
