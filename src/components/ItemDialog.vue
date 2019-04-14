@@ -99,7 +99,9 @@ export default {
         })
     },
     actionFavorite() {
-      (this.favorited ? this.$twitter.destroyFavorite(this.idStr) : this.$twitter.createFavorite(this.idStr))
+      (this.favorited
+        ? this.$twitter.destroyFavorite(this.idStr)
+        : this.$twitter.createFavorite(this.idStr))
         .then((tweet) => {
           this.$ons.notification.toast(`${this.favoritePrefix} favorite`, { timeout: 2000 })
           this.updateFavorited({
