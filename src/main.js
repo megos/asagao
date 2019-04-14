@@ -6,10 +6,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import Vue from 'vue'
 import $ons from 'vue-onsenui/esm'
-import * as VOns from './vue-onsen-components'
 import { FormTextarea } from 'bootstrap-vue/es/components'
 
 import log4js from 'log4js'
+import * as VOns from './vue-onsen-components'
 
 import App from './App'
 import router from './router'

@@ -1,14 +1,16 @@
-'use strict'
 
-import { app, shell, protocol, BrowserWindow } from 'electron'
+
+import {
+  app, shell, protocol, BrowserWindow,
+} from 'electron'
 import {
   createProtocol,
-  installVueDevtools
+  installVueDevtools,
 } from 'vue-cli-plugin-electron-builder/lib'
 import OAuthTwitter from 'electron-oauth-twitter'
 import storage from 'electron-json-storage-sync'
-import { credentials, keys } from './constants'
 import ContextMenu from 'electron-context-menu'
+import { credentials, keys } from './constants'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -18,7 +20,7 @@ let win
 
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true })
-function createWindow () {
+function createWindow() {
   // Create the browser window.
   // win = new BrowserWindow({ width: 800, height: 600 })
   let winURL
@@ -39,7 +41,7 @@ function createWindow () {
   } else {
     const twitterAuthWindow = new OAuthTwitter({
       key: credentials.CONSUMER_KEY,
-      secret: credentials.CONSUMER_SECRET
+      secret: credentials.CONSUMER_SECRET,
     })
 
     twitterAuthWindow.startRequest()
@@ -57,12 +59,12 @@ function createWindow () {
   }
 }
 
-function openWindow () {
+function openWindow() {
   win = new BrowserWindow({
     height: 700,
     width: 400,
     titleBarStyle: 'hidden',
-    useContentSize: true
+    useContentSize: true,
   })
   if (!process.env.IS_TEST) win.webContents.openDevTools()
 
@@ -71,8 +73,8 @@ function openWindow () {
   })
 
   win.webContents.on('new-window', (event, url) => {
-    if (!(url.match(/.*(jpg|png|mp4|size=l)$/) ||
-        url.match(/.*pixiv\.net.*[0-9]+$/))) {
+    if (!(url.match(/.*(jpg|png|mp4|size=l)$/)
+        || url.match(/.*pixiv\.net.*[0-9]+$/))) {
       event.preventDefault()
       shell.openExternal(url)
     }
@@ -110,7 +112,7 @@ app.on('ready', async () => {
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
   if (process.platform === 'win32') {
-    process.on('message', data => {
+    process.on('message', (data) => {
       if (data === 'graceful-exit') {
         app.quit()
       }

@@ -13,7 +13,7 @@ const client = new Twitter({
   consumer_key: credentials.CONSUMER_KEY,
   consumer_secret: credentials.CONSUMER_SECRET,
   access_token_key: oauthInfo.data.oauth_access_token,
-  access_token_secret: oauthInfo.data.oauth_access_token_secret
+  access_token_secret: oauthInfo.data.oauth_access_token_secret,
 })
 
 export const TwitterClient = {
@@ -21,7 +21,7 @@ export const TwitterClient = {
   /**
    * Fetch account
    */
-  fetchAccount () {
+  fetchAccount() {
     return new Promise((resolve, reject) => {
       client.get('account/verify_credentials', (err, user, res) => {
         if (!err) {
@@ -37,13 +37,13 @@ export const TwitterClient = {
   /**
    * Fetch list
    */
-  fetchLists () {
+  fetchLists() {
     return new Promise((resolve, reject) => {
       this.get('lists/list')
         .then((res) => {
-          let lists = [{
+          const lists = [{
             id_str: '',
-            full_text: ''
+            full_text: '',
           }]
           res.forEach((item) => {
             lists.push(this.parseListItem(item))
@@ -61,16 +61,16 @@ export const TwitterClient = {
    * @param {string} endpoint
    * @param {Object} params
    */
-  fetchTweets (endpoint, params) {
+  fetchTweets(endpoint, params) {
     return new Promise((resolve, reject) => {
-      logger.info('Fetch start ' + endpoint)
+      logger.info(`Fetch start ${endpoint}`)
       client.get(endpoint, params, (err, tweets, res) => {
         if (!err) {
-          let extendedTweets = []
+          const extendedTweets = []
           tweets.forEach((tweet) => {
             extendedTweets.push(this.parseTweet(tweet))
           })
-          logger.info('Fetch tweets from ' + endpoint + ' count: ' + tweets.length)
+          logger.info(`Fetch tweets from ${endpoint} count: ${tweets.length}`)
           resolve(extendedTweets)
         } else {
           logger.error(err)
@@ -86,7 +86,7 @@ export const TwitterClient = {
    * @param {string} replyScreenName
    * @param {string} inReplyToStatusId
    */
-  postTweet (status, replyScreenName, inReplyToStatusId) {
+  postTweet(status, replyScreenName, inReplyToStatusId) {
     const params = {}
     params.status = status
     if (inReplyToStatusId !== '' && (status.indexOf(`@${replyScreenName}`) !== -1)) {
@@ -99,18 +99,18 @@ export const TwitterClient = {
    * Delete tweet
    * @param {string} id
    */
-  deleteTweet (id) {
+  deleteTweet(id) {
     return this.post('statuses/destroy', {
-      id: id
+      id,
     })
   },
   /**
    * Retweet
    * @param {string} id
    */
-  retweet (id) {
+  retweet(id) {
     return this.post('statuses/retweet', {
-      id: id
+      id,
     })
   },
 
@@ -118,9 +118,9 @@ export const TwitterClient = {
    * UnRetweet
    * @param {string} id
    */
-  unretweet (id) {
+  unretweet(id) {
     return this.post('statuses/unretweet', {
-      id: id
+      id,
     })
   },
 
@@ -128,9 +128,9 @@ export const TwitterClient = {
    * Add favorite
    * @param {string} id
    */
-  createFavorite (id) {
+  createFavorite(id) {
     return this.post('favorites/create', {
-      id: id
+      id,
     })
   },
 
@@ -138,9 +138,9 @@ export const TwitterClient = {
    * Remove favorite
    * @param {string} id
    */
-  destroyFavorite (id) {
+  destroyFavorite(id) {
     return this.post('favorites/destroy', {
-      id: id
+      id,
     })
   },
 
@@ -149,7 +149,7 @@ export const TwitterClient = {
    * @param {string} url
    * @param {Object} params
    */
-  get (url, params) {
+  get(url, params) {
     return new Promise((resolve, reject) => {
       if (params == null) {
         client.get(url, (err, items, res) => {
@@ -178,7 +178,7 @@ export const TwitterClient = {
    * @param {string} url
    * @param {Object} params
    */
-  post (url, params) {
+  post(url, params) {
     return new Promise((resolve, reject) => {
       client.post(url, params, (err, tweet, res) => {
         if (!err) {
@@ -195,14 +195,14 @@ export const TwitterClient = {
    * Tweet object covert to this client object
    * @param {Object} tweet
    */
-  parseTweet (tweet) {
-    let retw = tweet.retweeted_status
+  parseTweet(tweet) {
+    const retw = tweet.retweeted_status
     if (retw) {
       retw.id_str = tweet.id_str
       retw.retweeted_user = tweet.user.name
       tweet = retw
     }
-    var html = this.toHtml(tweet.full_text || tweet.text)
+    let html = this.toHtml(tweet.full_text || tweet.text)
     tweet.media_list = []
     if (tweet.entities.urls) {
       html = this.convertURLs(html, tweet.entities.urls)
@@ -229,8 +229,8 @@ export const TwitterClient = {
         name: tweet.user.name,
         screen_name: tweet.user.screen_name,
         protected: tweet.user.protected,
-        verified: tweet.user.verified
-      }
+        verified: tweet.user.verified,
+      },
     }
   },
 
@@ -238,12 +238,12 @@ export const TwitterClient = {
    * Line feed to br tag and sanitize html
    * @param {string} text
    */
-  toHtml (text) {
+  toHtml(text) {
     text = text.replace(/[\n\r]/g, '<br>')
     text = sanitizeHtml(text)
     return autolinker.link(text, {
       mention: 'twitter',
-      hashtag: 'twitter'
+      hashtag: 'twitter',
     })
   },
 
@@ -252,9 +252,9 @@ export const TwitterClient = {
    * @param {string} text tweet
    * @param {Object} urls
    */
-  convertURLs (text, urls) {
+  convertURLs(text, urls) {
     for (let ui = 0; ui < urls.length; ui++) {
-      text = text.replace('>' + urls[ui].url.replace(/http(|s):\/\//, ''), '>' + urls[ui].display_url)
+      text = text.replace(`>${urls[ui].url.replace(/http(|s):\/\//, '')}`, `>${urls[ui].display_url}`)
     }
     return text
   },
@@ -263,15 +263,15 @@ export const TwitterClient = {
    * Get image or video urls
    * @param {Object} urls
    */
-  getUrlMedia (urls) {
-    let mediaList = []
+  getUrlMedia(urls) {
+    const mediaList = []
     urls.forEach((item) => {
       // instagram
       const shortcode = item.display_url.match(/^instagram\.com\/p\/(.*)\//)
       if (shortcode) {
         mediaList.push({
-          url_thumb: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=t',
-          url: 'https://instagram.com/p/' + shortcode[1] + '/media/?size=l'
+          url_thumb: `https://instagram.com/p/${shortcode[1]}/media/?size=t`,
+          url: `https://instagram.com/p/${shortcode[1]}/media/?size=l`,
         })
       }
       // pixiv
@@ -280,7 +280,7 @@ export const TwitterClient = {
         const pixivUrl = `https://embed.pixiv.net/decorate.php?illust_id=${illustId[1]}`
         mediaList.push({
           url_thumb: pixivUrl,
-          url: pixivUrl
+          url: pixivUrl,
         })
       }
     })
@@ -291,27 +291,23 @@ export const TwitterClient = {
    * Search extended entities media
    * @param {Object} media
    */
-  getMedia (media) {
-    let mediaList = []
+  getMedia(media) {
+    const mediaList = []
     media.forEach((item) => {
-      const type = item.type
+      const { type } = item
       if (type === 'photo') {
         mediaList.push({
-          url_thumb: item.media_url + ':thumb',
-          url: item.media_url
+          url_thumb: `${item.media_url}:thumb`,
+          url: item.media_url,
         })
       } else if (type === 'video' || type === 'animated_gif') {
-        const mp4 = item.video_info.variants.filter((item) => {
-          return (item.content_type === 'video/mp4')
-        }).sort((a, b) => {
-          return (a.bitrate > b.bitrate) ? -1 : 1
-        })
+        const mp4 = item.video_info.variants.filter(item => (item.content_type === 'video/mp4')).sort((a, b) => ((a.bitrate > b.bitrate) ? -1 : 1))
         if (mp4.length > 0) {
           // Get highest bitrate item
           mediaList.push({
             url_thumb: item.media_url,
             // Remove '?tag=3'
-            url: mp4[0].url.replace(/\?.*/, '')
+            url: mp4[0].url.replace(/\?.*/, ''),
           })
         }
       }
@@ -323,7 +319,7 @@ export const TwitterClient = {
    * Find tweet item for Array.prototype.find
    * @param {Object} tweet
    */
-  findItem (tweet) {
+  findItem(tweet) {
     return tweet.id_str === this
   },
 
@@ -331,10 +327,10 @@ export const TwitterClient = {
    * list object covert to this client object
    * @param {Object} item
    */
-  parseListItem (item) {
+  parseListItem(item) {
     return {
       id_str: item.id_str,
-      full_name: item.full_name
+      full_name: item.full_name,
     }
-  }
+  },
 }

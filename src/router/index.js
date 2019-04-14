@@ -10,11 +10,11 @@ export default new Router({
       path: '/',
       name: 'timeline',
       component: Timeline,
-      props: { mode: 'Timeline' }
+      props: { mode: 'Timeline' },
     },
     {
       path: '*',
-      redirect: '/'
-    }
-  ]
+      redirect: '/',
+    },
+  ],
 })

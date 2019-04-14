@@ -17,36 +17,36 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import TweetListItem from '@/components/TweetListItem'
-  import TweetSkelton from '@/components/TweetSkelton'
+import { mapState } from 'vuex'
+import TweetListItem from '@/components/TweetListItem'
+import TweetSkelton from '@/components/TweetSkelton'
 
-  export default {
-    components: { TweetListItem, TweetSkelton },
-    props: {
-      mode: {
-        type: String,
-        required: true
+export default {
+  components: { TweetListItem, TweetSkelton },
+  props: {
+    mode: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    tweets() {
+      if (this.mode === 'Timeline') {
+        return this.timeline
+      } if (this.mode === 'Mentions') {
+        return this.mentions
+      } if (this.mode === 'Favorites') {
+        return this.favorites
+      } if (this.mode === 'Lists') {
+        return this.lists
       }
     },
-    computed: {
-      tweets: function () {
-        if (this.mode === 'Timeline') {
-          return this.timeline
-        } else if (this.mode === 'Mentions') {
-          return this.mentions
-        } else if (this.mode === 'Favorites') {
-          return this.favorites
-        } else if (this.mode === 'Lists') {
-          return this.lists
-        }
-      },
-      ...mapState({
-        timeline: state => state.twitter.timeline,
-        mentions: state => state.twitter.mentions,
-        favorites: state => state.twitter.favorites,
-        lists: state => state.twitter.listsStatuses
-      })
-    }
-  }
+    ...mapState({
+      timeline: state => state.twitter.timeline,
+      mentions: state => state.twitter.mentions,
+      favorites: state => state.twitter.favorites,
+      lists: state => state.twitter.listsStatuses,
+    }),
+  },
+}
 </script>
