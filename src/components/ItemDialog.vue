@@ -73,7 +73,7 @@ export default {
     }),
   },
   methods: {
-    closeDialog(event) {
+    closeDialog() {
       this.closeTweetItemDialog()
       this.removeSelectedItem()
     },
