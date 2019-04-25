@@ -40,7 +40,7 @@ export default {
     screenName: state => state.app.screenName,
   }),
   watch: {
-    screenName(value) {
+    screenName() {
       if (this.screenName !== '' && this.tweet === '') {
         this.tweet = `@${this.screenName} `
       } else if (this.screenName === '') {
