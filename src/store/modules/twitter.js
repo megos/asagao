@@ -83,6 +83,8 @@ const actions = {
         if (!err) {
           commit('ADD_TIMELINE', docs)
           resolve()
+        } else {
+          reject()
         }
       })
     })
