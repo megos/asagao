@@ -36,7 +36,9 @@ function createWindow() {
 
   const oauthInfo = storage.get(keys.OAUTH_TOKEN)
   openWindow()
-  if (oauthInfo.status && oauthInfo.data.oauth_access_token && oauthInfo.data.oauth_access_token_secret) {
+  if (oauthInfo.status
+    && oauthInfo.data.oauth_access_token
+    && oauthInfo.data.oauth_access_token_secret) {
     win.loadURL(winURL)
   } else {
     const twitterAuthWindow = new OAuthTwitter({
