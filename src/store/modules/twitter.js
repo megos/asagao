@@ -1,6 +1,8 @@
 import _ from 'lodash'
 import Datastore from 'nedb'
+/* eslint-disable import/no-extraneous-dependencies */
 import electron from 'electron'
+/* eslint-enable */
 import { TwitterClient } from '../../modules/twitter'
 
 const datastore = new Datastore({

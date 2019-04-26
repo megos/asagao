@@ -1,5 +1,4 @@
-
-
+/* eslint-disable import/no-extraneous-dependencies */
 import {
   app, shell, protocol, BrowserWindow,
 } from 'electron'
@@ -7,6 +6,7 @@ import {
   createProtocol,
   installVueDevtools,
 } from 'vue-cli-plugin-electron-builder/lib'
+/* eslint-enable */
 import OAuthTwitter from 'electron-oauth-twitter'
 import storage from 'electron-json-storage-sync'
 import ContextMenu from 'electron-context-menu'
