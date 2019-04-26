@@ -29,50 +29,52 @@ const state = {
   listsStatuses: [],
 }
 
+/* eslint-disable no-param-reassign */
 const mutations = {
-  ADD_ME(state, me) {
-    state.me = me
+  ADD_ME(st, me) {
+    st.me = me
   },
-  ADD_LISTS(state, lists) {
-    state.lists = lists
+  ADD_LISTS(st, lists) {
+    st.lists = lists
   },
-  SET_LIST_ID(state, listId) {
-    state.listId = listId
+  SET_LIST_ID(st, listId) {
+    st.listId = listId
   },
-  ADD_TIMELINE(state, tweets) {
-    state.timeline = tweets.concat(state.timeline)
+  ADD_TIMELINE(st, tweets) {
+    st.timeline = tweets.concat(st.timeline)
   },
-  DELETE_TWEET(state, idx) {
-    state.timeline.splice(idx, 1)
+  DELETE_TWEET(st, idx) {
+    st.timeline.splice(idx, 1)
   },
-  ADD_TWEETED_ID_STR(state, idStr) {
-    state.tweetedIdStr.push(idStr)
+  ADD_TWEETED_ID_STR(st, idStr) {
+    st.tweetedIdStr.push(idStr)
   },
-  REMOVE_TWEETS(state) {
-    state.tweetedIdStr.forEach((idStr) => {
-      state.timeline.splice(state.timeline.findIndex(TwitterClient.findItem, idStr), 1)
+  REMOVE_TWEETS(st) {
+    st.tweetedIdStr.forEach((idStr) => {
+      st.timeline.splice(st.timeline.findIndex(TwitterClient.findItem, idStr), 1)
     })
-    state.tweetedIdStr = []
+    st.tweetedIdStr = []
   },
-  ADD_MENTIONS(state, tweets) {
-    state.mentions = tweets.concat(state.mentions)
+  ADD_MENTIONS(st, tweets) {
+    st.mentions = tweets.concat(st.mentions)
   },
-  ADD_FAVORITES(state, tweets) {
-    state.favorites = tweets.concat(state.favorites)
+  ADD_FAVORITES(st, tweets) {
+    st.favorites = tweets.concat(st.favorites)
   },
-  ADD_LISTS_STATUSES(state, tweets) {
-    state.listsStatuses = tweets.concat(state.listsStatuses)
+  ADD_LISTS_STATUSES(st, tweets) {
+    st.listsStatuses = tweets.concat(st.listsStatuses)
   },
-  DELETE_LISTS_STATUSES(state) {
-    state.listsStatuses = []
+  DELETE_LISTS_STATUSES(st) {
+    st.listsStatuses = []
   },
-  UPDATE_FAVORITED(state, { idx, favorited }) {
-    state.timeline[idx].favorited = favorited
+  UPDATE_FAVORITED(st, { idx, favorited }) {
+    st.timeline[idx].favorited = favorited
   },
-  UPDATE_RETWEETED(state, { idx, retweeted }) {
-    state.timeline[idx].retweeted = retweeted
+  UPDATE_RETWEETED(st, { idx, retweeted }) {
+    st.timeline[idx].retweeted = retweeted
   },
 }
+/* eslint-enable */
 
 const actions = {
   restore({ commit }) {
