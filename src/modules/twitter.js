@@ -300,7 +300,9 @@ export default {
           url: item.media_url,
         })
       } else if (type === 'video' || type === 'animated_gif') {
-        const mp4 = item.video_info.variants.filter(item => (item.content_type === 'video/mp4')).sort((a, b) => ((a.bitrate > b.bitrate) ? -1 : 1))
+        const mp4 = item.video_info.variants
+          .filter(variant => (variant.content_type === 'video/mp4'))
+          .sort((a, b) => ((a.bitrate > b.bitrate) ? -1 : 1))
         if (mp4.length > 0) {
           // Get highest bitrate item
           mediaList.push({
