@@ -20,6 +20,32 @@ let win
 
 // Standard scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', secure: true }])
+
+function openWindow() {
+  win = new BrowserWindow({
+    height: 700,
+    width: 400,
+    titleBarStyle: 'hidden',
+    useContentSize: true,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  })
+  if (!process.env.IS_TEST) win.webContents.openDevTools()
+
+  win.on('closed', () => {
+    win = null
+  })
+
+  win.webContents.on('new-window', (event, url) => {
+    if (!(url.match(/.*(jpg|png|mp4|size=l)$/)
+        || url.match(/.*pixiv\.net.*[0-9]+$/))) {
+      event.preventDefault()
+      shell.openExternal(url)
+    }
+  })
+}
+
 function createWindow() {
   // Create the browser window.
   // win = new BrowserWindow({ width: 800, height: 600 })
@@ -59,31 +85,6 @@ function createWindow() {
         console.error(err, err.stack)
       })
   }
-}
-
-function openWindow() {
-  win = new BrowserWindow({
-    height: 700,
-    width: 400,
-    titleBarStyle: 'hidden',
-    useContentSize: true,
-    webPreferences: {
-      nodeIntegration: true,
-    },
-  })
-  if (!process.env.IS_TEST) win.webContents.openDevTools()
-
-  win.on('closed', () => {
-    win = null
-  })
-
-  win.webContents.on('new-window', (event, url) => {
-    if (!(url.match(/.*(jpg|png|mp4|size=l)$/)
-        || url.match(/.*pixiv\.net.*[0-9]+$/))) {
-      event.preventDefault()
-      shell.openExternal(url)
-    }
-  })
 }
 
 // Quit when all windows are closed.
