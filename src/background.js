@@ -19,7 +19,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 let win
 
 // Standard scheme must be registered before the app is ready
-protocol.registerStandardSchemes(['app'], { secure: true })
+protocol.registerSchemesAsPrivileged([{ scheme: 'app', secure: true }])
 function createWindow() {
   // Create the browser window.
   // win = new BrowserWindow({ width: 800, height: 600 })
@@ -65,6 +65,9 @@ function openWindow() {
     width: 400,
     titleBarStyle: 'hidden',
     useContentSize: true,
+    webPreferences: {
+      nodeIntegration: true,
+    },
   })
   if (!process.env.IS_TEST) win.webContents.openDevTools()
 
@@ -104,7 +107,11 @@ app.on('activate', () => {
 app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
-    await installVueDevtools()
+    try {
+      await installVueDevtools()
+    } catch (e) {
+      console.error('Vue Devtools failed to install:', e.toString())
+    }
   }
   createWindow()
 })
