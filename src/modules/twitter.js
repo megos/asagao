@@ -16,7 +16,7 @@ const client = new Twitter({
   access_token_secret: oauthInfo.data.oauth_access_token_secret,
 })
 
-export const TwitterClient = {
+export default {
 
   /**
    * Fetch account

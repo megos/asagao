@@ -14,7 +14,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-import { TwitterClient } from './modules/twitter'
+import TwitterClient from './modules/twitter'
 
 Vue.config.productionTip = false
 
