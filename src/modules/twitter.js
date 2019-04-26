@@ -248,13 +248,14 @@ export default {
   /**
    * Convert short URL to Real URL
    * @param {string} text tweet
-   * @param {Object} urls
+   * @param {Object} items
    */
-  convertURLs(text, urls) {
-    for (let ui = 0; ui < urls.length; ui++) {
-      text = text.replace(`>${urls[ui].url.replace(/http(|s):\/\//, '')}`, `>${urls[ui].display_url}`)
-    }
-    return text
+  convertURLs(text, items) {
+    let newText = text
+    items.forEach((item) => {
+      newText = newText.replace(`>${item.url.replace(/http(|s):\/\//, '')}`, `>${item.display_url}`)
+    })
+    return newText
   },
 
   /**
