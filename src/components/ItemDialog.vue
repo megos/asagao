@@ -86,7 +86,7 @@ export default {
         .then((ret) => {
           if (ret === 1) {
             this.$twitter.deleteTweet(this.idStr)
-              .then((res) => {
+              .then(() => {
                 this.deleteTweet(this.idStr)
                 this.closeTweetItemDialog()
               })
