@@ -251,11 +251,11 @@ export default {
    * @param {Object} items
    */
   convertURLs(text, items) {
-    let newText = text
+    let ret = text
     items.forEach((item) => {
-      newText = newText.replace(`>${item.url.replace(/http(|s):\/\//, '')}`, `>${item.display_url}`)
+      ret = ret.replace(`>${item.url.replace(/http(|s):\/\//, '')}`, `>${item.display_url}`)
     })
-    return newText
+    return ret
   },
 
   /**
