@@ -31,14 +31,16 @@ export default {
   },
   computed: {
     tweets() {
-      if (this.mode === 'Timeline') {
-        return this.timeline
-      } if (this.mode === 'Mentions') {
-        return this.mentions
-      } if (this.mode === 'Favorites') {
-        return this.favorites
-      } if (this.mode === 'Lists') {
-        return this.lists
+      switch (this.mode) {
+        case 'Timeline':
+        default:
+          return this.timeline
+        case 'Mentions':
+          return this.mentions
+        case 'Favorites':
+          return this.favorites
+        case 'Lists':
+          return this.lists
       }
     },
     ...mapState({
