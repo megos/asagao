@@ -239,9 +239,7 @@ export default {
    * @param {string} text
    */
   toHtml(text) {
-    text = text.replace(/[\n\r]/g, '<br>')
-    text = sanitizeHtml(text)
-    return autolinker.link(text, {
+    return autolinker.link(sanitizeHtml(text.replace(/[\n\r]/g, '<br>')), {
       mention: 'twitter',
       hashtag: 'twitter',
     })
