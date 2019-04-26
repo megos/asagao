@@ -196,40 +196,41 @@ export default {
    * @param {Object} tweet
    */
   parseTweet(tweet) {
-    const retw = tweet.retweeted_status
+    let tw = tweet
+    const retw = tw.retweeted_status
     if (retw) {
-      retw.id_str = tweet.id_str
-      retw.retweeted_user = tweet.user.name
-      tweet = retw
+      retw.id_str = tw.id_str
+      retw.retweeted_user = tw.user.name
+      tw = retw
     }
-    let html = this.toHtml(tweet.full_text || tweet.text)
-    tweet.media_list = []
-    if (tweet.entities.urls) {
-      html = this.convertURLs(html, tweet.entities.urls)
-      Array.prototype.push.apply(tweet.media_list, this.getUrlMedia(tweet.entities.urls))
+    let html = this.toHtml(tw.full_text || tw.text)
+    tw.media_list = []
+    if (tw.entities.urls) {
+      html = this.convertURLs(html, tw.entities.urls)
+      Array.prototype.push.apply(tw.media_list, this.getUrlMedia(tw.entities.urls))
     }
-    if (tweet.extended_entities && tweet.extended_entities.media) {
-      html = this.convertURLs(html, tweet.extended_entities.media)
-      Array.prototype.push.apply(tweet.media_list, this.getMedia(tweet.extended_entities.media))
+    if (tw.extended_entities && tw.extended_entities.media) {
+      html = this.convertURLs(html, tw.extended_entities.media)
+      Array.prototype.push.apply(tw.media_list, this.getMedia(tw.extended_entities.media))
     }
-    if (tweet.quoted_status) {
-      tweet.quoted_status = this.parseTweet(tweet.quoted_status)
+    if (tw.quoted_status) {
+      tw.quoted_status = this.parseTweet(tw.quoted_status)
     }
     return {
-      id_str: tweet.id_str,
+      id_str: tw.id_str,
       full_text_html: html,
-      created_at: tweet.created_at,
-      quoted_status: tweet.quoted_status,
-      retweeted_user: tweet.retweeted_user,
-      favorited: tweet.favorited,
-      retweeted: tweet.retweeted,
-      media_list: tweet.media_list,
+      created_at: tw.created_at,
+      quoted_status: tw.quoted_status,
+      retweeted_user: tw.retweeted_user,
+      favorited: tw.favorited,
+      retweeted: tw.retweeted,
+      media_list: tw.media_list,
       user: {
-        profile_image_url: tweet.user.profile_image_url_https.replace(/_normal/, ''),
-        name: tweet.user.name,
-        screen_name: tweet.user.screen_name,
-        protected: tweet.user.protected,
-        verified: tweet.user.verified,
+        profile_image_url: tw.user.profile_image_url_https.replace(/_normal/, ''),
+        name: tw.user.name,
+        screen_name: tw.user.screen_name,
+        protected: tw.user.protected,
+        verified: tw.user.verified,
       },
     }
   },
