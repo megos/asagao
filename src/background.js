@@ -1,14 +1,16 @@
-'use strict'
-
-import { app, shell, protocol, BrowserWindow } from 'electron'
+/* eslint-disable import/no-extraneous-dependencies */
+import {
+  app, shell, protocol, BrowserWindow,
+} from 'electron'
 import {
   createProtocol,
-  installVueDevtools
+  installVueDevtools,
 } from 'vue-cli-plugin-electron-builder/lib'
+/* eslint-enable */
 import OAuthTwitter from 'electron-oauth-twitter'
 import storage from 'electron-json-storage-sync'
-import { credentials, keys } from './constants'
 import ContextMenu from 'electron-context-menu'
+import { credentials, keys } from './constants'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -17,8 +19,34 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 let win
 
 // Standard scheme must be registered before the app is ready
-protocol.registerStandardSchemes(['app'], { secure: true })
-function createWindow () {
+protocol.registerSchemesAsPrivileged([{ scheme: 'app', secure: true }])
+
+function openWindow() {
+  win = new BrowserWindow({
+    height: 700,
+    width: 400,
+    titleBarStyle: 'hidden',
+    useContentSize: true,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  })
+  if (!process.env.IS_TEST) win.webContents.openDevTools()
+
+  win.on('closed', () => {
+    win = null
+  })
+
+  win.webContents.on('new-window', (event, url) => {
+    if (!(url.match(/.*(jpg|png|mp4|size=l)$/)
+        || url.match(/.*pixiv\.net.*[0-9]+$/))) {
+      event.preventDefault()
+      shell.openExternal(url)
+    }
+  })
+}
+
+function createWindow() {
   // Create the browser window.
   // win = new BrowserWindow({ width: 800, height: 600 })
   let winURL
@@ -34,12 +62,14 @@ function createWindow () {
 
   const oauthInfo = storage.get(keys.OAUTH_TOKEN)
   openWindow()
-  if (oauthInfo.status && oauthInfo.data.oauth_access_token && oauthInfo.data.oauth_access_token_secret) {
+  if (oauthInfo.status
+    && oauthInfo.data.oauth_access_token
+    && oauthInfo.data.oauth_access_token_secret) {
     win.loadURL(winURL)
   } else {
     const twitterAuthWindow = new OAuthTwitter({
       key: credentials.CONSUMER_KEY,
-      secret: credentials.CONSUMER_SECRET
+      secret: credentials.CONSUMER_SECRET,
     })
 
     twitterAuthWindow.startRequest()
@@ -55,28 +85,6 @@ function createWindow () {
         console.error(err, err.stack)
       })
   }
-}
-
-function openWindow () {
-  win = new BrowserWindow({
-    height: 700,
-    width: 400,
-    titleBarStyle: 'hidden',
-    useContentSize: true
-  })
-  if (!process.env.IS_TEST) win.webContents.openDevTools()
-
-  win.on('closed', () => {
-    win = null
-  })
-
-  win.webContents.on('new-window', (event, url) => {
-    if (!(url.match(/.*(jpg|png|mp4|size=l)$/) ||
-        url.match(/.*pixiv\.net.*[0-9]+$/))) {
-      event.preventDefault()
-      shell.openExternal(url)
-    }
-  })
 }
 
 // Quit when all windows are closed.
@@ -102,7 +110,11 @@ app.on('activate', () => {
 app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
-    await installVueDevtools()
+    try {
+      await installVueDevtools()
+    } catch (e) {
+      console.error('Vue Devtools failed to install:', e.toString())
+    }
   }
   createWindow()
 })
@@ -110,7 +122,7 @@ app.on('ready', async () => {
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
   if (process.platform === 'win32') {
-    process.on('message', data => {
+    process.on('message', (data) => {
       if (data === 'graceful-exit') {
         app.quit()
       }

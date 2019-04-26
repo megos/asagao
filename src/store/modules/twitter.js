@@ -1,12 +1,14 @@
 import _ from 'lodash'
-import { TwitterClient } from '../../modules/twitter'
 import Datastore from 'nedb'
+/* eslint-disable import/no-extraneous-dependencies */
 import electron from 'electron'
+/* eslint-enable */
+import TwitterClient from '../../modules/twitter'
 
 const datastore = new Datastore({
   filename: `${electron.remote.app.getPath('userData')}/storage/timeline.db`,
   autoload: true,
-  timestampData: true
+  timestampData: true,
 })
 datastore.ensureIndex({ fieldName: 'id_str', unique: true })
 // Expire 1 day
@@ -15,7 +17,7 @@ datastore.ensureIndex({ fieldName: 'createdAt', expireAfterSeconds: 60 * 60 * 24
 const defaultGetParams = {
   include_entities: true,
   tweet_mode: 'extended',
-  count: 200
+  count: 200,
 }
 
 const state = {
@@ -26,82 +28,86 @@ const state = {
   timeline: [],
   mentions: [],
   favorites: [],
-  listsStatuses: []
+  listsStatuses: [],
 }
 
+/* eslint-disable no-param-reassign */
 const mutations = {
-  ADD_ME (state, me) {
-    state.me = me
+  ADD_ME(st, me) {
+    st.me = me
   },
-  ADD_LISTS (state, lists) {
-    state.lists = lists
+  ADD_LISTS(st, lists) {
+    st.lists = lists
   },
-  SET_LIST_ID (state, listId) {
-    state.listId = listId
+  SET_LIST_ID(st, listId) {
+    st.listId = listId
   },
-  ADD_TIMELINE (state, tweets) {
-    state.timeline = tweets.concat(state.timeline)
+  ADD_TIMELINE(st, tweets) {
+    st.timeline = tweets.concat(st.timeline)
   },
-  DELETE_TWEET (state, idx) {
-    state.timeline.splice(idx, 1)
+  DELETE_TWEET(st, idx) {
+    st.timeline.splice(idx, 1)
   },
-  ADD_TWEETED_ID_STR (state, idStr) {
-    state.tweetedIdStr.push(idStr)
+  ADD_TWEETED_ID_STR(st, idStr) {
+    st.tweetedIdStr.push(idStr)
   },
-  REMOVE_TWEETS (state) {
-    state.tweetedIdStr.forEach((idStr) => {
-      state.timeline.splice(state.timeline.findIndex(TwitterClient.findItem, idStr), 1)
+  REMOVE_TWEETS(st) {
+    st.tweetedIdStr.forEach((idStr) => {
+      st.timeline.splice(st.timeline.findIndex(TwitterClient.findItem, idStr), 1)
     })
-    state.tweetedIdStr = []
+    st.tweetedIdStr = []
   },
-  ADD_MENTIONS (state, tweets) {
-    state.mentions = tweets.concat(state.mentions)
+  ADD_MENTIONS(st, tweets) {
+    st.mentions = tweets.concat(st.mentions)
   },
-  ADD_FAVORITES (state, tweets) {
-    state.favorites = tweets.concat(state.favorites)
+  ADD_FAVORITES(st, tweets) {
+    st.favorites = tweets.concat(st.favorites)
   },
-  ADD_LISTS_STATUSES (state, tweets) {
-    state.listsStatuses = tweets.concat(state.listsStatuses)
+  ADD_LISTS_STATUSES(st, tweets) {
+    st.listsStatuses = tweets.concat(st.listsStatuses)
   },
-  DELETE_LISTS_STATUSES (state) {
-    state.listsStatuses = []
+  DELETE_LISTS_STATUSES(st) {
+    st.listsStatuses = []
   },
-  UPDATE_FAVORITED (state, {idx, favorited}) {
-    state.timeline[idx].favorited = favorited
+  UPDATE_FAVORITED(st, { idx, favorited }) {
+    st.timeline[idx].favorited = favorited
   },
-  UPDATE_RETWEETED (state, {idx, retweeted}) {
-    state.timeline[idx].retweeted = retweeted
-  }
+  UPDATE_RETWEETED(st, { idx, retweeted }) {
+    st.timeline[idx].retweeted = retweeted
+  },
 }
+/* eslint-enable */
 
 const actions = {
-  restore ({ commit }) {
+  restore({ commit }) {
     return new Promise((resolve, reject) => {
       datastore.find({}).sort({ id_str: -1 }).exec((err, docs) => {
         if (!err) {
           commit('ADD_TIMELINE', docs)
           resolve()
+        } else {
+          reject()
         }
       })
     })
   },
-  fetchAccount ({ commit }) {
+  fetchAccount({ commit }) {
     TwitterClient.fetchAccount()
       .then((user) => {
         commit('ADD_ME', user)
       })
   },
-  fetchLists ({ commit }) {
+  fetchLists({ commit }) {
     TwitterClient.fetchLists()
       .then((lists) => {
         commit('ADD_LISTS', lists)
       })
   },
-  setListId ({ commit }, listId) {
+  setListId({ commit }, listId) {
     commit('DELETE_LISTS_STATUSES')
     commit('SET_LIST_ID', listId)
   },
-  fetchTimeline ({ commit }) {
+  fetchTimeline({ commit }) {
     commit('REMOVE_TWEETS')
     const params = _.cloneDeep(defaultGetParams)
     if (state.timeline.length > 0) {
@@ -115,17 +121,17 @@ const actions = {
         }
       })
   },
-  addTimeline ({ commit }, tweet) {
+  addTimeline({ commit }, tweet) {
     commit('ADD_TIMELINE', [TwitterClient.parseTweet(tweet)])
     commit('ADD_TWEETED_ID_STR', tweet.id_str)
   },
-  remoteTweets ({ commit }) {
+  remoteTweets({ commit }) {
     commit('REMOVE_TWEETS')
   },
-  deleteTweet ({ commit }, idStr) {
+  deleteTweet({ commit }, idStr) {
     commit('DELETE_TWEET', state.timeline.findIndex(TwitterClient.findItem, idStr))
   },
-  fetchMentions ({ commit }) {
+  fetchMentions({ commit }) {
     const params = _.cloneDeep(defaultGetParams)
     if (state.mentions.length > 0) {
       params.since_id = state.mentions[0].id_str
@@ -137,7 +143,7 @@ const actions = {
         }
       })
   },
-  fetchFavorites ({ commit }) {
+  fetchFavorites({ commit }) {
     const params = _.cloneDeep(defaultGetParams)
     if (state.favorites.length > 0) {
       params.since_id = state.favorites[0].id_str
@@ -149,7 +155,7 @@ const actions = {
         }
       })
   },
-  fetchListsStatuses ({ commit }) {
+  fetchListsStatuses({ commit }) {
     const params = _.cloneDeep(defaultGetParams)
     if (state.listsStatuses.length > 0) {
       params.since_id = state.listsStatuses[0].id_str
@@ -162,22 +168,22 @@ const actions = {
         }
       })
   },
-  updateFavorited ({ commit }, {idStr, favorited}) {
+  updateFavorited({ commit }, { idStr, favorited }) {
     commit('UPDATE_FAVORITED', {
       idx: state.timeline.findIndex(TwitterClient.findItem, idStr),
-      favorited: favorited
+      favorited,
     })
   },
-  updateRetweeted ({ commit }, {idStr, retweeted}) {
+  updateRetweeted({ commit }, { idStr, retweeted }) {
     commit('UPDATE_RETWEETED', {
       idx: state.timeline.findIndex(TwitterClient.findItem, idStr),
-      retweeted: retweeted
+      retweeted,
     })
-  }
+  },
 }
 
 export default {
   state,
   mutations,
-  actions
+  actions,
 }
