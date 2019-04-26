@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 // Add your components:
 
 // export { default as VOnsActionSheet } from 'vue-onsenui/esm/components/VOnsActionSheet'
