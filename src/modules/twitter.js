@@ -23,7 +23,7 @@ export default {
    */
   fetchAccount() {
     return new Promise((resolve, reject) => {
-      client.get('account/verify_credentials', (err, user, res) => {
+      client.get('account/verify_credentials', (err, user) => {
         if (!err) {
           resolve(user)
         } else {
@@ -64,7 +64,7 @@ export default {
   fetchTweets(endpoint, params) {
     return new Promise((resolve, reject) => {
       logger.info(`Fetch start ${endpoint}`)
-      client.get(endpoint, params, (err, tweets, res) => {
+      client.get(endpoint, params, (err, tweets) => {
         if (!err) {
           const extendedTweets = []
           tweets.forEach((tweet) => {
@@ -152,7 +152,7 @@ export default {
   get(url, params) {
     return new Promise((resolve, reject) => {
       if (params == null) {
-        client.get(url, (err, items, res) => {
+        client.get(url, (err, items) => {
           if (!err) {
             resolve(items)
           } else {
@@ -161,7 +161,7 @@ export default {
           }
         })
       } else {
-        client.get(url, params, (err, items, res) => {
+        client.get(url, params, (err, items) => {
           if (!err) {
             resolve(items)
           } else {
@@ -180,7 +180,7 @@ export default {
    */
   post(url, params) {
     return new Promise((resolve, reject) => {
-      client.post(url, params, (err, tweet, res) => {
+      client.post(url, params, (err, tweet) => {
         if (!err) {
           resolve(tweet)
         } else {
