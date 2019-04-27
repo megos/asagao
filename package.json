@@ -11,7 +11,7 @@
   "dependencies": {
     "autolinker": "3.0.5",
     "bootstrap-vue": "2.0.0-rc.19",
-    "cron": "1.7.0",
+    "cron": "1.7.1",
     "electron-context-menu": "0.12.0",
     "electron-json-storage-sync": "1.1.1",
     "electron-oauth-twitter": "1.2.0",
