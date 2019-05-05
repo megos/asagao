@@ -28,6 +28,8 @@ jobs:
       - restore_cache:
           keys:
             - v-3.0.10-electron
+      - run: ls -al
+      - run: ls -al ~
 
       - run: yarn
 
@@ -51,3 +53,5 @@ jobs:
           key: v-3.0.10-electron
           paths:
             - ~/.cache/electron
+      - run: ls -al
+      - run: ls -al ~
