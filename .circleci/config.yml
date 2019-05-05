@@ -27,9 +27,7 @@ jobs:
             - v1-dependencies-
       - restore_cache:
           keys:
-            - v-3.0.10-electron
-      - run: ls -al
-      - run: ls -al ~
+            - electron-1.3.0
 
       - run: yarn
 
@@ -50,8 +48,7 @@ jobs:
       - run: yarn electron:build
 
       - save_cache:
-          key: v-3.0.10-electron
+          key: electron-1.3.0
           paths:
-            - ~/.cache/electron
-      - run: ls -al
-      - run: ls -al ~
+            - ~/.cache
+            - ~/.yarn
