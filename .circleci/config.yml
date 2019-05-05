@@ -41,7 +41,7 @@ jobs:
           name: lint
           command: |
             mkdir ./reports
-            yarn lint --format junit --output-file ./reports/results.xml
+            yarn eslint --ext=.js,.vue src --format junit --output-file ./reports/results.xml
       - store_test_results:
           path: ./reports
 
