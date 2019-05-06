@@ -17,7 +17,7 @@
     "electron-oauth-twitter": "1.2.0",
     "jquery": "3.4.1",
     "lodash": "4.17.11",
-    "log4js": "4.1.0",
+    "log4js": "4.1.1",
     "moment": "2.24.0",
     "nedb": "1.8.0",
     "onsenui": "2.10.8",
