@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "autolinker": "3.0.5",
-    "bootstrap-vue": "2.0.0-rc.19",
+    "bootstrap-vue": "2.0.0-rc.20",
     "cron": "1.7.1",
     "electron-context-menu": "0.12.1",
     "electron-json-storage-sync": "1.1.1",
