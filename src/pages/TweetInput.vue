@@ -2,10 +2,9 @@
   <v-ons-page>
     <v-ons-list>
       <v-ons-list-item modifier="longdivider">
-        <b-form-textarea
+        <textarea
           v-model="tweet"
-          :rows="10"
-          :no-resize="true"
+          rows="10"
           :maxlength="maxLength"
           placeholder="What's happening?"
         />
