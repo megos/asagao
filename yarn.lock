@@ -1677,7 +1677,7 @@ async@^2.0.0, async@^2.1.5:
   dependencies:
     lodash "^4.17.10"
 
-async@^2.6.1:
+async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.2.tgz#18330ea7e6e313887f5d2f2a904bac6fe4dd5381"
   integrity sha512-H1qVYh1MYhEEFLsP97cVKqCGo7KfCyTt6uEWqsTBr9SO84oK9Uwbyd/yCW+6rKJLHksBNUVWZDAjfS+Ccx0Bbg==
@@ -3212,7 +3212,7 @@ debug@=3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@^3.0.0, debug@^3.1.0, debug@^3.2.5:
+debug@^3.0.0, debug@^3.1.0, debug@^3.2.5, debug@^3.2.6:
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
@@ -6232,16 +6232,16 @@ log-symbols@^2.2.0:
   dependencies:
     chalk "^2.0.1"
 
-log4js@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/log4js/-/log4js-4.1.1.tgz#48ebed51e6989557b8a991c48f01879e82773545"
-  integrity sha512-tSQUF9bBMdcBtuLD6vD7hBM9Ci6Lng/NVHZEq4YbuRGo7ObmLiZuhxz33HKAmJItit74pAjvZgirqYX2LRaoGA==
+log4js@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/log4js/-/log4js-4.2.0.tgz#659a91d9522053b1e1d0ba89adf81c2005b8a993"
+  integrity sha512-1dJ2ORJcdqbzxvzKM2ceqPBh4O6bbICJpB4dvSEUoMcb14s8MqQ/54zNPqekuN5yjGtxO3GUDTvZfQOQhwdqnA==
   dependencies:
     date-format "^2.0.0"
     debug "^4.1.1"
     flatted "^2.0.0"
     rfdc "^1.1.2"
-    streamroller "^1.0.4"
+    streamroller "^1.0.5"
 
 loglevel@^1.6.1:
   version "1.6.1"
@@ -9362,16 +9362,16 @@ stream-shift@^1.0.0:
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
   integrity sha1-1cdSgl5TZ+eG944Y5EXqIjoVWVI=
 
-streamroller@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/streamroller/-/streamroller-1.0.4.tgz#d485c7624796d5e2eb34190c79afcbf006afb5e6"
-  integrity sha512-Wc2Gm5ygjSX8ZpW9J7Y9FwiSzTlKSvcl0FTTMd3rn7RoxDXpBW+xD9TY5sWL2n0UR61COB0LG1BQvN6nTUQbLQ==
+streamroller@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/streamroller/-/streamroller-1.0.5.tgz#71660c20b06b1a7b204d46085731ad13c10a562d"
+  integrity sha512-iGVaMcyF5PcUY0cPbW3xFQUXnr9O4RZXNBBjhuLZgrjLO4XCLLGfx4T2sGqygSeylUjwgWRsnNbT9aV0Zb8AYw==
   dependencies:
-    async "^2.6.1"
+    async "^2.6.2"
     date-format "^2.0.0"
-    debug "^3.1.0"
-    fs-extra "^7.0.0"
-    lodash "^4.17.10"
+    debug "^3.2.6"
+    fs-extra "^7.0.1"
+    lodash "^4.17.11"
 
 strict-uri-encode@^1.0.0:
   version "1.1.0"
