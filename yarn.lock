@@ -6232,10 +6232,10 @@ log-symbols@^2.2.0:
   dependencies:
     chalk "^2.0.1"
 
-log4js@4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/log4js/-/log4js-4.2.0.tgz#659a91d9522053b1e1d0ba89adf81c2005b8a993"
-  integrity sha512-1dJ2ORJcdqbzxvzKM2ceqPBh4O6bbICJpB4dvSEUoMcb14s8MqQ/54zNPqekuN5yjGtxO3GUDTvZfQOQhwdqnA==
+log4js@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/log4js/-/log4js-4.3.0.tgz#dfca01d9ac0b862c2ed51a06cf57aeb96166713f"
+  integrity sha512-ivqZBkBvWLJ8rXfhb4E0979olSwnYBPSZy/5WhLNXwntqRgUhxHnqcXGmVw0t+XmLNTr3GAWEzjqHMzu4KM7rA==
   dependencies:
     date-format "^2.0.0"
     debug "^4.1.1"
