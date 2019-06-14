@@ -22,16 +22,18 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-node_modules-{{ checksum "yarn.lock" }}
+            - v1-electron-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+            - v1-node_modules-
+            - v1-electron-
 
       - run: yarn
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          key: v1-node_modules-{{ checksum "yarn.lock" }}
 
       # run tests!
       - run:
@@ -48,4 +50,4 @@ jobs:
           paths:
             - ~/.cache
             - ~/.yarn
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          key: v1-electron-{{ checksum "yarn.lock" }}
