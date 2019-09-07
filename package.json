@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "autolinker": "3.11.0",
-    "cron": "1.7.1",
+    "cron": "1.7.2",
     "electron-context-menu": "0.14.0",
     "electron-json-storage-sync": "1.1.1",
     "electron-oauth-twitter": "1.2.0",
