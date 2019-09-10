@@ -32,7 +32,7 @@
     "@vue/cli-plugin-eslint": "3.10.0",
     "@vue/cli-service": "3.10.0",
     "babel-eslint": "10.0.3",
-    "electron": "5.0.9",
+    "electron": "5.0.10",
     "eslint": "6.3.0",
     "vue-cli-plugin-electron-builder": "1.4.0",
     "vue-template-compiler": "2.6.10"
