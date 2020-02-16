@@ -15,7 +15,7 @@
     "electron-json-storage-sync": "1.1.1",
     "electron-oauth-twitter": "1.2.0",
     "lodash": "4.17.15",
-    "log4js": "5.1.0",
+    "log4js": "6.1.2",
     "moment": "2.24.0",
     "nedb": "1.8.0",
     "onsenui": "2.10.10",
