@@ -9,7 +9,7 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
-    "autolinker": "3.11.0",
+    "autolinker": "3.13.0",
     "cron": "1.8.2",
     "electron-context-menu": "0.15.0",
     "electron-json-storage-sync": "1.1.1",
