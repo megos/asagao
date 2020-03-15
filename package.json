@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "autolinker": "3.13.0",
+    "core-js": "^3.6.4",
     "cron": "1.8.2",
     "electron-context-menu": "0.16.0",
     "electron-json-storage-sync": "1.1.1",
@@ -28,14 +29,18 @@
   },
   "devDependencies": {
     "@megos/eslint-config-vue": "0.0.4",
-    "@vue/cli-plugin-babel": "3.11.0",
-    "@vue/cli-plugin-eslint": "3.11.0",
-    "@vue/cli-service": "3.11.0",
+    "@vue/cli-plugin-babel": "4.2.3",
+    "@vue/cli-plugin-eslint": "4.2.3",
+    "@vue/cli-service": "4.2.3",
     "babel-eslint": "10.1.0",
     "electron": "8.1.1",
     "eslint": "6.8.0",
+    "eslint-loader": "^2.2.1",
     "vue-cli-plugin-electron-builder": "1.4.6",
     "vue-template-compiler": "2.6.11"
+  },
+  "resolutions": {
+    "eslint-loader": "2.2.1"
   },
   "eslintConfig": {
     "root": true,
