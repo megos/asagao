@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import Datastore from 'nedb'
 /* eslint-disable import/no-extraneous-dependencies */
 import electron from 'electron'
@@ -14,11 +13,11 @@ datastore.ensureIndex({ fieldName: 'id_str', unique: true })
 // Expire 1 day
 datastore.ensureIndex({ fieldName: 'createdAt', expireAfterSeconds: 60 * 60 * 24 })
 
-const defaultGetParams = {
+const defaultGetParams = () => ({
   include_entities: true,
   tweet_mode: 'extended',
   count: 200,
-}
+})
 
 const state = {
   me: {},
@@ -109,7 +108,7 @@ const actions = {
   },
   fetchTimeline({ commit }) {
     commit('REMOVE_TWEETS')
-    const params = _.cloneDeep(defaultGetParams)
+    const params = defaultGetParams()
     if (state.timeline.length > 0) {
       params.since_id = state.timeline[0].id_str
     }
@@ -132,7 +131,7 @@ const actions = {
     commit('DELETE_TWEET', state.timeline.findIndex(TwitterClient.findItem, idStr))
   },
   fetchMentions({ commit }) {
-    const params = _.cloneDeep(defaultGetParams)
+    const params = defaultGetParams()
     if (state.mentions.length > 0) {
       params.since_id = state.mentions[0].id_str
     }
@@ -144,7 +143,7 @@ const actions = {
       })
   },
   fetchFavorites({ commit }) {
-    const params = _.cloneDeep(defaultGetParams)
+    const params = defaultGetParams()
     if (state.favorites.length > 0) {
       params.since_id = state.favorites[0].id_str
     }
@@ -156,7 +155,7 @@ const actions = {
       })
   },
   fetchListsStatuses({ commit }) {
-    const params = _.cloneDeep(defaultGetParams)
+    const params = defaultGetParams()
     if (state.listsStatuses.length > 0) {
       params.since_id = state.listsStatuses[0].id_str
     }
