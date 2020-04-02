@@ -34,12 +34,12 @@
     "babel-eslint": "10.1.0",
     "electron": "8.1.1",
     "eslint": "6.8.0",
-    "eslint-loader": "2.2.1",
+    "eslint-loader": "3.0.4",
     "vue-cli-plugin-electron-builder": "1.4.6",
     "vue-template-compiler": "2.6.11"
   },
   "resolutions": {
-    "eslint-loader": "2.2.1"
+    "eslint-loader": "3.0.4"
   },
   "eslintConfig": {
     "root": true,
