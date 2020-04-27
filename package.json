@@ -12,7 +12,7 @@
     "autolinker": "3.14.0",
     "core-js": "3.6.4",
     "cron": "1.8.2",
-    "electron-context-menu": "0.16.0",
+    "electron-context-menu": "1.1.0",
     "electron-json-storage-sync": "1.1.1",
     "electron-oauth-twitter": "1.2.0",
     "log4js": "6.1.2",
