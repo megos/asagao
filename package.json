@@ -38,7 +38,7 @@
     "vue-template-compiler": "2.6.11"
   },
   "resolutions": {
-    "fsevents": "^1.2.9"
+    "fsevents": "^2.0.0"
   },
   "eslintConfig": {
     "root": true,
