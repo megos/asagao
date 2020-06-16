@@ -28,7 +28,7 @@ jobs:
             - v1-node_modules-
             - v1-electron-
 
-      - run: yarn --ignore-optional
+      - run: npm install --no-optional
 
       - save_cache:
           paths:
