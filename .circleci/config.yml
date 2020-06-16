@@ -28,7 +28,7 @@ jobs:
             - v1-node_modules-
             - v1-electron-
 
-      - run: yarn
+      - run: yarn --ignore-optional
 
       - save_cache:
           paths:
