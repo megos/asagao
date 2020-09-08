@@ -8,6 +8,7 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps"
   },
+  "main": "background.js",
   "dependencies": {
     "autolinker": "3.14.1",
     "core-js": "3.6.5",
@@ -28,17 +29,14 @@
   },
   "devDependencies": {
     "@megos/eslint-config-vue": "0.0.4",
-    "@vue/cli-plugin-babel": "4.5.3",
-    "@vue/cli-plugin-eslint": "4.5.3",
-    "@vue/cli-service": "4.5.3",
+    "@vue/cli-plugin-babel": "4.5.4",
+    "@vue/cli-plugin-eslint": "4.5.4",
+    "@vue/cli-service": "4.5.4",
     "babel-eslint": "10.1.0",
     "electron": "9.0.4",
     "eslint": "7.6.0",
     "vue-cli-plugin-electron-builder": "1.4.6",
     "vue-template-compiler": "2.6.11"
-  },
-  "resolutions": {
-    "fsevents": "^1.2.9"
   },
   "eslintConfig": {
     "root": true,
@@ -61,6 +59,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "main": "background.js"
+  ]
 }
