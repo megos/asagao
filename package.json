@@ -28,7 +28,7 @@
     "vuex": "3.5.1"
   },
   "devDependencies": {
-    "@megos/eslint-config-vue": "0.0.4",
+    "@megos/eslint-config-vue": "0.0.7",
     "@vue/cli-plugin-babel": "4.5.8",
     "@vue/cli-plugin-eslint": "4.5.8",
     "@vue/cli-service": "4.5.8",
