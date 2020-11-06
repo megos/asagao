@@ -29,6 +29,7 @@ function openWindow() {
     useContentSize: true,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
   })
   if (!process.env.IS_TEST) win.webContents.openDevTools()
