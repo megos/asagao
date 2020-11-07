@@ -11,7 +11,7 @@
   "main": "background.js",
   "dependencies": {
     "autolinker": "3.14.2",
-    "core-js": "3.6.5",
+    "core-js": "3.7.0",
     "cron": "1.8.2",
     "electron-context-menu": "2.3.0",
     "electron-json-storage-sync": "1.1.1",
