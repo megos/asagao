@@ -30,7 +30,7 @@
   "devDependencies": {
     "@megos/eslint-config-vue": "0.0.4",
     "@vue/cli-plugin-babel": "4.5.8",
-    "@vue/cli-plugin-eslint": "4.5.8",
+    "@vue/cli-plugin-eslint": "4.5.9",
     "@vue/cli-service": "4.5.8",
     "babel-eslint": "10.1.0",
     "electron": "10.1.5",
