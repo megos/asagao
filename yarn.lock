@@ -3128,10 +3128,15 @@ core-js@3.7.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.7.0.tgz#b0a761a02488577afbf97179e4681bf49568520f"
   integrity sha512-NwS7fI5M5B85EwpWuIwJN4i/fbisQUwLwiSNUWeXlkAZ0sbBjLEvLvFLf1uzAUV66PcEPt4xCGCmOZSxVf3xzA==
 
-core-js@^2.4.0, core-js@^2.6.11:
+core-js@^2.4.0:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
+
+core-js@^2.6.12:
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
+  integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
 core-js@^3.6.5:
   version "3.6.5"
@@ -7263,13 +7268,13 @@ onetime@^5.1.0:
   dependencies:
     mimic-fn "^2.1.0"
 
-onsenui@2.11.1:
-  version "2.11.1"
-  resolved "https://registry.yarnpkg.com/onsenui/-/onsenui-2.11.1.tgz#94a5342a19617ae94bc79300d2158f085477889d"
-  integrity sha512-n0Likj7ysMz8jyVKgsAZLKWoU9BwyvrE0pg0xRF8yu2YocuTJlzPiiMlsftC77UwFxHovLkFmZ4+jui+zCBuBg==
+onsenui@2.11.2:
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/onsenui/-/onsenui-2.11.2.tgz#acec927bccadc83eb882d3eb9cff965bfe8aae63"
+  integrity sha512-gllq4jJvFynSt+i4oujYdkQ/lrtfWfLXsFHEyx2SsbQ7R7B0xiGNbl2l1xGjunncwvKSZ1nxmaZEbDHElUmKEw==
   dependencies:
     "@onsenui/custom-elements" "1.0.0"
-    core-js "^2.6.11"
+    core-js "^2.6.12"
 
 open@^6.3.0:
   version "6.4.0"
