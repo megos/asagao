@@ -17,7 +17,7 @@
     "electron-json-storage-sync": "1.1.1",
     "electron-oauth-twitter": "1.2.0",
     "log4js": "6.3.0",
-    "moment": "2.29.1",
+    "moment": "2.29.2",
     "nedb": "1.8.0",
     "onsenui": "2.11.1",
     "sanitize-html": "2.1.2",
